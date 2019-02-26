@@ -17,13 +17,18 @@ body {
   background: #000;
 }
 
+.toggle-burger > div{
+  cursor: pointer;
+  padding: 2px 10px;
+  width: 40px;
+}
 .toggle-burger span {
   display: block;
   background: #fff;
   margin: 3px 0;
   width: 30px;
   height: 5px;
-  cursor: pointer;
+  
 }
 .navbar .toggle-burger {
   margin-left: 10px;

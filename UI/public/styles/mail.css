@@ -4,6 +4,8 @@
   overflow: hidden;
 }
 
+
+
 .table-div{
   background: #fff;
   min-height: 100vh;
@@ -102,14 +104,40 @@
   
 }
 
+.layout-div section {
+  padding: 10px;
+  border: none;
+  margin: 20px 10px;
+  
+}
+
+section.messageView div span {
+  padding: 0;
+}
+
+ section.messageView div {
+  padding: 10px;
+  border: none;  
+}
+
+section.messageView div p {
+  line-height: 1.5rem;
+}
+
+section.messageView div:hover {
+  box-shadow: none;
+  cursor: default;
+}
+
+
 .compose-layout {
   position: absolute;
   background: #fff;
-  top: 55%;
-  left: 70%;
+  top: 70%;
+  left: 45%;
   z-index: 100;
   width: 100%;
-  max-width: 600px;
+  max-width: 250px;
   pointer-events: auto;
   opacity: 1;
   border: 1px solid #c2bfbf;
@@ -122,6 +150,24 @@
   transition-delay: 0.1s;
 }
 
+.rf-layout {
+  position: absolute;
+  background: #fff;
+  top: 70%;
+  left: 45%;
+  z-index: 99;
+  width: 100%;
+  max-width: 250px;
+  pointer-events: auto;
+  opacity: 1;
+  border: 1px solid #c2bfbf;
+  -webkit-transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transition: transform 0.5s ease, opacity 0.5s ease;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  -webkit-transition-delay: 0.1s;
+  transition-delay: 0.1s;
+}
 
 .compose-div div header {
   background: #c2bfbf;
@@ -150,6 +196,114 @@
   border-bottom: 1px solid #c2bfbf;
 }
 
+#replyforward .compose-div div input {
+  border: none;
+  border-bottom: 1px solid #c2bfbf;
+}
+
+.compose-div div textarea {
+  max-width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  margin-bottom: 10px;
+}
+
+.compose-div div div {
+  margin-bottom: 10px;
+}
+
+.compose-div div div a {
+  text-decoration: none;
+  padding: 10px;
+}
+
+.compose-div div div a span i{
+  padding: 10px;
+  font-size: 20px;
+  margin-top: 5px;
+  color: #000;
+}
+
+.compose-div div div a button {
+  padding: 10px;
+  font-size: 20px;
+  color: #fff;
+  width: 100px;
+  background: #33a3e4;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 4px rgba(54, 52, 52, 0.7);
+}
+
+section.messageView div button {
+  padding: 10px 7px;
+  margin: 10px;
+  font-size: 18px;
+  color: #fff;
+  width: 100px;
+  background: #30373b;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 4px rgba(54, 52, 52, 0.7);
+}
+
+.compose-div div div a:nth-child(1) {
+  float: left;
+}
+.compose-div div div a:nth-child(2) {
+  float: right;
+}
+
+
+
+.layout-div div:hover{
+  box-shadow: 0 0 4px rgba(54, 52, 52, 0.7);
+  cursor: pointer;
+}
+
+.contactmail:hover {
+  box-shadow: 0 0 4px rgba(54, 52, 52, 0.7);
+  cursor: pointer;
+}
+
+.layout-div ul li.collection-item a:hover {
+  cursor: default;
+}
+
+.layout-div ul li.collection-item  a, .layout-div ul li.collection-item span{
+  display: block;
+  line-height: 2rem;
+}
+
+.layout-div ul li.collection-item span i {
+  color: #940e04;
+  padding: 0 5px;
+}
+
+.layout-div div span {
+  display: block;
+  line-height: 1.5rem;
+}
+
+.layout-div ul li {
+  padding: 10px;
+  border: 1px solid #e0dada;
+  border-left: none;
+  border-right: none;
+  
+}
+
+.layout-div ul li.collection-header {
+  padding: 10px;
+  font-size: 25px;
+  font-weight: bold;
+  
+}
+
 
 @media screen and (min-width: 600px) {
   .table-div {
@@ -157,12 +311,22 @@
     margin-top: 20px;
     
   }
+
+  .compose-layout, .rf-layout {
+    top: 50%;
+    left: 60%;
+    width: 100%;
+    max-width: 400px;
+  }
+
+
   
   .side-nav {
     position: absolute;
     width: 150px;
     height: 100vh;
   }
+
 
 }
 
@@ -171,6 +335,8 @@
     display: inline;
     padding-left: 20px;
   }
+
+  
   .layout-div div span:nth-child(3) {
     float: right;
     padding-right: 10px;
@@ -203,6 +369,14 @@
   }
   .layout-div div span:nth-child(1), .layout-div ul li.collection-item a {
    width: 300px;
-  } 
-
+  }
+  .compose-layout,.rf-layout {
+    top: 45%;
+    left: 65%;
+    width: 100%;
+    max-width: 600px;
+  }
+   
 }
+
+
