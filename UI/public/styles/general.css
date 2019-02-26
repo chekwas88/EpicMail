@@ -1,0 +1,127 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+}
+body {
+  box-sizing: border-box;
+  background: #000;
+}
+
+.navbar {
+  color: #fff;
+  margin: 0;
+  background: #000;
+}
+
+.toggle-burger span {
+  display: block;
+  background: #fff;
+  margin: 3px 0;
+  width: 30px;
+  height: 5px;
+  cursor: pointer;
+}
+.navbar .toggle-burger {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.navbar ul {
+  list-style: none;
+  margin-top: 10px;
+}
+
+.navbar ul li {
+  padding: 10px;
+  border-bottom: 1px solid rgba(233,233,233,0.2);
+  cursor: pointer;
+}
+
+.navbar ul li:hover {
+  border-bottom: 2px solid #db6c04;
+}
+
+.navbar ul li a {
+  text-decoration: none;
+  color: #fff;
+}
+#bars.show {
+  display: block;
+}
+
+#bars.hide{
+  display: none;
+}
+
+#bars li a span:nth-child(1) {
+  color: #df8919;
+}
+
+footer {
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+footer.other{
+  margin: 0; 
+  box-sizing: border-box;
+  width: 100%;
+}
+footer.landing {
+  margin: 0;
+}
+footer.register{
+  margin: 20px 0 0 0;
+  box-sizing: border-box;
+  width: 100%;
+  position: sticky;
+  
+}
+
+footer.login{
+  margin: 20px 0 0 0;
+  box-sizing: border-box;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+
+@media screen and (min-width: 600px) {
+  #bars.show {
+    display: flex;
+  }
+  .navbar {
+    position: relative;
+  }
+  .navbar ul{
+    position: absolute;
+    top: -15px;
+    right: 10px;
+  }
+  .navbar ul li {
+    padding: 5px 20px;
+    border-bottom: none;
+  }
+  footer {
+    margin-left: 170px;
+  }
+  
+}
+@media screen and (min-width: 800px) {
+  footer.other{
+    position: absolute;
+  }
+}
+
+
+@media screen and (min-width: 1000px) {
+  footer {
+    margin-left: 220px;
+  }
+  
+}
+
