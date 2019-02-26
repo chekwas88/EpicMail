@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Mail</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../public/styles/general.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../public/styles/mail.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" 
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" 
+    crossorigin="anonymous">
+    
+  </head>
+  <body>
+    <nav class="navbar">
+        <div id="burger" class="toggle-burger">
+          <Span></Span>
+          <Span></Span>
+          <Span></Span>
+        </div>
+        <ul id="bars" class="hide">
+          <li>
+            <a href="#">
+              Login
+            </a> 
+          </li>
+          <li>
+            <a href="#">
+              <span><i class="far fa-envelope"></i></span>
+              <span>Mail</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              About
+            </a> 
+          </li>
+        </ul>
+    </nav>
+    <div class="dcontainer" >
+      <div class="side-nav">
+        <nav>
+          <ul>
+            <li id="compose">
+                <a id="compose-btn" href="#compose-new">
+                  <span><i class="fas fa-plus"></i></span>
+                  <span>Compose</span>
+                </a>
+            </li>
+            <li id="inbox-list" class="visited">
+              <a id="inbox" href="#">
+                <span><i class="fas fa-envelope"></i></span>
+                <span>Inbox</span>
+              </a>
+            </li>
+            <li id="sent-list" >
+              <a id="sent" href="#">
+                <span><i class="fas fa-check-double"></i></span>
+                <span>Sent</span>
+              </a>
+            </li>
+            <li id="draft-list">
+              <a id="draft" href="#">
+                <span><i class="far fa-file"></i></span>
+                <span>Draft</span>
+              </a>
+            </li>
+            <li id="contact-list">
+              <a id="contact" href="#">
+                <span><i class="fas fa-users"></i></span>
+                <span>Contacts</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <!-- inbox -->
+      <div id="inbox-set" class="table-div show">
+          <div class="layout-div">
+            <div>
+              <span>Ted Mosby</span>
+              <span>Dear Barney, Its is true that you are from canada...</span>
+              <span>Feb 25</span>
+            </div>
+            <div>
+              <span>Marshal Erickson</span>
+              <span>Dear Barney, Its is true that you are from canada...</span>
+              <span>Feb 25</span>
+            </div>
+            <div>
+              <span>Lily Aldrin</span>
+              <span>Dear Barney, Its is true that you are from canada...</span>
+              <span>Feb 25</span>
+            </div>
+          </div>         
+      </div>
+
+      <!-- compose -->
+      <div id="compose-new" class="compose-layout hide">
+        <div class="compose-div">
+          <div>
+            <header><h3>New Message</h3></header>
+            <input type="text" name="recipients" placeholder="Recipients" required />
+            <input type="text" name="subject" placeholder="Subject" required />
+            <textarea name="message" cols="65" rows="15" required></textarea>
+            <div>
+              <a href="#">
+                  <button id="compose-send" type="submit">Send</button>
+                </a>
+                <a href="#">
+                  <span><i id="compose-delete" class="fas fa-trash"></i></span>
+                </a>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- sent -->
+
+      <div id="sent-set" class="table-div hide">
+        <div class="layout-div">
+          <div>
+              <span>Barney Stinson</span>
+              <span>Dear Ted, Suit up cause we are going to have...</span>
+              <span>Feb 25</span>
+            </div>
+            <div>
+              <span>Barney Stinson</span>
+              <span>Dear Marshall, Swear on the brocode you won't at my...</span>
+              <span>Feb 25</span>
+            </div>
+            <div>
+              <span>Barney Stinson</span>
+              <span>Dear Lilly, please don't tell robin I have feelings...</span>
+              <span>Feb 25</span>
+            </div>
+          </div>         
+      </div>
+
+
+      <!-- draft -->
+
+      <div id="draft-set" class="table-div hide">
+        <div class="layout-div">
+          <div>
+            <span>Gredenco Sebratov</span>
+            <span>Dear Barney, Its is true that you are from canada...</span>
+            <span>Feb 25</span>
+          </div>
+          <div>
+            <span>Gredenco Seb</span>
+            <span>Dear Barney, Its is true that you are from canada...</span>
+            <span>Feb 25</span>
+          </div>
+          <div>
+            <span>Gredenco Sebratov</span>
+            <span>Dear Barney, Its is true that you are from canada...</span>
+            <span>Feb 25</span>
+          </div>
+        </div>         
+      </div>
+
+      <!-- contact -->
+
+      <div id="contact-set" class="table-div hide">
+        <div class="layout-div">
+          <ul>
+            <input type="text" id="filterable" placeholder="search contact...">
+            <li class="collection-header">
+              <h5>A</h5>
+            </li>
+            <li class="collection-item">
+              <a href="#">Abe</a>
+              <span><i class="fas fa-phone"></i>0015562443</span>
+              <span><i class="fas fa-envelope"></i>Email</span>
+            </li>
+            <li class="collection-item">
+              <a href="#">Adam</a>
+              <span><i class="fas fa-phone"></i>0015562443</span>
+              <span><i class="fas fa-envelope"></i>Email</span>
+            </li>
+            <li class="collection-item">
+              <a href="#">Allan</a>
+              <span><i class="fas fa-phone"></i>0015562443</span>
+              <span><i class="fas fa-envelope"></i>Email</span>
+            </li>
+            <li class="collection-item">
+              <a href="#">Alvin</a>
+              <span><i class="fas fa-phone"></i>0015562443</span>
+              <span><i class="fas fa-envelope"></i>Email</span>
+            </li>
+
+            <li class="collection-header">
+              <h5>B</h5>
+            </li>
+            <li class="collection-item">
+              <a href="#">Bab</a>
+              <span><i class="fas fa-phone"></i>0015562443</span>
+              <span><i class="fas fa-envelope"></i>Email</span>
+            </li>
+            <li class="collection-item">
+              <a href="#">Beth</a>
+              <span><i class="fas fa-phone"></i>0015562443</span>
+              <span><i class="fas fa-envelope"></i>Email</span>
+            </li>
+            <li class="collection-item">
+              <a href="#">Brooke</a>
+              <span><i class="fas fa-phone"></i>0015562443</span>
+              <span><i class="fas fa-envelope"></i>Email</span>
+            </li>
+            <li class="collection-item">
+              <a href="#">Burke</a>
+              <span><i class="fas fa-phone"></i>0015562443</span>
+              <span><i class="fas fa-envelope"></i>Email</span>
+            </li>
+
+
+            <li class="collection-header">
+              <h5>C</h5>
+            </li>
+            <li class="collection-item">
+              <a href="#">Cathy</a>
+              <span><i class="fas fa-phone"></i>0015562443</span>
+              <span><i class="fas fa-envelope"></i>Email</span>
+            </li>
+            <li class="collection-item">
+              <a href="#">Carrie</a>
+              <span><i class="fas fa-phone"></i>0015562443</span>
+              <span><i class="fas fa-envelope"></i>Email</span>
+            </li>
+            <li class="collection-item">
+              <a href="#">Carmel</a>
+              <span><i class="fas fa-phone"></i>0015562443</span>
+              <span><i class="fas fa-envelope"></i>Email</span>
+            </li>
+            <li class="collection-item">
+              <a href="#">Crixus</a>
+              <span><i class="fas fa-phone"></i>0015562443</span>
+              <span><i class="fas fa-envelope"></i>Email</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <footer>This is footer</footer>
+
+  </body>
+</html>
