@@ -1,0 +1,88 @@
+label {
+  display: block;
+}
+
+.pagecontent {
+  position: relative; 
+}
+.container {
+  width: 100%;
+  height: 100%;
+}
+.container > div {
+  width: 60%;
+  margin: 50px auto;
+  color: #fff;
+  border: 2px solid #3d3833;
+  box-shadow: 0 0 4px rgba(254, 255, 255, 0.5)
+}
+.container > div > nav{
+  display: flex;
+  border-bottom: 1px solid #575252;
+  margin-bottom: 10px;
+ 
+}
+.container > div nav > div {
+  flex: 1;
+  padding: 10px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+}
+
+.container > div  nav > div.active {
+  border-bottom: 2px solid #f8851a;
+  font-size: 20px;
+}
+
+.userform > div {
+  padding: 10px;
+  font-size: 18px;
+
+}
+.userform > div input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px;
+  margin: 10px 0;
+  font-size: 18px;
+  outline: none;
+  border: 2px solid #f5f2ed;
+  border-radius: 35px;
+  transition: all 0.5s;
+}
+.userform > div input:focus {
+  border-color: #f8851a;
+}
+.userform > div button {
+  background: #f8851a;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: none;
+  font-size: 18px;
+  border-radius: 35px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.userform > div button:hover {
+  opacity: 0.5;
+}
+
+#signup{
+  display: none;
+}
+#login.hide {
+  display: none;
+}
+#login.show, #signup.show {
+  display:block;
+}
+
+@media screen and (min-width: 600px) {
+  .container > div {
+    width: 40%;
+  }
+
+}
