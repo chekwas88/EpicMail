@@ -15,13 +15,16 @@
   <body>
     <nav class="navbar">
         <div id="burger" class="toggle-burger">
-          <Span></Span>
-          <Span></Span>
-          <Span></Span>
+          <div>
+            <Span></Span>
+            <Span></Span>
+            <Span></Span>
+          </div>
+          
         </div>
         <ul id="bars" class="hide">
           <li>
-            <a href="#">
+            <a href="./userAuth.html">
               Login
             </a> 
           </li>
@@ -96,6 +99,26 @@
           </div>         
       </div>
 
+      <!-- replyforward -->
+
+      <div id="replyforward" class="rf-layout hide">
+          <div class="compose-div">
+            <div>
+              <input type="text" name="recipients" placeholder="Recipients" required />
+              <textarea name="message" cols="65" rows="10" required></textarea>
+              <div>
+                <a href="#">
+                    <button id="rf-send" type="submit">Send</button>
+                  </a>
+                  <a href="#">
+                    <span><i id="rf-delete" class="fas fa-trash"></i></span>
+                  </a>
+              </div>
+              
+            </div>
+          </div>
+      </div>
+
       <!-- compose -->
       <div id="compose-new" class="compose-layout hide">
         <div class="compose-div">
@@ -128,7 +151,7 @@
             </div>
             <div>
               <span>Barney Stinson</span>
-              <span>Dear Marshall, Swear on the brocode you won't at my...</span>
+              <span>Dear Marshall, Swear on the brocode you won't slap me at my...</span>
               <span>Feb 25</span>
             </div>
             <div>
@@ -174,22 +197,22 @@
             <li class="collection-item">
               <a href="#">Abe</a>
               <span><i class="fas fa-phone"></i>0015562443</span>
-              <span><i class="fas fa-envelope"></i>Email</span>
+              <span class="contactmail"><i class="fas fa-envelope"></i>Email</span>
             </li>
             <li class="collection-item">
               <a href="#">Adam</a>
               <span><i class="fas fa-phone"></i>0015562443</span>
-              <span><i class="fas fa-envelope"></i>Email</span>
+              <span class="contactmail"><i class="fas fa-envelope"></i>Email</span>
             </li>
             <li class="collection-item">
               <a href="#">Allan</a>
               <span><i class="fas fa-phone"></i>0015562443</span>
-              <span><i class="fas fa-envelope"></i>Email</span>
+              <span class="contactmail"><i class="fas fa-envelope"></i>Email</span>
             </li>
             <li class="collection-item">
               <a href="#">Alvin</a>
               <span><i class="fas fa-phone"></i>0015562443</span>
-              <span><i class="fas fa-envelope"></i>Email</span>
+              <span class="contactmail"><i class="fas fa-envelope"></i>Email</span>
             </li>
 
             <li class="collection-header">
@@ -198,22 +221,22 @@
             <li class="collection-item">
               <a href="#">Bab</a>
               <span><i class="fas fa-phone"></i>0015562443</span>
-              <span><i class="fas fa-envelope"></i>Email</span>
+              <span class="contactmail"><i class="fas fa-envelope"></i>Email</span>
             </li>
             <li class="collection-item">
               <a href="#">Beth</a>
               <span><i class="fas fa-phone"></i>0015562443</span>
-              <span><i class="fas fa-envelope"></i>Email</span>
+              <span class="contactmail"><i class="fas fa-envelope"></i>Email</span>
             </li>
             <li class="collection-item">
               <a href="#">Brooke</a>
               <span><i class="fas fa-phone"></i>0015562443</span>
-              <span><i class="fas fa-envelope"></i>Email</span>
+              <span class="contactmail"><i class="fas fa-envelope"></i>Email</span>
             </li>
             <li class="collection-item">
               <a href="#">Burke</a>
               <span><i class="fas fa-phone"></i>0015562443</span>
-              <span><i class="fas fa-envelope"></i>Email</span>
+              <span class="contactmail"><i class="fas fa-envelope"></i>Email</span>
             </li>
 
 
@@ -223,57 +246,62 @@
             <li class="collection-item">
               <a href="#">Cathy</a>
               <span><i class="fas fa-phone"></i>0015562443</span>
-              <span><i class="fas fa-envelope"></i>Email</span>
+              <span class="contactmail"><i class="fas fa-envelope"></i>Email</span>
             </li>
             <li class="collection-item">
               <a href="#">Carrie</a>
               <span><i class="fas fa-phone"></i>0015562443</span>
-              <span><i class="fas fa-envelope"></i>Email</span>
+              <span class="contactmail"><i class="fas fa-envelope"></i>Email</span>
             </li>
             <li class="collection-item">
               <a href="#">Carmel</a>
               <span><i class="fas fa-phone"></i>0015562443</span>
-              <span><i class="fas fa-envelope"></i>Email</span>
+              <span class="contactmail"><i class="fas fa-envelope"></i>Email</span>
             </li>
             <li class="collection-item">
               <a href="#">Crixus</a>
               <span><i class="fas fa-phone"></i>0015562443</span>
-              <span><i class="fas fa-envelope"></i>Email</span>
+              <span class="contactmail"><i class="fas fa-envelope"></i>Email</span>
             </li>
           </ul>
         </div>
       </div>
+
+      <!-- modal for a mail view (sent, draft, inbox)-->
       <div id="mailView" class="table-div hide">
-          <div class="layout-div">
-            <section class="messageView">
-              <h3>Reminder: Pre-Bootcamp Workshops</h3>
+        <div class="layout-div">
+          <section class="messageView">
+            <h3>Reminder: Pre-Bootcamp Workshops</h3>
+            <div>
+              <p>Philip Newman<i>:philip.newman@andela.com</i></p>
+              <span>Feb 25, 2019, 11:14 AM</span>
+            </div>
+            <div>
+              <p>Hello there,</p>
+
+              <p>
+                Trust this meets you well.
+                Yes, the Pre-Bootcamp Workshops are starting today. As a reminder, the schedule is as follows:
+                Duration: 2 weeks (Monday 25th February - Saturday 9th March 2019)<br>
+                Week 1:   4:00 - 7:00pm Monday - Friday; 10:30am - 4:30pm Saturday<br>
+                Week 2:   5:00 - 7:00pm Monday - Friday; 10:30am - 4:30pm Saturday<br>
+                Venue:     Andela office (EPIC Tower), 235 Ikorodu Road, Ilupeju, Lagos. <br>
+                Please be sure to arrive early and proceed to the reception on the 4th floor to obtain a guest ID card. We look forward to having you in attendance.<br>
+                See you then!
+              </p>
               <div>
-                <p>Philip Newman<i>:philip.newman@andela.com</i></p>
-                <span>Feb 25, 2019, 11:14 AM</span>
+                <button id="replybtn">Reply</button>
+                <button id="forwardbtn">forward</button>
               </div>
-              <div>
-                <p>Hello there,</p>
-  
-                <p>
-                  Trust this meets you well.
-                  Yes, the Pre-Bootcamp Workshops are starting today. As a reminder, the schedule is as follows:
-                  Duration: 2 weeks (Monday 25th February - Saturday 9th March 2019)<br>
-                  Week 1:   4:00 - 7:00pm Monday - Friday; 10:30am - 4:30pm Saturday<br>
-                  Week 2:   5:00 - 7:00pm Monday - Friday; 10:30am - 4:30pm Saturday<br>
-                  Venue:     Andela office (EPIC Tower), 235 Ikorodu Road, Ilupeju, Lagos. <br>
-                  Please be sure to arrive early and proceed to the reception on the 4th floor to obtain a guest ID card. We look forward to having you in attendance.<br>
-                  See you then!
-                </p>
-                <div>
-                  <button id="replybtn">Reply</button>
-                  <button id="forwardbtn">forward</button>
-                </div>
-              </div>
-            </section>
-          </div>
+            </div>
+          </section>
         </div>
+      </div>
     </div>
     <footer>This is footer</footer>
-
+    <script src="../public/scripts/nav.js"></script>
+    <script src="../public/scripts/mailModal.js"></script>
+    <script src="../public/scripts/mail.js"></script>
+    <script src="../public/scripts/searchContacts.js"></script>
   </body>
 </html>
