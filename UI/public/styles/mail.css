@@ -260,29 +260,11 @@ section.messageView div button {
 
 
 
-.layout-div div:hover{
+.layout-div div:hover, li.collection-item:hover {
   box-shadow: 0 0 4px rgba(54, 52, 52, 0.7);
   cursor: pointer;
 }
 
-.contactmail:hover {
-  box-shadow: 0 0 4px rgba(54, 52, 52, 0.7);
-  cursor: pointer;
-}
-
-.layout-div ul li.collection-item a:hover {
-  cursor: default;
-}
-
-.layout-div ul li.collection-item  a, .layout-div ul li.collection-item span{
-  display: block;
-  line-height: 2rem;
-}
-
-.layout-div ul li.collection-item span i {
-  color: #940e04;
-  padding: 0 5px;
-}
 
 .layout-div div span {
   display: block;
@@ -297,11 +279,10 @@ section.messageView div button {
   
 }
 
-.layout-div ul li.collection-header {
-  padding: 10px;
-  font-size: 25px;
-  font-weight: bold;
-  
+li.collection-item {
+  margin: 0 5px;
+  text-align: center;
+  cursor: pointer;
 }
 
 
@@ -317,41 +298,17 @@ section.messageView div button {
     left: 60%;
     width: 100%;
     max-width: 400px;
-  }
-
-
-  
+  } 
   .side-nav {
     position: absolute;
     width: 150px;
     height: 100vh;
   }
-
-
 }
 
 @media screen and (min-width: 800px) {
-  .layout-div div span {
-    display: inline;
-    padding-left: 20px;
-  }
-
   
-  .layout-div div span:nth-child(3) {
-    float: right;
-    padding-right: 10px;
-  }
-  .layout-div div span:nth-child(1), .layout-div ul li.collection-item a {
-    float:left;
-    padding-left: 10px;
-    width: 180px;
-  }
-
-
-  .layout-div ul li.collection-item span:nth-child(2){
-    float: right;
-    padding-right: 10px;
-  }
+  
 }
 
 
@@ -364,12 +321,7 @@ section.messageView div button {
     width: calc(100% - 210px);
     margin-left: 200px;
   }
-  .layout-div div span, .layout-div ul li.collection-item {
-    padding-left: 10px;
-  }
-  .layout-div div span:nth-child(1), .layout-div ul li.collection-item a {
-   width: 300px;
-  }
+  
   .compose-layout,.rf-layout {
     top: 45%;
     left: 65%;
