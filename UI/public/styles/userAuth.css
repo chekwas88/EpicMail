@@ -6,7 +6,7 @@ label {
   position: relative; 
 }
 
-.welcome {
+.message {
   color: #0672b1;
   width: 70%;
   margin: 10px auto;
@@ -58,7 +58,7 @@ label {
   border-radius: 35px;
   transition: all 0.5s;
 }
-.userform > div input:focus {
+.userform > div input:focus, .fp-form > div input:focus {
   border-color: #f8851a;
 }
 .userform > div button {
@@ -77,6 +77,12 @@ label {
   opacity: 0.5;
 }
 
+.fp-form > div button:hover{
+  background: #4e2601;
+}
+
+
+
 #signup{
   display: none;
 }
@@ -85,6 +91,56 @@ label {
 }
 #login.show, #signup.show {
   display:block;
+}
+
+a.fp {
+  float: right;
+  text-decoration: none;
+  color: #0672b1;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+.fp-container {
+  width: 100%;
+  position: relative;
+}
+
+.fp-form {
+  box-sizing: border-box;
+  width: 285px;
+  margin: 100px auto;
+  padding: 20px 10px;
+  background: #fff;
+  box-shadow: 0 0 4px rgba(254, 255, 255, 0.9);
+}
+
+.fp-form > div button {
+  background: #f8851a;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: none;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.fp-form > div input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px;
+  margin: 10px 0;
+  font-size: 16px;
+  outline: none;
+  border: 1px solid #cec4b5;
+  border-radius: 4px;
+  transition: all 0.5s;
+}
+
+.fp-form > div {
+  margin: 10px;
 }
 
 @media screen and (min-width: 600px) {
