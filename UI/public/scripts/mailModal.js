@@ -8,8 +8,10 @@ const rfdelete = document.getElementById('rf-delete');
 const replybtn = document.querySelector('div button#replybtn');
 const fowardbtn = document.querySelector('div button#forwardbtn');
 const contactViewLists = document.querySelectorAll('.layout-div ul li.collection-item ');
-const addToGroup = document.querySelectorAll('li.gp-list');
-const formLayout = document.getElementById('gp-form-page')
+const getLink = document.querySelectorAll('li.gp-list');
+const formLayout = document.getElementById('gp-form-page');
+const membersDisplay = document.getElementById('members-modal');
+
 
 function removeComposeModal() {
   composeLayout.classList.add('hide');
@@ -20,6 +22,16 @@ function removeRFModal() {
   layoutRF.classList.add('hide');
   layoutRF.classList.remove('show');
 }
+
+function getGroupLists() {
+  let spanModal = [];
+  getLink.forEach((span) => {
+    spanModal.push(span.getElementsByTagName('span'));
+  });
+  return spanModal;
+}
+
+console.log(getGroupLists());
 
 compose.addEventListener('click', () => {
   composeLayout.classList.add('show');
@@ -43,15 +55,26 @@ contactViewLists.forEach((list) =>{
     composeLayout.classList.remove('hide');
   });
 });
-console.log(addToGroup);
-addToGroup.forEach((span) => {
-  let spanModal = span.getElementsByTagName('span')[1];
-  spanModal.addEventListener('click', () => {
+
+
+const spans = getGroupLists();
+
+
+spans.forEach((span) => {
+  span[1].addEventListener('click', () => {
     formLayout.classList.remove('hide');
     formLayout.classList.add('show');
   });
-  
 });
+   
+
+getLink.forEach((span) => {
+  let membersIcon = span.getElementsByTagName('span')[2];
+  membersIcon.addEventListener('click', () => {
+    membersDisplay.classList.remove('hide');
+    membersDisplay.classList.add('show');
+  })
+})
 
 send.addEventListener('click', removeComposeModal);
 deleteBtn.addEventListener('click', removeComposeModal);
