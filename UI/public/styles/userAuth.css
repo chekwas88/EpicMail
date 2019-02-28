@@ -106,7 +106,7 @@ a.fp {
   position: relative;
 }
 
-.fp-form {
+.fp-form, .gp-form {
   box-sizing: border-box;
   width: 285px;
   margin: 100px auto;
@@ -115,7 +115,7 @@ a.fp {
   box-shadow: 0 0 4px rgba(254, 255, 255, 0.9);
 }
 
-.fp-form > div button {
+.fp-form > div button, .gp-form > div button{
   background: #f8851a;
   width: 100%;
   padding: 8px;
@@ -127,7 +127,7 @@ a.fp {
   transition: all 0.5s;
 }
 
-.fp-form > div input {
+.fp-form > div input, .gp-form > div input {
   width: 100%;
   box-sizing: border-box;
   padding: 5px;
@@ -139,7 +139,7 @@ a.fp {
   transition: all 0.5s;
 }
 
-.fp-form > div {
+.fp-form > div, .gp-form > div {
   margin: 10px;
 }
 

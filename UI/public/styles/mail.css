@@ -86,7 +86,8 @@
 #group-set.hide,
 #mailView.hide,
 #replyforward.hide, 
-#profile-set.hide {
+#profile-set.hide,
+#gp-form-page.hide {
   display: none;
 }
 
@@ -343,12 +344,62 @@ button.ubttn:hover {
   background: #012438
 }
 
+/* group add form */
+
+.gp-form {
+  position: absolute;
+  top: 48%;
+  left: 3%;
+  box-sizing: border-box;
+  border: 1px solid #c2bfbf;
+  width: 285px;
+  background: #fff;
+  box-shadow: 0 0 4px rgba(54, 52, 52, 0.7);
+}
+
+.gp-form > div button{
+  background: #f8851a;
+  width: 40%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: none;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.gp-form > div button:nth-child(2) {
+  float: right;
+}
+
+.gp-form > div input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 5px;
+  margin: 10px 0;
+  font-size: 16px;
+  outline: none;
+  border: 1px solid #cec4b5;
+  border-radius: 4px;
+  transition: all 0.5s;
+}
+
+.gp-form > div {
+  margin: 10px;
+}
+
 
 @media screen and (min-width: 600px) {
   .table-div {
     margin-left: 150px;
     margin-top: 20px;
     
+  }
+
+  .gp-form {
+    top: 15%;
+    left: 40%;
   }
 
   .compose-layout, .rf-layout {
@@ -370,6 +421,7 @@ button.ubttn:hover {
     display: flex;
     justify-content: space-between;
   }
+
 
   .layout-div div span {
     flex: 2 1 180px;
@@ -400,9 +452,16 @@ button.ubttn:hover {
     width: 200px;
     
   }
+
+  
   .table-div {
     width: calc(100% - 210px);
     margin-left: 200px;
+  }
+
+  .gp-form {
+    top: 15%;
+    left: 30%;
   }
   
   .compose-layout,.rf-layout {

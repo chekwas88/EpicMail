@@ -8,6 +8,8 @@ const rfdelete = document.getElementById('rf-delete');
 const replybtn = document.querySelector('div button#replybtn');
 const fowardbtn = document.querySelector('div button#forwardbtn');
 const contactViewLists = document.querySelectorAll('.layout-div ul li.collection-item ');
+const addToGroup = document.querySelectorAll('li.gp-list');
+const formLayout = document.getElementById('gp-form-page')
 
 function removeComposeModal() {
   composeLayout.classList.add('hide');
@@ -40,6 +42,15 @@ contactViewLists.forEach((list) =>{
     composeLayout.classList.add('show');
     composeLayout.classList.remove('hide');
   });
+});
+console.log(addToGroup);
+addToGroup.forEach((span) => {
+  let spanModal = span.getElementsByTagName('span')[1];
+  spanModal.addEventListener('click', () => {
+    formLayout.classList.remove('hide');
+    formLayout.classList.add('show');
+  });
+  
 });
 
 send.addEventListener('click', removeComposeModal);
