@@ -1,7 +1,11 @@
 const inboxLayout = document.getElementById('inbox-set');
 const sentLayout = document.getElementById('sent-set');
 const draftLayout = document.getElementById('draft-set');
-const contactLayout = document.getElementById('contact-set')
+const contactLayout = document.getElementById('contact-set');
+const profileLayout = document.getElementById('profile-set');
+const groupLayout = document.getElementById('group-set');
+const profilelist = document.getElementById('profile-list')
+const grouplist = document.getElementById('group-list');
 const inboxlist = document.getElementById('inbox-list');
 const sentlist = document.getElementById('sent-list');
 const draftlist = document.getElementById('draft-list');
@@ -10,12 +14,13 @@ const inbox = document.getElementById('inbox');
 const sent= document.getElementById('sent');
 const draft = document.getElementById('draft');
 const contact = document.getElementById('contact');
+const profile = document.getElementById('profile');
 const linkedDiv = document.querySelectorAll('div.table-div .layout-div > div');
 const mailView = document.getElementById('mailView');
 
 
 
-inbox.addEventListener('click', () =>{
+inboxlist.addEventListener('click', () =>{
   inboxLayout.classList.add('show');
   inboxLayout.classList.remove('hide');
   inboxlist.classList.add('visited');
@@ -30,9 +35,38 @@ inbox.addEventListener('click', () =>{
   contactlist.classList.remove('visited');
   mailView.classList.add('hide');
   mailView.classList.remove('show');
+  profileLayout.classList.add('hide');
+  profileLayout.classList.remove('show');
+  profilelist.classList.remove('visited');
+  groupLayout.classList.remove('show');
+  groupLayout.classList.add('hide');
+  grouplist.classList.remove('visited');
 });
 
-sent.addEventListener('click', () =>{
+profilelist.addEventListener('click', () => {
+  profileLayout.classList.add('show');
+  profileLayout.classList.remove('hide');
+  profilelist.classList.add('visited');
+  inboxLayout.classList.add('hide');
+  inboxLayout.classList.remove('show');
+  inboxlist.classList.remove('visited');
+  sentLayout.classList.remove('show');
+  sentLayout.classList.add('hide');
+  sentlist.classList.remove('visited');
+  draftLayout.classList.add('hide');
+  draftLayout.classList.remove('show');
+  draftlist.classList.remove('visited');
+  contactLayout.classList.add('hide');
+  contactLayout.classList.remove('show');
+  contactlist.classList.remove('visited');
+  mailView.classList.add('hide');
+  mailView.classList.remove('show');
+  groupLayout.classList.remove('show');
+  groupLayout.classList.add('hide');
+  grouplist.classList.remove('visited');
+});
+
+sentlist.addEventListener('click', () =>{
   inboxLayout.classList.remove('show');
   inboxLayout.classList.add('hide');
   inboxlist.classList.remove('visited');
@@ -47,9 +81,15 @@ sent.addEventListener('click', () =>{
   contactlist.classList.remove('visited');
   mailView.classList.add('hide');
   mailView.classList.remove('show');
+  profileLayout.classList.add('hide');
+  profileLayout.classList.remove('show');
+  profilelist.classList.remove('visited');
+  groupLayout.classList.remove('show');
+  groupLayout.classList.add('hide');
+  grouplist.classList.remove('visited');
 });
 
-draft.addEventListener('click', () =>{
+draftlist.addEventListener('click', () =>{
   inboxLayout.classList.remove('show');
   inboxLayout.classList.add('hide');
   inboxlist.classList.remove('visited');
@@ -64,9 +104,15 @@ draft.addEventListener('click', () =>{
   contactlist.classList.remove('visited');
   mailView.classList.add('hide');
   mailView.classList.remove('show');
+  profileLayout.classList.add('hide');
+  profileLayout.classList.remove('show');
+  profilelist.classList.remove('visited');
+  groupLayout.classList.remove('show');
+  groupLayout.classList.add('hide');
+  grouplist.classList.remove('visited');
 });
 
-contact.addEventListener('click', () =>{
+contactlist.addEventListener('click', () =>{
   inboxLayout.classList.remove('show');
   inboxLayout.classList.add('hide');
   inboxlist.classList.remove('visited');
@@ -81,6 +127,35 @@ contact.addEventListener('click', () =>{
   contactlist.classList.add('visited');
   mailView.classList.add('hide');
   mailView.classList.remove('show');
+  profileLayout.classList.add('hide');
+  profileLayout.classList.remove('show');
+  profilelist.classList.remove('visited');
+  groupLayout.classList.remove('show');
+  groupLayout.classList.add('hide');
+  grouplist.classList.remove('visited');
+});
+
+grouplist.addEventListener('click', () =>{
+  inboxLayout.classList.remove('show');
+  inboxLayout.classList.add('hide');
+  inboxlist.classList.remove('visited');
+  sentLayout.classList.remove('show');
+  sentLayout.classList.add('hide');
+  sentlist.classList.remove('visited');
+  draftLayout.classList.add('hide');
+  draftLayout.classList.remove('show');
+  draftlist.classList.remove('visited');
+  contactLayout.classList.remove('show');
+  contactLayout.classList.add('hide');
+  contactlist.classList.remove('visited');
+  mailView.classList.add('hide');
+  mailView.classList.remove('show');
+  profileLayout.classList.add('hide');
+  profileLayout.classList.remove('show');
+  profilelist.classList.remove('visited');
+  groupLayout.classList.add('show');
+  groupLayout.classList.remove('hide');
+  grouplist.classList.add('visited');
 });
 
 
@@ -100,6 +175,12 @@ linkedDiv.forEach((div) => {
     contactLayout.classList.add('hide');
     contactLayout.classList.remove('show');
     contactlist.classList.remove('visited');
+    profileLayout.classList.add('hide');
+    profileLayout.classList.remove('show');
+    profilelist.classList.remove('visited');
+    groupLayout.classList.remove('show');
+    groupLayout.classList.add('hide');
+    grouplist.classList.remove('visited');
   });
 });
 

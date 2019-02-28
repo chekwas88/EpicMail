@@ -6,6 +6,7 @@
     <title>Mail</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="../public/styles/general.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../public/styles/profile.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="../public/styles/mail.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" 
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" 
@@ -46,7 +47,7 @@
         <nav>
           <ul>
             <li id="compose">
-                <a id="compose-btn" href="#compose-new">
+                <a id="compose-btn">
                   <span><i class="fas fa-plus"></i></span>
                   <span>Compose</span>
                 </a>
@@ -81,28 +82,37 @@
                 <span>Groups</span>
               </a>
             </li>
+            <li id="profile-list">
+                <a id="profile" href="#">
+                  <span><i class="fas fa-user"></i></span>
+                  <span>profile</span>
+                </a>
+              </li>
           </ul>
         </nav>
       </div>
       <!-- inbox -->
       <div id="inbox-set" class="table-div show">
-          <div class="layout-div">
-            <div>
-              <span>Ted Mosby</span>
-              <span>Dear Barney, Its is true that you are from canada...</span>
-              <span>Feb 25</span>
-            </div>
-            <div>
-              <span>Marshal Erickson</span>
-              <span>Dear Barney, Its is true that you are from canada...</span>
-              <span>Feb 25</span>
-            </div>
-            <div>
-              <span>Lily Aldrin</span>
-              <span>Dear Barney, Its is true that you are from canada...</span>
-              <span>Feb 25</span>
-            </div>
-          </div>         
+        <div class="layout-div">
+          <div>
+            <span>Ted Mosby</span>
+            <span>Dear Barney, Its is true that you are from canada...</span>
+            <span>Feb 25</span>
+            <span><i id="rf-delete" class="fas fa-trash"></i></span>
+          </div>
+          <div>
+            <span>Marshal Erickson</span>
+            <span>Dear Barney, Its is true that you are from canada...</span>
+            <span>Feb 25</span>
+            <span><i id="rf-delete" class="fas fa-trash"></i></span>
+          </div>
+          <div>
+            <span>Lily Aldrin</span>
+            <span>Dear Barney, Its is true that you are from canada...</span>
+            <span>Feb 25</span>
+            <span><i id="rf-delete" class="fas fa-trash"></i></span>
+          </div>
+        </div>         
       </div>
 
       <!-- replyforward -->
@@ -136,10 +146,10 @@
             <div>
               <a href="#">
                   <button id="compose-send" type="submit">Send</button>
-                </a>
-                <a href="#">
-                  <span><i id="compose-delete" class="fas fa-trash"></i></span>
-                </a>
+              </a>
+              <a href="#">
+                <span><i id="compose-delete" class="fas fa-trash"></i></span>
+              </a>
             </div>
             
           </div>
@@ -151,21 +161,24 @@
       <div id="sent-set" class="table-div hide">
         <div class="layout-div">
           <div>
-              <span>Barney Stinson</span>
-              <span>Dear Ted, Suit up cause we are going to have...</span>
-              <span>Feb 25</span>
-            </div>
-            <div>
-              <span>Barney Stinson</span>
-              <span>Dear Marshall, Swear on the brocode you won't slap me at my...</span>
-              <span>Feb 25</span>
-            </div>
-            <div>
-              <span>Barney Stinson</span>
-              <span>Dear Lilly, please don't tell robin I have feelings...</span>
-              <span>Feb 25</span>
-            </div>
-          </div>         
+            <span>Barney Stinson</span>
+            <span>Dear Ted, Suit up cause we are going...</span>
+            <span>Feb 25</span>
+            <span><i id="rf-delete" class="fas fa-trash"></i></span>
+          </div>
+          <div>
+            <span>Barney Stinson</span>
+            <span>Dear Marshall, Swear on the brocode you won't slap...</span>
+            <span>Feb 25</span>
+            <span><i id="rf-delete" class="fas fa-trash"></i></span>
+          </div>
+          <div>
+            <span>Barney Stinson</span>
+            <span>Dear Lilly, please don't tell robin I have feelings...</span>
+            <span>Feb 25</span>
+            <span><i id="rf-delete" class="fas fa-trash"></i></span>
+          </div>
+        </div>         
       </div>
 
 
@@ -177,16 +190,19 @@
             <span>Gredenco Sebratov</span>
             <span>Dear Barney, Its is true that you are from canada...</span>
             <span>Feb 25</span>
+            <span><i id="rf-delete" class="fas fa-trash"></i></span>
           </div>
           <div>
             <span>Gredenco Seb</span>
             <span>Dear Barney, Its is true that you are from canada...</span>
             <span>Feb 25</span>
+            <span><i id="rf-delete" class="fas fa-trash"></i></span>
           </div>
           <div>
             <span>Gredenco Sebratov</span>
             <span>Dear Barney, Its is true that you are from canada...</span>
             <span>Feb 25</span>
+            <span><i id="rf-delete" class="fas fa-trash"></i></span>
           </div>
         </div>         
       </div>
@@ -196,7 +212,10 @@
       <div id="contact-set" class="table-div hide">
         <div class="layout-div">
           <ul>
-            <input type="text" id="filterable" placeholder="search contact...">
+            <input type="text" id="filterable" placeholder="search contact..." />
+            <div class="u-div">
+                <button class="ubttn">New contact</button>
+            </div>
             <li class="collection-item">
               <span>Lily Aldrin</span>  
             </li>
@@ -220,25 +239,70 @@
       <div id="group-set" class="table-div hide">
         <div class="layout-div">
           <ul>
-            <input type="text" id="filterable" placeholder="search contact...">
-            <li class="collection-item">
-              <span>Lily Aldrin</span>  
+            <input type="text" id="filterable" placeholder="search group..." />
+            <button class="ubttn">create group</button>  
+            <li class="gp-list">
+              <span class="gp-li-ch">Lily Aldrin</span>
+              <span class="gp-li-ch"><i title="add to group" class="fas fa-plus-circle"></i></span>
+              <span class="gp-li-ch"><i title="members" class="fas fa-users"></i></span>
+              <span class="gp-li-ch"><i id="rf-delete" class="fas fa-trash"></i></span>  
             </li>
-            <li class="collection-item">
-              <span>Marshall Erickson</span>
+            <li class="gp-list">
+              <span class="gp-li-ch">Marshall Erickson</span>
+              <span class="gp-li-ch"><i title="add to group" class="fas fa-plus-circle"></i></span>
+              <span class="gp-li-ch"><i title="members" class="fas fa-users"></i></span>
+              <span class="gp-li-ch"><i id="rf-delete" class="fas fa-trash"></i></span>  
             </li>
-            <li class="collection-item">
-              <span>Ted Mosby</span>
+            <li class="gp-list">
+              <span class="gp-li-ch">Ted Mosby</span>
+              <span class="gp-li-ch"><i title="add to group" class="fas fa-plus-circle"></i></span>
+              <span class="gp-li-ch"><i title="members" class="fas fa-users"></i></span>
+              <span class="gp-li-ch"><i id="rf-delete" class="fas fa-trash"></i></span>  
             </li>
-            <li class="collection-item">
-              <span>Barney Stinson</span>
+            <li class="gp-list">
+              <span class="gp-li-ch">Barney Stinson</span>
+              <span class="gp-li-ch"><i title="add to group" class="fas fa-plus-circle"></i></span>
+              <span class="gp-li-ch"><i title="members" class="fas fa-users"></i></span>
+              <span class="gp-li-ch"><i id="rf-delete" class="fas fa-trash"></i></span>  
             </li>
-            <li class="collection-item">
-              <span>Robin Scherbatsky</span> 
+            <li class= "gp-list">
+              <span class="gp-li-ch">Robin Scherbatsky</span>
+              <span class="gp-li-ch"><i title="add to group" class="fas fa-plus-circle"></i></span>
+              <span class="gp-li-ch"><i title="members" class="fas fa-users"></i></span>
+              <span class="gp-li-ch"><i id="rf-delete" class="fas fa-trash"></i></span>   
             </li>
           </ul>
         </div>
       </div>
+      <!-- profile detail -->
+      <div id="profile-set" class="table-div hide" >
+        <div class="details">
+          <div>
+            <div class="img-container">
+              <div class="banner">
+                  <img src="../public/images/wentworthmiller.jpg" alt="profile-pic" class="profile-img">
+              </div> 
+              <div class="share">
+                <ul>
+                  <li><i class="fab fa-twitter" ></i></li>
+                  <li><i class="fab fa-git" ></i></li>
+                  <li><i class="fab fa-linkedin"></i></li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="content">
+              <div class="personal">
+                <p><i class="fas fa-burn"></i>onwuchekwa Chisom</p>
+                <p><i class="fas fa-burn"></i>Front-end Developer</p>
+                <p><i class="fa fa-envelope" ></i>princechekwas@gmail.com</p>
+                <p><i class="fas fa-phone"></i>0123456789</p>
+              </div>
+            </div> 
+          </div>
+        </div>
+      </div>
+
 
       <!-- modal for a mail view (sent, draft, inbox)-->
       <div id="mailView" class="table-div hide">
@@ -271,6 +335,7 @@
         </div>
       </div>
     </div>
+
     <footer>This is footer</footer>
     <script src="../public/scripts/nav.js"></script>
     <script src="../public/scripts/mailModal.js"></script>
