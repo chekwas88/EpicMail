@@ -299,6 +299,10 @@ section.messageView div button {
 .gp-list span.gp-li-ch {
   flex: 1 1 75px;
 }
+
+.gp-list span:nth-child(1) {
+ flex: 1 1 160px;
+}
 .gp-li-ch i {
   color: #063c5c;
 }
