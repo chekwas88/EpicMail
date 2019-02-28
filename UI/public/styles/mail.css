@@ -10,6 +10,7 @@
   background: #fff;
   min-height: 100vh;
   margin-bottom: 0;
+  overflow-y: scroll;
   position: relative;
 }
 
@@ -41,6 +42,7 @@
 
 .side-nav nav ul li:hover {
   background: #5a6164;
+  cursor: pointer;
 }
 
 .layout-div ul li a {
@@ -81,10 +83,14 @@
 #draft-set.hide,
 #contact-set.hide,
 #compose-new.hide,
+#group-set.hide,
 #mailView.hide,
-#replyforward.hide {
+#replyforward.hide, 
+#profile-set.hide {
   display: none;
 }
+
+
 
 .visited {
   background: #f59982;
@@ -97,7 +103,7 @@
   margin: 0;
 }
 .layout-div div {
-  padding: 10px;
+  padding: 5px;
   border: 1px solid #e0dada;
   border-left: none;
   border-right: none;
@@ -183,9 +189,6 @@ section.messageView div:hover {
 }
 
 
-/* .compose-div {
-  box-sizing: border-box;
-} */
 
 .compose-div div input {
   width: 100%;
@@ -231,7 +234,7 @@ section.messageView div:hover {
   font-size: 20px;
   color: #fff;
   width: 100px;
-  background: #33a3e4;
+  background: #063c5c;
   border-radius: 10px;
   border: none;
   cursor: pointer;
@@ -260,33 +263,23 @@ section.messageView div button {
 
 
 
-.layout-div div:hover{
+.layout-div div:hover, li.collection-item:hover {
   box-shadow: 0 0 4px rgba(54, 52, 52, 0.7);
   cursor: pointer;
 }
 
-.contactmail:hover {
-  box-shadow: 0 0 4px rgba(54, 52, 52, 0.7);
-  cursor: pointer;
-}
-
-.layout-div ul li.collection-item a:hover {
-  cursor: default;
-}
-
-.layout-div ul li.collection-item  a, .layout-div ul li.collection-item span{
-  display: block;
-  line-height: 2rem;
-}
-
-.layout-div ul li.collection-item span i {
-  color: #940e04;
-  padding: 0 5px;
-}
 
 .layout-div div span {
   display: block;
-  line-height: 1.5rem;
+  line-height: 1.2rem;
+}
+
+.layout-div div span:nth-child(4) {
+  position: fixed;
+  right: 10px;
+  padding: 0 10px;
+  margin-top: -40px;
+  line-height: 0;
 }
 
 .layout-div ul li {
@@ -297,11 +290,57 @@ section.messageView div button {
   
 }
 
-.layout-div ul li.collection-header {
+.gp-list{
+  display: flex;
+  text-align: left;
+  flex-wrap: nowrap;
+}
+
+.gp-list span.gp-li-ch {
+  flex: 1 1 75px;
+}
+
+.gp-list span:nth-child(1) {
+ flex: 1 1 160px;
+}
+.gp-li-ch i {
+  color: #063c5c;
+}
+
+#rf-delete {
+  color: #f10d0d
+}
+.gp-li-ch i:hover {
+  box-shadow: 0 0 4px rgba(54, 52, 52, 0.7);
+  opacity: 0.8;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 3px;
+}
+
+div.u-div {
+  padding: 0;
+  margin-bottom: 20px;
+  border: none;
+}
+
+div.u-div:hover{
+  box-shadow: none;
+}
+
+button.ubttn {
+  border: none;
+  border-radius: 10px;
   padding: 10px;
-  font-size: 25px;
-  font-weight: bold;
-  
+  margin: 5px;
+  cursor: pointer;
+  color: #fff;
+  background: #1d5575;
+  box-shadow: 0 0 4px rgba(54, 52, 52, 0.7);
+}
+
+button.ubttn:hover {
+  background: #012438
 }
 
 
@@ -317,40 +356,41 @@ section.messageView div button {
     left: 60%;
     width: 100%;
     max-width: 400px;
-  }
-
-
-  
+  } 
   .side-nav {
     position: absolute;
     width: 150px;
     height: 100vh;
   }
-
-
 }
 
 @media screen and (min-width: 800px) {
-  .layout-div div span {
-    display: inline;
-    padding-left: 20px;
-  }
-
   
+  .layout-div div {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .layout-div div span {
+    flex: 2 1 180px;
+    padding: 5px;
+    margin: 0 5px;
+    
+  }
+
   .layout-div div span:nth-child(3) {
-    float: right;
-    padding-right: 10px;
+    flex: 1 3 80px;
   }
-  .layout-div div span:nth-child(1), .layout-div ul li.collection-item a {
-    float:left;
-    padding-left: 10px;
-    width: 180px;
+  .layout-div div span:nth-child(4) {
+    flex: 1 4 40px;
+    margin-top: 0px;
+    position: unset;
+    padding: 0 10px;
+    line-height: 1.2rem;
   }
 
-
-  .layout-div ul li.collection-item span:nth-child(2){
-    float: right;
-    padding-right: 10px;
+  .layout-div div span:nth-child(1) {
+    flex: 1 2 100px;
   }
 }
 
@@ -364,12 +404,7 @@ section.messageView div button {
     width: calc(100% - 210px);
     margin-left: 200px;
   }
-  .layout-div div span, .layout-div ul li.collection-item {
-    padding-left: 10px;
-  }
-  .layout-div div span:nth-child(1), .layout-div ul li.collection-item a {
-   width: 300px;
-  }
+  
   .compose-layout,.rf-layout {
     top: 45%;
     left: 65%;

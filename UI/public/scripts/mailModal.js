@@ -7,7 +7,7 @@ const rfSend = document.getElementById('rf-send');
 const rfdelete = document.getElementById('rf-delete');
 const replybtn = document.querySelector('div button#replybtn');
 const fowardbtn = document.querySelector('div button#forwardbtn');
-const contactViewLists = document.querySelectorAll('.layout-div ul li.collection-item');
+const contactViewLists = document.querySelectorAll('.layout-div ul li.collection-item ');
 
 function removeComposeModal() {
   composeLayout.classList.add('hide');
@@ -34,12 +34,9 @@ replybtn.addEventListener('click', () => {
   layoutRF.classList.remove('hide');
 });
 
-console.log(contactViewLists);
 
-contactViewLists.forEach((list) => {
-  let emailIcon = list.getElementsByTagName('span')[1];
-  console.log(emailIcon);
-  emailIcon.addEventListener('click', () => {
+contactViewLists.forEach((list) =>{
+  list.addEventListener('click', () => {
     composeLayout.classList.add('show');
     composeLayout.classList.remove('hide');
   });
