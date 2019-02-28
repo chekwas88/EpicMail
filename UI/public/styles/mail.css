@@ -87,7 +87,8 @@
 #mailView.hide,
 #replyforward.hide, 
 #profile-set.hide,
-#gp-form-page.hide {
+#gp-form-page.hide,
+#members-modal.hide {
   display: none;
 }
 
@@ -276,9 +277,9 @@ section.messageView div button {
 }
 
 .layout-div div span:nth-child(4) {
-  position: fixed;
+  position: absolute;
   right: 10px;
-  padding: 0 10px;
+  left: 92%;
   margin-top: -40px;
   line-height: 0;
 }
@@ -344,6 +345,50 @@ button.ubttn:hover {
   background: #012438
 }
 
+/* gp members modal */
+.gp-members{
+  position: absolute;
+  top: 48%;
+  left: 3%;
+  border: 1px solid #c2bfbf;
+  width: 200px;
+  height: 150px;
+  overflow-y: auto;
+  background: #fff;
+  box-shadow: 0 0 4px rgba(54, 52, 52, 0.7);
+}
+
+.gp-members button{
+  padding: 5px 10px;
+  margin-top: 10px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+  float: right;
+  border: none;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.5s;
+  background: #f8851a;
+}
+
+.gp-members ul{
+  list-style: none;;
+}
+
+.gp-members ul li{
+  padding: 5px 5px;
+  border-bottom: 1px solid #d2d4d4;
+}
+
+.gp-members ul li:hover{
+  cursor: pointer;
+  box-shadow: 0 0 4px rgba(54, 52, 52, 0.7);
+}
+.gp-members button:hover {
+  background: #572b02;
+}
+
 /* group add form */
 
 .gp-form {
@@ -397,7 +442,7 @@ button.ubttn:hover {
     
   }
 
-  .gp-form {
+  .gp-form, .gp-members {
     top: 15%;
     left: 40%;
   }
@@ -459,9 +504,14 @@ button.ubttn:hover {
     margin-left: 200px;
   }
 
-  .gp-form {
+  .gp-form{
     top: 15%;
     left: 30%;
+  }
+
+  .gp-members {
+    top: 15%;
+    left: 55%;
   }
   
   .compose-layout,.rf-layout {
