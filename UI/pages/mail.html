@@ -23,7 +23,7 @@
           </div>
           
         </div>
-        <ul id="bars" class="hide">
+        <ul id="bars" class="show">
           <li>
             <a href="./userAuth.html">
               Login
@@ -34,11 +34,6 @@
               <span><i class="far fa-envelope"></i></span>
               <span>Mail</span>
             </a>
-          </li>
-          <li>
-            <a href="#">
-              About
-            </a> 
           </li>
         </ul>
     </nav>
@@ -125,10 +120,10 @@
               <div>
                 <a href="#">
                     <button id="rf-send" type="submit">Send</button>
-                  </a>
-                  <a href="#">
-                    <span><i id="rf-delete" class="fas fa-trash"></i></span>
-                  </a>
+                </a>
+                <a href="#">
+                  <span><i id="rf-delete" class="fas fa-trash"></i></span>
+                </a>
               </div>
               
             </div>
@@ -213,9 +208,7 @@
         <div class="layout-div">
           <ul>
             <input type="text" id="filterable" placeholder="search contact..." />
-            <div class="u-div">
-                <button class="ubttn">New contact</button>
-            </div>
+            <button class="ubttn">New contact</button>
             <li class="collection-item">
               <span>Lily Aldrin</span>  
             </li>
@@ -298,9 +291,9 @@
             
             <div class="content">
               <div class="personal">
-                <p><i class="fas fa-burn"></i>onwuchekwa Chisom</p>
-                <p><i class="fas fa-burn"></i>Front-end Developer</p>
-                <p><i class="fa fa-envelope" ></i>princechekwas@gmail.com</p>
+                <p><i class="fas fa-burn"></i>Onwuchekwa Chisom</p>
+                <p><i class="fas fa-burn"></i>Front-End Developer</p>
+                <p id="profile-mail"><i class="fa fa-envelope" ></i>princechekwas@gmail.com</p>
                 <p><i class="fas fa-phone"></i>0123456789</p>
               </div>
             </div> 
@@ -356,7 +349,7 @@
 
       <!-- modal for a mail view (sent, draft, inbox)-->
       <div id="mailView" class="table-div hide">
-        <div class="layout-div">
+        <div class="rfbttn">
           <section class="messageView">
             <h3>Reminder: Pre-Bootcamp Workshops</h3>
             <div>

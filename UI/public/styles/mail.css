@@ -104,7 +104,7 @@
   padding: 2px;
   margin: 0;
 }
-.layout-div div {
+.layout-div div, .rfbttn div {
   padding: 5px;
   border: 1px solid #e0dada;
   border-left: none;
@@ -149,7 +149,6 @@ section.messageView div:hover {
   pointer-events: auto;
   opacity: 1;
   border: 1px solid #c2bfbf;
-  border-radius: 10px;
   -webkit-transform: translate(-50%, -50%) scale(1);
   transform: translate(-50%, -50%) scale(1);
   -webkit-transition: transform 0.5s ease, opacity 0.5s ease;
@@ -182,8 +181,6 @@ section.messageView div:hover {
   padding: 10px;
   margin: 0;
   color: #070707;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
 }
 
 .compose-div div header h3 {
@@ -243,6 +240,8 @@ section.messageView div:hover {
   box-shadow: 0 0 4px rgba(54, 52, 52, 0.7);
 }
 
+/* mailview */
+
 section.messageView div button {
   padding: 10px 7px;
   margin: 10px;
@@ -254,6 +253,14 @@ section.messageView div button {
   border: none;
   cursor: pointer;
   box-shadow: 0 0 4px rgba(54, 52, 52, 0.7);
+}
+
+section.messageView h3 {
+  padding: 10px;
+}
+
+div.rfbttn {
+  padding: 10px;
 }
 
 .compose-div div div a:nth-child(1) {
@@ -311,6 +318,10 @@ section.messageView div button {
 
 #rf-delete {
   color: #f10d0d
+}
+
+#rf-delete:hover {
+  font-size: 20px;
 }
 .gp-li-ch i:hover {
   box-shadow: 0 0 4px rgba(54, 52, 52, 0.7);
@@ -443,7 +454,7 @@ button.ubttn:hover {
   }
 
   .gp-form, .gp-members {
-    top: 15%;
+    top: 25%;
     left: 40%;
   }
 
@@ -480,7 +491,7 @@ button.ubttn:hover {
   }
   .layout-div div span:nth-child(4) {
     flex: 1 4 40px;
-    margin-top: 0px;
+    margin-top: 5px;
     position: unset;
     padding: 0 10px;
     line-height: 1.2rem;
@@ -505,12 +516,10 @@ button.ubttn:hover {
   }
 
   .gp-form{
-    top: 15%;
     left: 30%;
   }
 
   .gp-members {
-    top: 15%;
     left: 55%;
   }
   

@@ -58,6 +58,10 @@
 .personal p {
   padding: 5px;
 }
+.personal p:nth-child(3):hover {
+  cursor: pointer;
+  box-shadow: 0 0 4px rgba(54, 52, 52, 0.7);
+}
 .personal p i {
   color: #055e64;
   padding: 5px;
