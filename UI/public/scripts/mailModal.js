@@ -13,7 +13,10 @@ const profileMail = document.getElementById('profile-mail');
 const getLink = document.querySelectorAll('li.gp-list');
 const formLayout = document.getElementById('gp-form-page');
 const membersDisplay = document.getElementById('members-modal');
+const addcontact = document.getElementById('addcontact');
+const contactFormLayout = document.getElementById('ct-form-page')
 const closeMembersDisplay = document.getElementById('gp-member-close');
+const contactFormSubmit  = document.getElementById('ct-form-sub');
 
 
 function removeComposeModal() {
@@ -39,7 +42,17 @@ function getGroupLists() {
   return spanModal;
 }
 
-console.log(getGroupLists());
+addcontact.addEventListener('click', () => {
+  contactFormLayout.classList.add('show');
+  contactFormLayout.classList.remove('hide');
+});
+
+contactFormSubmit.addEventListener('click', () => {
+  contactFormLayout.classList.add('hide');
+  contactFormLayout.classList.remove('show');
+});
+
+
 
 compose.addEventListener('click', () => {
   composeLayout.classList.add('show');
