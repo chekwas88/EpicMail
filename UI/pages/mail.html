@@ -208,7 +208,7 @@
         <div class="layout-div">
           <ul>
             <input type="text" id="filterable" placeholder="search contact..." />
-            <button class="ubttn">New contact</button>
+            <button id="addcontact" class="ubttn">New contact</button>
             <li class="collection-item">
               <span>Lily Aldrin</span>  
             </li>
@@ -226,6 +226,32 @@
             </li>
           </ul>
         </div>
+      </div>
+
+      <!-- contact form -->
+
+      <div id="ct-form-page" class="gp-layout hide">
+        <form class="ct-form">
+          <div>
+            <label for="ct-fname"></label>
+            <input id="ct-fname"  type="text" name="name" placeholder="firstname" required/>
+          </div>
+          <div>
+            <label for="ct-sname"></label>
+            <input id="ct-sname"  type="text" name="name" placeholder="surname" required/>
+          </div>
+          <div>
+            <label for="ct-role"></label>
+            <input id="ct-role"  type="text" name="name" placeholder="role" />
+          </div>
+          <div>
+            <label for="gp-email"></label>
+            <input id="gp-email" type="email" name="email" placeholder="email" required/> 
+          </div>
+          <div>
+            <button id="ct-form-sub" type="submit">Add</button>
+          </div>
+        </form>
       </div>
 
       <!-- groups -->
