@@ -9,6 +9,7 @@ const rfSend = document.getElementById('rf-send');
 const rfdelete = document.querySelector('a span #rf-delete');
 const replybtn = document.querySelector('div button#replybtn');
 const fowardbtn = document.querySelector('div button#forwardbtn');
+const draftForward = document.getElementById('dtforwardbtn');
 const profileMail = document.getElementById('profile-mail');
 const getLink = document.querySelectorAll('li.gp-list');
 const formLayout = document.getElementById('gp-form-page');
@@ -17,11 +18,20 @@ const addcontact = document.getElementById('addcontact');
 const contactFormLayout = document.getElementById('ct-form-page')
 const closeMembersDisplay = document.getElementById('gp-member-close');
 const contactFormSubmit  = document.getElementById('ct-form-sub');
+const createGPForm = document.getElementById('ct-gp-form-page');
+const ctGPFormAdd = document.getElementById('ct-gp-form-sub');
+const ctGPFormCancel = document.getElementById('ct-gp-form-cancel');
+const createGPBtn = document.getElementById('creategroup');
 
 
 function removeComposeModal() {
   composeLayout.classList.add('hide');
   composeLayout.classList.remove('show');
+}
+
+function removeCTGroupform() {
+  createGPForm.classList.remove('show');
+  createGPForm.classList.add('hide');
 }
 
 function removeRFModal() {
@@ -32,6 +42,11 @@ function removeRFModal() {
 function removeGPForm() {
   formLayout.classList.add('hide');
   formLayout.classList.remove('show');
+}
+
+function getReplyForwardModal() {
+  layoutRF.classList.add('show');
+  layoutRF.classList.remove('hide');
 }
 
 function getGroupLists() {
@@ -52,26 +67,19 @@ contactFormSubmit.addEventListener('click', () => {
   contactFormLayout.classList.remove('show');
 });
 
-
+createGPBtn.addEventListener('click', () => {
+  createGPForm.classList.remove('hide');
+  createGPForm.classList.add('show');
+});
 
 compose.addEventListener('click', () => {
   composeLayout.classList.add('show');
   composeLayout.classList.remove('hide');
 });
 
-fowardbtn.addEventListener('click', () => {
-  layoutRF.classList.add('show');
-  layoutRF.classList.remove('hide');
-});
-
-replybtn.addEventListener('click', () => {
-  layoutRF.classList.add('show');
-  layoutRF.classList.remove('hide');
-});
-
-
-
-
+fowardbtn.addEventListener('click', getReplyForwardModal);
+replybtn.addEventListener('click', getReplyForwardModal);
+draftForward.addEventListener('click', getReplyForwardModal);
 
 const spans = getGroupLists();
 
@@ -89,7 +97,6 @@ spans.forEach((span) => {
   });
 });
    
-
 getLink.forEach((span) => {
   let membersIcon = span.getElementsByTagName('span')[2];
   membersIcon.addEventListener('click', () => {
@@ -116,6 +123,8 @@ rfSend.addEventListener('click', removeRFModal);
 rfdelete.addEventListener('click', removeRFModal);
 gpFormAdd.addEventListener('click', removeGPForm);
 gpFormCancel.addEventListener('click', removeGPForm);
+ctGPFormAdd.addEventListener('click', removeCTGroupform);
+ctGPFormCancel.addEventListener('click', removeCTGroupform);
 
 
 

@@ -130,6 +130,8 @@
           </div>
       </div>
 
+      
+
       <!-- compose -->
       <div id="compose-new" class="compose-layout hide">
         <div class="compose-div">
@@ -180,7 +182,7 @@
       <!-- draft -->
 
       <div id="draft-set" class="table-div hide">
-        <div class="layout-div">
+        <div class="draft-div">
           <div>
             <span>Gredenco Sebratov</span>
             <span>Dear Barney, Its is true that you are from canada...</span>
@@ -250,6 +252,7 @@
           </div>
           <div>
             <button id="ct-form-sub" type="submit">Add</button>
+            <button id="ct-form-cancel">Cancel</button>
           </div>
         </form>
       </div>
@@ -259,7 +262,7 @@
         <div class="layout-div">
           <ul>
             <input type="text" id="filterable" placeholder="search group..." />
-            <button class="ubttn">create group</button>  
+            <button id="creategroup" class="ubttn">create group</button>  
             <li class="gp-list">
               <span class="gp-li-ch">Lily Aldrin</span>
               <span class="gp-li-ch"><i title="add to group" class="fas fa-plus-circle"></i></span>
@@ -346,6 +349,21 @@
         </form>
       </div>
 
+      <!-- create group form -->
+
+      <div id="ct-gp-form-page" class="gp-layout hide">
+        <form class="gp-form">
+          <div>
+            <label for="gpr-name"></label>
+            <input id="gpr-name"  type="text" name="name" placeholder="name" required/>
+          </div>
+          <div>
+            <button id="ct-gp-form-sub" type="submit">Add</button>
+            <button id="ct-gp-form-cancel">Cancel</button>
+          </div>
+        </form>
+      </div>
+
       <!-- group-members-modal -->
 
       <div id="members-modal" class="hide">
@@ -403,6 +421,38 @@
           </section>
         </div>
       </div>
+
+      <!-- draft-mail view -->
+
+      <div id="draft-open" class="table-div hide">
+        <div class="rfbttn">
+          <section class="messageView">
+            <h3>Reminder: Pre-Bootcamp Workshops</h3>
+            <div>
+              <p>Philip Newman<i>:philip.newman@andela.com</i></p>
+              <span>Feb 25, 2019, 11:14 AM</span>
+            </div>
+            <div>
+              <p>Hello there,</p>
+
+              <p>
+                Trust this meets you well.
+                Yes, the Pre-Bootcamp Workshops are starting today. As a reminder, the schedule is as follows:
+                Duration: 2 weeks (Monday 25th February - Saturday 9th March 2019)<br>
+                Week 1:   4:00 - 7:00pm Monday - Friday; 10:30am - 4:30pm Saturday<br>
+                Week 2:   5:00 - 7:00pm Monday - Friday; 10:30am - 4:30pm Saturday<br>
+                Venue:     Andela office (EPIC Tower), 235 Ikorodu Road, Ilupeju, Lagos. <br>
+                Please be sure to arrive early and proceed to the reception on the 4th floor to obtain a guest ID card. We look forward to having you in attendance.<br>
+                See you then!
+              </p>
+              <div>
+                <button id="dtforwardbtn">forward</button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
     </div>
 
     <footer>This is footer</footer>
