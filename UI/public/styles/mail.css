@@ -89,7 +89,9 @@
 #profile-set.hide,
 #gp-form-page.hide,
 #members-modal.hide,
-#ct-form-page.hide {
+#ct-form-page.hide,
+#ct-gp-form-page.hide,
+#draft-open.hide {
   display: none;
 }
 
@@ -100,12 +102,12 @@
   border-radius: 15px;
 }
 
-.layout-div {
+.layout-div, .draft-div {
   display: block;
   padding: 2px;
   margin: 0;
 }
-.layout-div div, .rfbttn div {
+.layout-div div, .rfbttn div, .draft-div div {
   padding: 5px;
   border: 1px solid #e0dada;
   border-left: none;
@@ -273,18 +275,18 @@ div.rfbttn {
 
 
 
-.layout-div div:hover, li.collection-item:hover {
+.layout-div div:hover, li.collection-item:hover, .draft-div div:hover {
   box-shadow: 0 0 4px rgba(54, 52, 52, 0.7);
   cursor: pointer;
 }
 
 
-.layout-div div span {
+.layout-div div span, .draft-div div span {
   display: block;
   line-height: 1.2rem;
 }
 
-.layout-div div span:nth-child(4) {
+.layout-div div span:nth-child(4), .draft-div div span:nth-child(4) {
   position: absolute;
   right: 10px;
   left: 92%;
@@ -478,23 +480,23 @@ button.ubttn:hover {
 
 @media screen and (min-width: 800px) {
   
-  .layout-div div {
+  .layout-div div, .draft-div div {
     display: flex;
     justify-content: space-between;
   }
 
 
-  .layout-div div span {
+  .layout-div div span, .draft-div div span {
     flex: 2 1 180px;
     padding: 5px;
     margin: 0 5px;
     
   }
 
-  .layout-div div span:nth-child(3) {
+  .layout-div div span:nth-child(3), .draft-div div span:nth-child(3) {
     flex: 1 3 80px;
   }
-  .layout-div div span:nth-child(4) {
+  .layout-div div span:nth-child(4), .draft-div div span:nth-child(4) {
     flex: 1 4 40px;
     margin-top: 5px;
     position: unset;
@@ -502,7 +504,7 @@ button.ubttn:hover {
     line-height: 1.2rem;
   }
 
-  .layout-div div span:nth-child(1) {
+  .layout-div div span:nth-child(1), .draft-div div span:nth-child(1) {
     flex: 1 2 100px;
   }
 }
