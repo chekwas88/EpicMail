@@ -4,17 +4,12 @@ const draftLayout = document.getElementById('draft-set');
 const contactLayout = document.getElementById('contact-set');
 const profileLayout = document.getElementById('profile-set');
 const groupLayout = document.getElementById('group-set');
-const profilelist = document.getElementById('profile-list')
+const profilelist = document.getElementById('profile-list');
 const grouplist = document.getElementById('group-list');
 const inboxlist = document.getElementById('inbox-list');
 const sentlist = document.getElementById('sent-list');
 const draftlist = document.getElementById('draft-list');
 const contactlist = document.getElementById('contact-list');
-const inbox = document.getElementById('inbox');
-const sent= document.getElementById('sent');
-const draft = document.getElementById('draft');
-const contact = document.getElementById('contact');
-const profile = document.getElementById('profile');
 const linkedDiv = document.querySelectorAll('div.table-div .layout-div > div');
 const draftDiv = document.querySelectorAll('.draft-div div');
 const mailView = document.getElementById('mailView');
@@ -47,9 +42,7 @@ function getProfileSet() {
   draftMailView.classList.remove('show');
 }
 
-
-
-inboxlist.addEventListener('click', () =>{
+inboxlist.addEventListener('click', () => {
   inboxLayout.classList.add('show');
   inboxLayout.classList.remove('hide');
   inboxlist.classList.add('visited');
@@ -76,7 +69,7 @@ inboxlist.addEventListener('click', () =>{
 
 profilelist.addEventListener('click', getProfileSet);
 
-sentlist.addEventListener('click', () =>{
+sentlist.addEventListener('click', () => {
   inboxLayout.classList.remove('show');
   inboxLayout.classList.add('hide');
   inboxlist.classList.remove('visited');
@@ -101,7 +94,7 @@ sentlist.addEventListener('click', () =>{
   draftMailView.classList.remove('show');
 });
 
-draftlist.addEventListener('click', () =>{
+draftlist.addEventListener('click', () => {
   inboxLayout.classList.remove('show');
   inboxLayout.classList.add('hide');
   inboxlist.classList.remove('visited');
@@ -126,7 +119,7 @@ draftlist.addEventListener('click', () =>{
   draftMailView.classList.remove('show');
 });
 
-contactlist.addEventListener('click', () =>{
+contactlist.addEventListener('click', () => {
   inboxLayout.classList.remove('show');
   inboxLayout.classList.add('hide');
   inboxlist.classList.remove('visited');
@@ -151,7 +144,7 @@ contactlist.addEventListener('click', () =>{
   draftMailView.classList.remove('show');
 });
 
-grouplist.addEventListener('click', () =>{
+grouplist.addEventListener('click', () => {
   inboxLayout.classList.remove('show');
   inboxLayout.classList.add('hide');
   inboxlist.classList.remove('visited');
@@ -231,7 +224,7 @@ draftDiv.forEach((div) => {
   });
 });
 
-contactViewLists.forEach((list) =>{
+contactViewLists.forEach((list) => {
   list.addEventListener('click', () => {
     profileLayout.classList.add('show');
     profileLayout.classList.remove('hide');
@@ -257,5 +250,3 @@ contactViewLists.forEach((list) =>{
     draftMailView.classList.remove('show');
   });
 });
-
-
