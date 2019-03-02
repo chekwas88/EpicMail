@@ -15,9 +15,9 @@ const getLink = document.querySelectorAll('li.gp-list');
 const formLayout = document.getElementById('gp-form-page');
 const membersDisplay = document.getElementById('members-modal');
 const addcontact = document.getElementById('addcontact');
-const contactFormLayout = document.getElementById('ct-form-page')
+const contactFormLayout = document.getElementById('ct-form-page');
 const closeMembersDisplay = document.getElementById('gp-member-close');
-const contactFormSubmit  = document.getElementById('ct-form-sub');
+const contactFormSubmit = document.getElementById('ct-form-sub');
 const createGPForm = document.getElementById('ct-gp-form-page');
 const ctGPFormAdd = document.getElementById('ct-gp-form-sub');
 const ctGPFormCancel = document.getElementById('ct-gp-form-cancel');
@@ -50,7 +50,7 @@ function getReplyForwardModal() {
 }
 
 function getGroupLists() {
-  let spanModal = [];
+  const spanModal = [];
   getLink.forEach((span) => {
     spanModal.push(span.getElementsByTagName('span'));
   });
@@ -96,16 +96,13 @@ spans.forEach((span) => {
     composeLayout.classList.remove('hide');
   });
 });
-   
 getLink.forEach((span) => {
-  let membersIcon = span.getElementsByTagName('span')[2];
+  const membersIcon = span.getElementsByTagName('span')[2];
   membersIcon.addEventListener('click', () => {
     membersDisplay.classList.remove('hide');
     membersDisplay.classList.add('show');
   });
 });
-
-
 
 closeMembersDisplay.addEventListener('click', () => {
   membersDisplay.classList.add('hide');
@@ -125,6 +122,3 @@ gpFormAdd.addEventListener('click', removeGPForm);
 gpFormCancel.addEventListener('click', removeGPForm);
 ctGPFormAdd.addEventListener('click', removeCTGroupform);
 ctGPFormCancel.addEventListener('click', removeCTGroupform);
-
-
-
