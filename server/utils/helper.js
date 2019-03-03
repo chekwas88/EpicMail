@@ -21,7 +21,7 @@ class HelperUtils {
     } catch (e) {
       return res.status(400).json({
         status: res.statusCode,
-        message: `${e.name}: ${e.message}`,
+        error: `${e.name}: ${e.message}`,
       });
     }
   }

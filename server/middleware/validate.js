@@ -4,7 +4,7 @@ import HelperUtils from '../utils/helper';
 
 // const { BadRequestError } = error;
 
-class ValidateEntries {
+class Validate {
   /**
      * @function  validateData - check for input validation before creating a diary entry
      * @param {object} req - request object
@@ -14,14 +14,14 @@ class ValidateEntries {
   */
   static validateUserRegData(req, res, next) {
     const schema = {
-      id: Joi.number().required(),
       firstname: Joi.string().required(),
       lastname: Joi.string().required(),
       email: Joi.string().email().required(),
       password: Joi.string().required(),
+      confirmpassword: Joi.string().required(),
     };
     HelperUtils.schemaValidation(req, schema, res, next);
   }
 }
 
-export default ValidateEntries;
+export default Validate;
