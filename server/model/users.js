@@ -6,6 +6,7 @@ const users = [
     email: 'princechekwas@gmail.com',
     password: 'password',
     confirmpassword: 'password',
+    isAdmin: 'true',
   },
 ];
 
