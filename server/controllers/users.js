@@ -27,6 +27,20 @@ class UserController {
       message: 'Account created successfully',
     });
   }
+
+  static loginUser(req, res) {
+    const loginDetails = {
+      email: req.body.email,
+      password: req.body.password,
+    };
+    const authUser = users.find(user => user.email === loginDetails.email);
+    return res.status(201).json({
+      status: res.statusCode,
+      message: 'login was successful',
+      authUser,
+    });
+  }
 }
+
 
 export default UserController;
