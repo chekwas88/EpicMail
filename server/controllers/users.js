@@ -1,7 +1,7 @@
 import users from '../model/users';
-import error from '../utils/error';
+// import error from '../utils/error';
 
-const { BadRequestError } = error;
+// const { BadRequestError } = error;
 
 class UserController {
   /**
@@ -21,21 +21,11 @@ class UserController {
       password: req.body.password,
       confirmpassword: req.body.confirmpassword,
     };
-    try {
-      if (user.password !== user.confirmpassword) {
-        throw new BadRequestError('Please confirm your password');
-      }
-      users.push(user);
-      return res.status(201).json({
-        status: res.statusCode,
-        message: 'Account created successfully',
-      });
-    } catch (e) {
-      return res.status(400).json({
-        status: res.statusCode,
-        error: `${e.name}: ${e.message}`,
-      });
-    }
+    users.push(user);
+    return res.status(201).json({
+      status: res.statusCode,
+      message: 'Account created successfully',
+    });
   }
 }
 

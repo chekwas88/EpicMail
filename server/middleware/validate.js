@@ -1,8 +1,8 @@
 import Joi from 'joi';
 import HelperUtils from '../utils/helper';
-// import error from '../utils/error';
+import error from '../utils/error';
 
-// const { BadRequestError } = error;
+const { AuthenticationError } = error;
 
 class Validate {
   /**
@@ -21,6 +21,27 @@ class Validate {
       confirmpassword: Joi.string().required(),
     };
     HelperUtils.schemaValidation(req, schema, res, next);
+  }
+
+  /**
+     * @function  validatePassword - validates password
+     * @param {object} req - request object
+     * @param {object} res - response object
+     * @returns {function} next
+     *
+  */
+  static validatePassword(req, res, next) {
+    try {
+      if (req.body.password !== req.body.confirmpassword) {
+        throw new AuthenticationError('Please confirm your password');
+      }
+      return next();
+    } catch (e) {
+      return res.status(403).json({
+        status: res.statusCode,
+        error: `${e.name}: ${e.message}`,
+      });
+    }
   }
 }
 
