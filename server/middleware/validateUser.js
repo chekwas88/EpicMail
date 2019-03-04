@@ -20,6 +20,7 @@ class Validate {
       email: Joi.string().email().required(),
       password: Joi.string().required(),
       confirmpassword: Joi.string().required(),
+      isAdmin: Joi.boolean().required(),
     };
     HelperUtils.schemaValidation(req, schema, res, next);
   }
