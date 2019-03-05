@@ -28,6 +28,13 @@ class UserController {
     });
   }
 
+  /**
+    * @function loginUser - log's in a user
+    * @param {object} req - request object
+    * @param {object} res - response object
+    * @returns {object} json data
+  */
+
   static loginUser(req, res) {
     const loginDetails = {
       email: req.body.email,

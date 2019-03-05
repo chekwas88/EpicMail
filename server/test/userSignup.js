@@ -13,7 +13,7 @@ describe('Post api/v1/auth/signup', () => {
       .send({
         firstname: 'Ted',
         lastname: 'Mosby',
-        email: 'ted@mail.com',
+        email: 'ted@epicmail.com',
         password: 'pass',
         confirmpassword: 'pass',
         isAdmin: 'true',
@@ -31,7 +31,7 @@ describe('Post api/v1/auth/signup', () => {
       .send({
         firstname: '',
         lastname: 'Mosby',
-        email: 'ted@mail.com',
+        email: 'ted@epicmail.com',
         password: 'pass',
         confirmpassword: 'pass',
         isAdmin: 'true',
@@ -48,7 +48,7 @@ describe('Post api/v1/auth/signup', () => {
       .send({
         firstname: 'ted',
         lastname: '',
-        email: 'ted@mail.com',
+        email: 'ted@epicmail.com',
         password: 'pass',
         confirmpassword: 'pass',
         isAdmin: 'true',
@@ -84,7 +84,7 @@ describe('Post api/v1/auth/signup', () => {
       .send({
         firstname: 'ted',
         lastname: 'mosby',
-        email: 'ted@mail.com',
+        email: 'ted@epicmail.com',
         password: '',
         confirmpassword: 'pass',
         isAdmin: 'true',
@@ -102,7 +102,7 @@ describe('Post api/v1/auth/signup', () => {
       .send({
         firstname: 'ted',
         lastname: 'mosby',
-        email: 'ted@mail.com',
+        email: 'ted@epicmail.com',
         password: 'pass',
         confirmpassword: '',
         isAdmin: 'true',
@@ -120,7 +120,7 @@ describe('Post api/v1/auth/signup', () => {
       .send({
         firstname: 'ted',
         lastname: 'mosby',
-        email: 'ted@mail.com',
+        email: 'ted@epicmail.com',
         password: 'pass',
         confirmpassword: 'pass',
         isAdmin: '',
@@ -137,7 +137,7 @@ describe('Post api/v1/auth/signup', () => {
       .post('/api/v1/auth/signup')
       .send({
         lastname: 'mosby',
-        email: 'ted@mail.com',
+        email: 'ted@epicmail.com',
         password: 'pass',
         confirmpassword: 'pass',
         isAdmin: 'true',
@@ -154,7 +154,7 @@ describe('Post api/v1/auth/signup', () => {
       .post('/api/v1/auth/signup')
       .send({
         firstname: 'ted',
-        email: 'ted@mail.com',
+        email: 'ted@epicmail.com',
         password: 'pass',
         confirmpassword: 'pass',
         isAdmin: 'true',
@@ -188,7 +188,7 @@ describe('Post api/v1/auth/signup', () => {
       .send({
         firstname: 'ted',
         lastname: 'mosby',
-        email: 'ted@mail.com',
+        email: 'ted@epicmail.com',
         confirmpassword: 'pass',
         isAdmin: 'true',
       })
@@ -205,7 +205,7 @@ describe('Post api/v1/auth/signup', () => {
       .send({
         firstname: 'ted',
         lastname: 'mosby',
-        email: 'ted@mail.com',
+        email: 'ted@epicmail.com',
         password: 'pass',
         isAdmin: 'true',
       })
@@ -222,7 +222,7 @@ describe('Post api/v1/auth/signup', () => {
       .send({
         firstname: 'ted',
         lastname: 'mosby',
-        email: 'ted@mail.com',
+        email: 'ted@epicmail.com',
         password: 'pass',
         confirmpassword: 'pass',
       })
@@ -239,7 +239,7 @@ describe('Post api/v1/auth/signup', () => {
       .send({
         firstname: 'ted',
         lastname: 'mosby',
-        email: 'ted@mail.com',
+        email: 'ted@epicmail.com',
         password: 'pass',
         confirmpassword: 'password',
         isAdmin: 'true',
