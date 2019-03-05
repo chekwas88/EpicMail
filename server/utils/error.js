@@ -1,6 +1,6 @@
 class NotFoundError {
   constructor(message) {
-    this.name = 'NotFound';
+    this.name = 'NotFoundError';
     this.message = message;
   }
 }
