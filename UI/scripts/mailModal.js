@@ -9,7 +9,6 @@ const rfSend = document.getElementById('rf-send');
 const rfdelete = document.querySelector('a span #rf-delete');
 const replybtn = document.querySelector('div button#replybtn');
 const fowardbtn = document.querySelector('div button#forwardbtn');
-const draftForward = document.getElementById('dtforwardbtn');
 const profileMail = document.getElementById('profile-mail');
 const getLink = document.querySelectorAll('li.gp-list');
 const formLayout = document.getElementById('gp-form-page');
@@ -22,6 +21,7 @@ const createGPForm = document.getElementById('ct-gp-form-page');
 const ctGPFormAdd = document.getElementById('ct-gp-form-sub');
 const ctGPFormCancel = document.getElementById('ct-gp-form-cancel');
 const createGPBtn = document.getElementById('creategroup');
+const draftDiv = document.querySelectorAll('.draft-div div');
 
 
 function removeComposeModal() {
@@ -47,6 +47,10 @@ function removeGPForm() {
 function getReplyForwardModal() {
   layoutRF.classList.add('show');
   layoutRF.classList.remove('hide');
+}
+function getComposeLayout() {
+  composeLayout.classList.add('show');
+  composeLayout.classList.remove('hide');
 }
 
 function getGroupLists() {
@@ -79,7 +83,6 @@ compose.addEventListener('click', () => {
 
 fowardbtn.addEventListener('click', getReplyForwardModal);
 replybtn.addEventListener('click', getReplyForwardModal);
-draftForward.addEventListener('click', getReplyForwardModal);
 
 const spans = getGroupLists();
 
@@ -109,10 +112,11 @@ closeMembersDisplay.addEventListener('click', () => {
   membersDisplay.classList.remove('show');
 });
 
-profileMail.addEventListener('click', () => {
-  composeLayout.classList.add('show');
-  composeLayout.classList.remove('hide');
+draftDiv.forEach((div) => {
+  div.addEventListener('click', getComposeLayout);
 });
+
+profileMail.addEventListener('click', getComposeLayout);
 
 send.addEventListener('click', removeComposeModal);
 deleteBtn.addEventListener('click', removeComposeModal);
