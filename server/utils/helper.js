@@ -50,6 +50,11 @@ class HelperUtils {
     const receivedMessages = messages.filter(m => (m.status === 'read') || (m.status === 'unread'));
     return receivedMessages;
   }
+
+  static getAllUnReadMessages() {
+    const receivedMessages = messages.filter(m => m.status === 'unread');
+    return receivedMessages;
+  }
 }
 
 
