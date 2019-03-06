@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Mail</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro|Ubuntu" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="./styles/general.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="./styles/profile.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="./styles/mail.css" />
@@ -15,7 +16,7 @@
   </head>
   <body>
     <nav class="navbar">
-        <div id="burger" class="toggle-burger">
+        <div id="burger" class="toggle-burger  hide">
           <div>
             <Span></Span>
             <Span></Span>
@@ -23,7 +24,7 @@
           </div>
           
         </div>
-        <ul id="bars" class="show">
+        <ul id="bars" class="hide">
           <li>
             <a href="./index.html">
               Login
@@ -307,7 +308,7 @@
           <div>
             <div class="img-container">
               <div class="banner">
-                  <img src="../public/images/wentworthmiller.jpg" alt="profile-pic" class="profile-img">
+                  <img src="./images/wentworthmiller.jpg" alt="profile-pic" class="profile-img">
               </div> 
               <div class="share">
                 <ul>
@@ -422,40 +423,9 @@
         </div>
       </div>
 
-      <!-- draft-mail view -->
-
-      <div id="draft-open" class="table-div hide">
-        <div class="rfbttn">
-          <section class="messageView">
-            <h3>Reminder: Pre-Bootcamp Workshops</h3>
-            <div>
-              <p>Philip Newman<i>:philip.newman@andela.com</i></p>
-              <span>Feb 25, 2019, 11:14 AM</span>
-            </div>
-            <div>
-              <p>Hello there,</p>
-
-              <p>
-                Trust this meets you well.
-                Yes, the Pre-Bootcamp Workshops are starting today. As a reminder, the schedule is as follows:
-                Duration: 2 weeks (Monday 25th February - Saturday 9th March 2019)<br>
-                Week 1:   4:00 - 7:00pm Monday - Friday; 10:30am - 4:30pm Saturday<br>
-                Week 2:   5:00 - 7:00pm Monday - Friday; 10:30am - 4:30pm Saturday<br>
-                Venue:     Andela office (EPIC Tower), 235 Ikorodu Road, Ilupeju, Lagos. <br>
-                Please be sure to arrive early and proceed to the reception on the 4th floor to obtain a guest ID card. We look forward to having you in attendance.<br>
-                See you then!
-              </p>
-              <div>
-                <button id="dtforwardbtn">forward</button>
-              </div>
-            </div>
-          </section>
-        </div>
-      </div>
-
     </div>
 
-    <footer>This is footer</footer>
+    <footer>© EpicMail 2019. All rights Reserved.</footer>
     <script src="./scripts/nav.js"></script>
     <script src="./scripts/mailModal.js"></script>
     <script src="./scripts/mail.js"></script>

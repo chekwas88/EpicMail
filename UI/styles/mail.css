@@ -1,7 +1,8 @@
 .dcontainer{
   width: 100%;
   position: relative;
-  overflow: hidden;
+  margin: 0;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 
@@ -10,13 +11,12 @@
   background: #fff;
   min-height: 100vh;
   margin-bottom: 0;
-  overflow-y: scroll;
+  overflow-y: auto;
   position: relative;
 }
 
 .side-nav {
-  margin-top: 20px;
-  background: #000;
+  background: #043a6d;
 }
 
 .side-nav nav ul, .layout-div ul {
@@ -99,7 +99,6 @@
 
 .visited {
   background: #f59982;
-  border-radius: 15px;
 }
 
 .layout-div, .draft-div {
@@ -228,7 +227,7 @@ section.messageView div:hover {
   padding: 10px;
   font-size: 20px;
   margin-top: 5px;
-  color: #000;
+  color: #d80a0a;
 }
 
 .compose-div div div a button {
@@ -456,7 +455,6 @@ button.ubttn:hover {
 @media screen and (min-width: 600px) {
   .table-div {
     margin-left: 150px;
-    margin-top: 20px;
     
   }
 
