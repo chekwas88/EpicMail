@@ -6,9 +6,9 @@ import app from '../app';
 use(chaihttp);
 
 describe('GET api/v1/messages', () => {
-  it('it gets all received messages', (done) => {
+  it('it gets all unread messages', (done) => {
     request(app)
-      .get('/api/v1/messages')
+      .get('/api/v1/messages/unread')
       .end((err, res) => {
         assert.isArray(res.body.data);
         assert.equal(res.body.message, 'success');
