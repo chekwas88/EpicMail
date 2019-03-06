@@ -1,6 +1,7 @@
 import Joi from 'joi';
 import error from './error';
 import users from '../model/users';
+import messages from '../model/message';
 
 const { BadRequestError } = error;
 
@@ -44,6 +45,12 @@ class HelperUtils {
     });
     return recipients;
   }
+
+  static getAllReceivedMessages() {
+    const receivedMessages = messages.filter(m => (m.status === 'read') || (m.status === 'unread'));
+    return receivedMessages;
+  }
 }
+
 
 export default HelperUtils;
