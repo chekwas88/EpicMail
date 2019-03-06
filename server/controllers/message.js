@@ -38,7 +38,17 @@ class MessageController {
     const rm = helperUtils.getAllReceivedMessages();
     return res.status(200).json({
       status: res.statusCode,
-      data: [rm],
+      message: 'success',
+      data: rm,
+    });
+  }
+
+  static getUnreadMessages(req, res) {
+    const urm = helperUtils.getAllUnReadMessages();
+    return res.status(200).json({
+      status: res.statusCode,
+      message: 'success',
+      data: urm,
     });
   }
 }
