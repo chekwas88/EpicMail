@@ -4,9 +4,10 @@ const message = [
     createdOn: '03/04/2019',
     subject: 'BootCamp Reminder',
     message: 'This is to remind you all that boocamp commences on 11th of this month',
-    status: 'sent',
+    status: 'read',
     senderId: 1,
     recipients: ['lily@epicmail.com'],
+    receiverId: [2],
   },
 
   {
@@ -23,9 +24,10 @@ const message = [
     createdOn: '03/05/2019',
     subject: 'Andela Developer Challenge',
     message: 'This is to remind you all that your week2 challenge is supposed to be submitted on friday 8th march 2019.',
-    status: 'read',
+    status: 'sent',
     senderId: 1,
     recipients: ['lily@epicmail.com'],
+    receiverId: [2],
   },
 
   {
@@ -36,6 +38,7 @@ const message = [
     status: 'unread',
     senderId: 2,
     recipients: ['princechekwas@epicmail.com'],
+    receiverId: [1],
   },
 ];
 

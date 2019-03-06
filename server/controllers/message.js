@@ -33,6 +33,14 @@ class MessageController {
       });
     }
   }
+
+  static getReceivedMessages(req, res) {
+    const rm = helperUtils.getAllReceivedMessages();
+    return res.status(200).json({
+      status: res.statusCode,
+      data: [rm],
+    });
+  }
 }
 
 export default MessageController;

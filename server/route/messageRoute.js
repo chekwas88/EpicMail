@@ -1,6 +1,7 @@
 import express from 'express';
 import MessageController from '../controllers/message';
 import ValidateMessage from '../middleware/validateMessage';
+// import helper from '../utils/helper';
 
 const router = express.Router();
 
@@ -9,4 +10,11 @@ router.post(
   ValidateMessage.validateMessageData,
   MessageController.sendMessage,
 );
+
+router.get(
+  '/api/v1/messages',
+  MessageController.getReceivedMessages,
+);
+
+
 export default router;
