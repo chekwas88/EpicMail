@@ -51,6 +51,15 @@ class MessageController {
       data: urm,
     });
   }
+
+  static getSentMessages(req, res) {
+    const sm = helperUtils.getAllSentMessages();
+    return res.status(200).json({
+      status: res.statusCode,
+      message: 'success',
+      data: sm,
+    });
+  }
 }
 
 export default MessageController;

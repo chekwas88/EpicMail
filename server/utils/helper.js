@@ -55,6 +55,11 @@ class HelperUtils {
     const receivedMessages = messages.filter(m => m.status === 'unread');
     return receivedMessages;
   }
+
+  static getAllSentMessages() {
+    const receivedMessages = messages.filter(m => m.status === 'sent');
+    return receivedMessages;
+  }
 }
 
 

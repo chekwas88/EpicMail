@@ -21,5 +21,10 @@ router.get(
   MessageController.getUnreadMessages,
 );
 
+router.get(
+  '/api/v1/messages/sent',
+  MessageController.getSentMessages,
+);
+
 
 export default router;
