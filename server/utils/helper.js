@@ -3,7 +3,7 @@ import error from './error';
 import users from '../model/users';
 import messages from '../model/message';
 import inbox from '../model/inbox';
-// import sent from '../model/sent';
+import sent from '../model/sent';
 
 const { BadRequestError } = error;
 
@@ -71,6 +71,16 @@ class HelperUtils {
     return data;
   }
 
+  static getAllSentMessages(id) {
+    const data = [];
+    sent.forEach((s) => {
+      if (s.senderId === id) {
+        data.push(messages.find(m => m.id === s.messageId));
+      }
+    });
+    return data;
+  }
+
   static getAllMessages(id) {
     const data = [];
     messages.forEach((i) => {
@@ -115,11 +125,6 @@ class HelperUtils {
       messageId,
       createdOn,
     };
-  }
-
-  static getAllSentMessages() {
-    const receivedMessages = messages.filter(m => m.status === 'sent');
-    return receivedMessages;
   }
 }
 
