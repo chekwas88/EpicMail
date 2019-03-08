@@ -105,16 +105,63 @@ class MessageController {
   static getAMessage(req, res) {
     const userInsession = helperUtils.getUserInSession(req);
     const { id } = userInsession;
-    const msg = helperUtils.getAllMessages(id);
-    const data = msg.find(d => d.id === parseInt(req.params.id, 10));
+    const inboxdata = helperUtils.getAllReceivedMessages(id);
+    const sentbox = helperUtils.getAllSentMessages(id);
+    let data;
+    const inboxmessage = inboxdata.find(i => i.id === parseInt(req.params.id, 10));
+    const sentboxmessage = sentbox.find(d => d.id === parseInt(req.params.id, 10));
     try {
-      if (!data) {
+      if (!inboxmessage && !sentboxmessage) {
         throw new NotFoundError('no such message was found');
+      }
+      if (inboxmessage) {
+        data = inboxmessage;
+      }
+
+      if (sentboxmessage) {
+        data = sentboxmessage;
       }
       return res.status(200).json({
         status: res.statusCode,
         message: 'message retrieved',
         data,
+      });
+    } catch (e) {
+      return res.status(404).json({
+        status: res.statusCode,
+        error: `${e.name}: ${e.message}`,
+      });
+    }
+  }
+
+  static deleteAMessage(req, res) {
+    const userInsession = helperUtils.getUserInSession(req);
+    const { id } = userInsession;
+    const inboxdata = helperUtils.getAllReceivedMessages(id);
+    const sentbox = helperUtils.getAllSentMessages(id);
+    let msg;
+    let dataIndex;
+    const inboxmessage = inboxdata.find(i => i.id === parseInt(req.params.id, 10));
+    const sentboxmessage = sentbox.find(d => d.id === parseInt(req.params.id, 10));
+    try {
+      if (!inboxmessage && !sentboxmessage) {
+        throw new NotFoundError('no such message was found');
+      }
+
+      if (inboxmessage) {
+        msg = inboxmessage;
+        dataIndex = inboxdata.indexOf(msg);
+        inboxdata.splice(dataIndex, 1);
+      }
+
+      if (sentboxmessage) {
+        msg = sentboxmessage;
+        dataIndex = inboxdata.indexOf(msg);
+        sentbox.splice(dataIndex, 1);
+      }
+      return res.status(200).json({
+        status: res.statusCode,
+        data: [{ message: 'message deleted' }],
       });
     } catch (e) {
       return res.status(404).json({
