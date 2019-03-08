@@ -6,6 +6,7 @@ const users = [
     email: 'princechekwas@epicmail.com',
     password: 'password',
     confirmpassword: 'password',
+    token: '123abc',
     isAdmin: 'true',
   },
 
@@ -16,6 +17,7 @@ const users = [
     email: 'lily@epicmail.com',
     password: '12345',
     confirmpassword: '12345',
+    token: 'abc123',
     isAdmin: 'false',
   },
 ];

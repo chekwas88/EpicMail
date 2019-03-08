@@ -18,8 +18,6 @@ describe('Post api/v1/auth/login', () => {
         assert.equal(res.body.message, 'login was successful');
         assert.equal(res.status, 201);
         assert.isObject(res.body);
-        assert.equal(res.body.authUser.firstname, 'Chisom');
-        assert.equal(res.body.authUser.lastname, 'Onwuchekwa');
         done(err);
       });
   });
