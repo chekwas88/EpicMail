@@ -1,4 +1,5 @@
 import users from '../model/users';
+import HelperUtils from '../utils/helper';
 // import error from '../utils/error';
 
 // const { BadRequestError } = error;
@@ -22,9 +23,13 @@ class UserController {
       confirmpassword: req.body.confirmpassword,
     };
     users.push(user);
+    const regUser = users.find(u => u.id === id);
+    const token = HelperUtils.generateToken();
+    regUser.token = token;
     return res.status(201).json({
       status: res.statusCode,
       message: 'Account created successfully',
+      data: [{ token }],
     });
   }
 
@@ -41,10 +46,13 @@ class UserController {
       password: req.body.password,
     };
     const authUser = users.find(user => user.email === loginDetails.email);
+    const token = HelperUtils.generateToken();
+    authUser.token = token;
+    // console.log(req.user);
     return res.status(201).json({
       status: res.statusCode,
       message: 'login was successful',
-      authUser,
+      data: [{ token }],
     });
   }
 }

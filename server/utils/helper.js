@@ -2,6 +2,8 @@ import Joi from 'joi';
 import error from './error';
 import users from '../model/users';
 import messages from '../model/message';
+import inbox from '../model/inbox';
+// import sent from '../model/sent';
 
 const { BadRequestError } = error;
 
@@ -46,14 +48,73 @@ class HelperUtils {
     return recipients;
   }
 
-  static getAllReceivedMessages() {
-    const receivedMessages = messages.filter(m => (m.status === 'read') || (m.status === 'unread'));
-    return receivedMessages;
+  static getReceiverIds(recipients) {
+    const receiverIds = [];
+    const potentialIds = [];
+    recipients.forEach((recipient) => {
+      const potentialUsers = users.filter(u => u.email === recipient);
+      potentialIds.push(potentialUsers[0]);
+    });
+    for (let i = 0; i < potentialIds.length; i += 1) {
+      receiverIds.push(potentialIds[i].id);
+    }
+    return receiverIds;
   }
 
-  static getAllUnReadMessages() {
-    const receivedMessages = messages.filter(m => m.status === 'unread');
-    return receivedMessages;
+  static getAllReceivedMessages(id) {
+    const data = [];
+    inbox.forEach((i) => {
+      if (i.receiverId.includes(id)) {
+        data.push(messages.find(m => m.id === i.messageId));
+      }
+    });
+    return data;
+  }
+
+  static getAllMessages(id) {
+    const data = [];
+    messages.forEach((i) => {
+      if (i.receiverId.includes(id) || i.senderId === id) {
+        data.push(messages.find(m => m.id === i.id));
+      }
+    });
+    return data;
+  }
+
+  static getUserInSession(req) {
+    const token = req.headers.authorization.split(' ')[1];
+    const userInsession = users.find(u => u.token === token);
+    return userInsession;
+  }
+
+  /**
+     * @function  generateToken - generates random string NB not jwt. Used as dummy token
+     * @returns {String} token
+     *
+  */
+  static generateToken() {
+    let token = '';
+    const tokenBank = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (let i = 0; i < 7; i += 1) {
+      token += tokenBank.charAt(Math.floor(Math.random() * tokenBank.length));
+    }
+    return token;
+  }
+
+  static createSentBox(senderId, messageId, createdOn) {
+    return {
+      senderId,
+      messageId,
+      createdOn,
+    };
+  }
+
+  static createInBox(receiverId, messageId, createdOn) {
+    return {
+      receiverId,
+      messageId,
+      createdOn,
+    };
   }
 }
 

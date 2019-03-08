@@ -19,8 +19,21 @@ class AuthenticationError {
   }
 }
 
+class UnAuthorizedError {
+  constructor(message) {
+    this.name = 'UnAuthorizedError';
+    this.message = message;
+  }
+}
+
 NotFoundError.prototype = new Error();
 BadRequestError.prototype = new Error();
 AuthenticationError.prototype = new Error();
+UnAuthorizedError.prototype = new Error();
 
-export default { NotFoundError, AuthenticationError, BadRequestError };
+export default {
+  NotFoundError,
+  AuthenticationError,
+  BadRequestError,
+  UnAuthorizedError,
+};

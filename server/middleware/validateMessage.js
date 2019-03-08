@@ -21,7 +21,6 @@ class ValidateMessage {
       message: Joi.string().required(),
       status: Joi.string().required(),
       parentMessageId: Joi.number().integer(),
-      senderId: Joi.number().integer().required(),
       recipients: Joi.array().items(Joi.string().email()).single().required(),
     };
     HelperUtils.schemaValidation(req, schema, res, next);
