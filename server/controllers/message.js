@@ -51,8 +51,8 @@ class MessageController {
   }
 
   static getReceivedMessages(req, res) {
-    const userInsession = helperUtils.getUserInSession(req);
-    const { id } = userInsession;
+    const Insession = helperUtils.getUserInSession(req);
+    const { id } = Insession;
     const data = helperUtils.getAllReceivedMessages(id);
     if (data.length <= 0) {
       return res.status(200).json({
@@ -86,8 +86,8 @@ class MessageController {
   }
 
   static getSentMessages(req, res) {
-    const userInsession = helperUtils.getUserInSession(req);
-    const { id } = userInsession;
+    const user = helperUtils.getUserInSession(req);
+    const { id } = user;
     const data = helperUtils.getAllSentMessages(id);
     if (data.length <= 0) {
       return res.status(200).json({
@@ -103,23 +103,23 @@ class MessageController {
   }
 
   static getAMessage(req, res) {
-    const userInsession = helperUtils.getUserInSession(req);
-    const { id } = userInsession;
+    const insessionUser = helperUtils.getUserInSession(req);
+    const { id } = insessionUser;
     const inboxdata = helperUtils.getAllReceivedMessages(id);
     const sentbox = helperUtils.getAllSentMessages(id);
     let data;
-    const inboxmessage = inboxdata.find(i => i.id === parseInt(req.params.id, 10));
-    const sentboxmessage = sentbox.find(d => d.id === parseInt(req.params.id, 10));
+    const inboxmsg = inboxdata.find(i => i.id === parseInt(req.params.id, 10));
+    const sentboxmsg = sentbox.find(d => d.id === parseInt(req.params.id, 10));
     try {
-      if (!inboxmessage && !sentboxmessage) {
+      if (!inboxmsg && !sentboxmsg) {
         throw new NotFoundError('no such message was found');
       }
-      if (inboxmessage) {
-        data = inboxmessage;
+      if (inboxmsg) {
+        data = inboxmsg;
       }
 
-      if (sentboxmessage) {
-        data = sentboxmessage;
+      if (sentboxmsg) {
+        data = sentboxmsg;
       }
       return res.status(200).json({
         status: res.statusCode,
