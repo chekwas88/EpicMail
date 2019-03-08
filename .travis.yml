@@ -1,0 +1,11 @@
+language: node_js
+node_js: 
+  - "stable"
+before_script:
+- ./cc-test-reporter before-build
+
+cache:
+  directories:
+    - "node_modules"
+after_success: 
+  - npm run coverage
