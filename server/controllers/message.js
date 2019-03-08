@@ -85,6 +85,23 @@ class MessageController {
     });
   }
 
+  static getSentMessages(req, res) {
+    const userInsession = helperUtils.getUserInSession(req);
+    const { id } = userInsession;
+    const data = helperUtils.getAllSentMessages(id);
+    if (data.length <= 0) {
+      return res.status(200).json({
+        status: res.statusCode,
+        message: 'sent message is empty',
+      });
+    }
+    return res.status(200).json({
+      status: res.statusCode,
+      message: 'sent messages retrieved',
+      data,
+    });
+  }
+
   static getAMessage(req, res) {
     const userInsession = helperUtils.getUserInSession(req);
     const { id } = userInsession;

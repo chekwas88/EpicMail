@@ -26,6 +26,12 @@ router.get(
 );
 
 router.get(
+  '/api/v1/messages/sent',
+  Token.verifyToken,
+  MessageController.getSentMessages,
+);
+
+router.get(
   '/api/v1/messages/:id',
   Token.verifyToken,
   MessageController.getAMessage,
