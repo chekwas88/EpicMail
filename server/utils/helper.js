@@ -116,6 +116,11 @@ class HelperUtils {
       createdOn,
     };
   }
+
+  static getAllSentMessages() {
+    const receivedMessages = messages.filter(m => m.status === 'sent');
+    return receivedMessages;
+  }
 }
 
 
