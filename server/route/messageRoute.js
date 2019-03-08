@@ -37,5 +37,11 @@ router.get(
   MessageController.getAMessage,
 );
 
+router.delete(
+  '/api/v1/messages/:id',
+  Token.verifyToken,
+  MessageController.deleteAMessage,
+);
+
 
 export default router;

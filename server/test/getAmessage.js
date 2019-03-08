@@ -37,7 +37,7 @@ describe('GET api/v1/messages/:id', () => {
         done(err);
       });
   });
-  it('it gets all received messages', (done) => {
+  it('it gets a message', (done) => {
     request(app)
       .get('/api/v1/messages/1')
       .set('authorization', `Bearer ${token}`)
@@ -55,7 +55,7 @@ describe('GET api/v1/messages/:id', () => {
       .set('authorization', `Bearer ${token}`)
       .end((err, res) => {
         if (!res.body.data) {
-          assert.equal(res.body.error, 'no such message was found');
+          assert.equal(res.body.error, 'NotFound: no such message was found');
         }
         assert.equal(res.status, 200);
         done(err);

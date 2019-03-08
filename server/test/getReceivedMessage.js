@@ -49,7 +49,7 @@ describe('GET api/v1/messages', () => {
       });
   });
 
-  it('it returns not found error if no data is returned', (done) => {
+  it('it returns empty if no data is returned', (done) => {
     request(app)
       .get('/api/v1/messages')
       .set('authorization', `Bearer ${token}`)

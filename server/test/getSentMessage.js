@@ -7,7 +7,7 @@ use(chaihttp);
 
 let token;
 
-describe('GET api/v1/messages', () => {
+describe('GET api/v1/messages/sent', () => {
   before((done) => {
     request(app)
       .post('/api/v1/auth/login')
@@ -40,7 +40,7 @@ describe('GET api/v1/messages', () => {
       });
   });
 
-  it('it gets all received messages', (done) => {
+  it('it gets all sent messages', (done) => {
     request(app)
       .get('/api/v1/messages/sent')
       .set('authorization', `Bearer ${token}`)
@@ -52,7 +52,7 @@ describe('GET api/v1/messages', () => {
       });
   });
 
-  it('it gets all received messages', (done) => {
+  it('it returns empty when there is no sent message ', (done) => {
     request(app)
       .get('/api/v1/messages/sent')
       .set('authorization', `Bearer ${token}`)

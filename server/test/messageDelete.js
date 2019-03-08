@@ -4,10 +4,9 @@ import chaihttp from 'chai-http';
 import app from '../app';
 
 use(chaihttp);
-
 let token;
 
-describe('GET api/v1/messages/unread', () => {
+describe('GET api/v1/messages/:id', () => {
   before((done) => {
     request(app)
       .post('/api/v1/auth/login')
@@ -18,10 +17,9 @@ describe('GET api/v1/messages/unread', () => {
         done(err);
       });
   });
-
   it('it should return an error if token cannot be verifed', (done) => {
     request(app)
-      .get('/api/v1/messages/unread')
+      .delete('/api/v1/messages/1')
       .set('authorization', 'Bearer jxxxxxxxxxxxxnns66s')
       .end((err, res) => {
         assert.equal(res.status, 401);
@@ -32,33 +30,31 @@ describe('GET api/v1/messages/unread', () => {
 
   it('it should return an error if token is not provided', (done) => {
     request(app)
-      .get('/api/v1/messages/unread')
+      .delete('/api/v1/messages/1')
       .end((err, res) => {
         assert.equal(res.status, 401);
         assert.equal(res.body.error, 'UnAuthorizedError: No authorization is provided');
         done(err);
       });
   });
-
-  it('it gets all unread messages', (done) => {
+  it('it deletes a messages', (done) => {
     request(app)
-      .get('/api/v1/messages/unread')
+      .delete('/api/v1/messages/1')
       .set('authorization', `Bearer ${token}`)
       .end((err, res) => {
-        assert.isArray(res.body.data);
-        assert.equal(res.body.message, 'unread messages retrieved');
+        assert.equal(res.body.data[0].message, 'message deleted');
         assert.equal(res.status, 200);
         done(err);
       });
   });
 
-  it('it returns empty when there is no unread messages', (done) => {
+  it('it returns not found error if no data is found', (done) => {
     request(app)
-      .get('/api/v1/messages/unread')
+      .delete('/api/v1/messages/1')
       .set('authorization', `Bearer ${token}`)
       .end((err, res) => {
-        if (res.body.data.length <= 0) {
-          assert.equal(res.body.message, 'No unread message');
+        if (!res.body.data) {
+          assert.equal(res.body.error, 'NotFound: no such message was found');
         }
         assert.equal(res.status, 200);
         done(err);
