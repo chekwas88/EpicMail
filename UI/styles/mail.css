@@ -16,7 +16,7 @@
 }
 
 .side-nav {
-  background: #043a6d;
+  background: #011222;
 }
 
 .side-nav nav ul, .layout-div ul {
@@ -52,7 +52,7 @@
 
 .side-nav nav ul li a {
   text-decoration: none;
-  color: #940e04;
+  color: #e68f0e;
   font-size: 20px;
   padding-left: 15px;;
 }
@@ -75,7 +75,6 @@
 
 .show {
   display: block;
-  transition: all 1s;
 }
 
 #inbox-set.hide, 
@@ -98,7 +97,7 @@
 
 
 .visited {
-  background: #f59982;
+  background: #553402;
 }
 
 .layout-div, .draft-div {
@@ -109,8 +108,8 @@
 .layout-div div, .rfbttn div, .draft-div div {
   padding: 5px;
   border: 1px solid #e0dada;
-  border-left: none;
-  border-right: none;
+  margin-top: 4px;
+  margin-left: 5px;
   
 }
 
@@ -296,8 +295,8 @@ div.rfbttn {
 .layout-div ul li {
   padding: 10px;
   border: 1px solid #e0dada;
-  border-left: none;
-  border-right: none;
+  margin-top: 4px;
+  margin-left: 5px;
   
 }
 
@@ -470,9 +469,12 @@ button.ubttn:hover {
     max-width: 400px;
   } 
   .side-nav {
-    position: absolute;
+    position: fixed;
+    left: 0;
+    top: 0;
     width: 150px;
     height: 100vh;
+    padding-top: 50px;
   }
 }
 
@@ -516,7 +518,7 @@ button.ubttn:hover {
 
   
   .table-div {
-    width: calc(100% - 210px);
+    width: calc(100% - 205px);
     margin-left: 200px;
   }
 

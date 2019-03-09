@@ -22,6 +22,7 @@ const ctGPFormAdd = document.getElementById('ct-gp-form-sub');
 const ctGPFormCancel = document.getElementById('ct-gp-form-cancel');
 const createGPBtn = document.getElementById('creategroup');
 const draftDiv = document.querySelectorAll('.draft-div div');
+const contactViewLists = document.querySelectorAll('.layout-div ul li.collection-item ');
 
 
 function removeComposeModal() {
@@ -114,6 +115,10 @@ closeMembersDisplay.addEventListener('click', () => {
 
 draftDiv.forEach((div) => {
   div.addEventListener('click', getComposeLayout);
+});
+
+contactViewLists.forEach((list) => {
+  list.addEventListener('click', getComposeLayout);
 });
 
 profileMail.addEventListener('click', getComposeLayout);

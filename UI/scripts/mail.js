@@ -12,8 +12,6 @@ const draftlist = document.getElementById('draft-list');
 const contactlist = document.getElementById('contact-list');
 const linkedDiv = document.querySelectorAll('div.table-div .layout-div > div');
 const mailView = document.getElementById('mailView');
-const contactViewLists = document.querySelectorAll('.layout-div ul li.collection-item ');
-
 
 function getProfileSet() {
   profileLayout.classList.add('show');
@@ -175,32 +173,6 @@ linkedDiv.forEach((div) => {
     profileLayout.classList.add('hide');
     profileLayout.classList.remove('show');
     profilelist.classList.remove('visited');
-    groupLayout.classList.remove('show');
-    groupLayout.classList.add('hide');
-    grouplist.classList.remove('visited');
-  });
-});
-
-
-contactViewLists.forEach((list) => {
-  list.addEventListener('click', () => {
-    profileLayout.classList.add('show');
-    profileLayout.classList.remove('hide');
-    profilelist.classList.remove('visited');
-    inboxLayout.classList.add('hide');
-    inboxLayout.classList.remove('show');
-    inboxlist.classList.remove('visited');
-    sentLayout.classList.remove('show');
-    sentLayout.classList.add('hide');
-    sentlist.classList.remove('visited');
-    draftLayout.classList.add('hide');
-    draftLayout.classList.remove('show');
-    draftlist.classList.remove('visited');
-    contactLayout.classList.add('hide');
-    contactLayout.classList.remove('show');
-    contactlist.classList.remove('visited');
-    mailView.classList.add('hide');
-    mailView.classList.remove('show');
     groupLayout.classList.remove('show');
     groupLayout.classList.add('hide');
     grouplist.classList.remove('visited');
