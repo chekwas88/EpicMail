@@ -3,26 +3,21 @@ const layoutRF = document.getElementById('replyforward');
 const compose = document.getElementById('compose');
 const send = document.getElementById('compose-send');
 const deleteBtn = document.getElementById('compose-delete');
-const gpFormAdd = document.getElementById('gp-form-sub');
-const gpFormCancel = document.getElementById('gp-form-cancel');
 const rfSend = document.getElementById('rf-send');
 const rfdelete = document.querySelector('a span #rf-delete');
 const replybtn = document.querySelector('div button#replybtn');
 const fowardbtn = document.querySelector('div button#forwardbtn');
-const profileMail = document.getElementById('profile-mail');
 const getLink = document.querySelectorAll('li.gp-list');
-const formLayout = document.getElementById('gp-form-page');
+const addToGroupLay = document.getElementById('gp-add-page');
 const membersDisplay = document.getElementById('members-modal');
-const addcontact = document.getElementById('addcontact');
-const contactFormLayout = document.getElementById('ct-form-page');
 const closeMembersDisplay = document.getElementById('gp-member-close');
-const contactFormSubmit = document.getElementById('ct-form-sub');
 const createGPForm = document.getElementById('ct-gp-form-page');
 const ctGPFormAdd = document.getElementById('ct-gp-form-sub');
 const ctGPFormCancel = document.getElementById('ct-gp-form-cancel');
 const createGPBtn = document.getElementById('creategroup');
 const draftDiv = document.querySelectorAll('.draft-div div');
 const contactViewLists = document.querySelectorAll('.layout-div ul li.collection-item ');
+const gpAddCancel = document.getElementById('gp-add-cancel');
 
 
 function removeComposeModal() {
@@ -40,9 +35,9 @@ function removeRFModal() {
   layoutRF.classList.remove('show');
 }
 
-function removeGPForm() {
-  formLayout.classList.add('hide');
-  formLayout.classList.remove('show');
+function getGpCreateForm() {
+  createGPForm.classList.remove('hide');
+  createGPForm.classList.add('show');
 }
 
 function getReplyForwardModal() {
@@ -62,20 +57,7 @@ function getGroupLists() {
   return spanModal;
 }
 
-addcontact.addEventListener('click', () => {
-  contactFormLayout.classList.add('show');
-  contactFormLayout.classList.remove('hide');
-});
-
-contactFormSubmit.addEventListener('click', () => {
-  contactFormLayout.classList.add('hide');
-  contactFormLayout.classList.remove('show');
-});
-
-createGPBtn.addEventListener('click', () => {
-  createGPForm.classList.remove('hide');
-  createGPForm.classList.add('show');
-});
+createGPBtn.addEventListener('click', getGpCreateForm);
 
 compose.addEventListener('click', () => {
   composeLayout.classList.add('show');
@@ -89,8 +71,8 @@ const spans = getGroupLists();
 
 spans.forEach((span) => {
   span[1].addEventListener('click', () => {
-    formLayout.classList.remove('hide');
-    formLayout.classList.add('show');
+    addToGroupLay.classList.remove('hide');
+    addToGroupLay.classList.add('show');
   });
 });
 
@@ -99,6 +81,10 @@ spans.forEach((span) => {
     composeLayout.classList.add('show');
     composeLayout.classList.remove('hide');
   });
+});
+
+spans.forEach((span) => {
+  span[4].addEventListener('click', getGpCreateForm);
 });
 getLink.forEach((span) => {
   const membersIcon = span.getElementsByTagName('span')[2];
@@ -121,13 +107,14 @@ contactViewLists.forEach((list) => {
   list.addEventListener('click', getComposeLayout);
 });
 
-profileMail.addEventListener('click', getComposeLayout);
+gpAddCancel.addEventListener('click', () => {
+  addToGroupLay.classList.remove('show');
+  addToGroupLay.classList.add('hide');
+});
 
 send.addEventListener('click', removeComposeModal);
 deleteBtn.addEventListener('click', removeComposeModal);
 rfSend.addEventListener('click', removeRFModal);
 rfdelete.addEventListener('click', removeRFModal);
-gpFormAdd.addEventListener('click', removeGPForm);
-gpFormCancel.addEventListener('click', removeGPForm);
 ctGPFormAdd.addEventListener('click', removeCTGroupform);
 ctGPFormCancel.addEventListener('click', removeCTGroupform);

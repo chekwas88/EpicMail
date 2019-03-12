@@ -86,7 +86,7 @@
 #mailView.hide,
 #replyforward.hide, 
 #profile-set.hide,
-#gp-form-page.hide,
+#gp-add-page.hide,
 #members-modal.hide,
 #ct-form-page.hide,
 #ct-gp-form-page.hide,
@@ -136,6 +136,10 @@ section.messageView div p {
 section.messageView div:hover {
   box-shadow: none;
   cursor: default;
+}
+
+.unread span {
+  font-weight: 700;
 }
 
 
@@ -225,17 +229,17 @@ section.messageView div:hover {
 .compose-div div div a span i{
   padding: 10px;
   font-size: 20px;
-  margin-top: 5px;
+  margin-top: 2px;
   color: #d80a0a;
 }
 
 .compose-div div div a button {
-  padding: 10px;
+  padding: 7px;
   font-size: 20px;
   color: #fff;
-  width: 100px;
+  width: 80px;
   background: #063c5c;
-  border-radius: 10px;
+  border-radius: 5px;
   border: none;
   cursor: pointer;
   box-shadow: 0 0 4px rgba(54, 52, 52, 0.7);
@@ -244,11 +248,11 @@ section.messageView div:hover {
 /* mailview */
 
 section.messageView div button {
-  padding: 10px 7px;
+  padding: 7px 7px;
   margin: 10px;
   font-size: 18px;
   color: #fff;
-  width: 100px;
+  width: 80px;
   background: #30373b;
   border-radius: 10px;
   border: none;
@@ -371,7 +375,7 @@ button.ubttn:hover {
 }
 
 .gp-members button{
-  padding: 5px 10px;
+  padding: 5px 5px;
   margin-top: 10px;
   margin-right: 5px;
   margin-bottom: 10px;
@@ -403,7 +407,7 @@ button.ubttn:hover {
 
 /* group add form */
 
-.gp-form, .ct-form {
+.memselect, .gp-form {
   position: absolute;
   top: 48%;
   left: 3%;
@@ -413,24 +417,74 @@ button.ubttn:hover {
   background: #fff;
   box-shadow: 0 0 4px rgba(54, 52, 52, 0.7);
 }
-
-.gp-form > div button, .ct-form > div button{
-  background: #f8851a;
-  width: 40%;
-  padding: 8px;
-  margin-bottom: 10px;
+.memselect {
+  height: 200px;
+  overflow-y: auto;
+}
+.memselect div:nth-child(1) {
+  background: #012438;
+  padding: 5px;
+  height: 25px;
+}
+.memselect .cancel {
+  float: right;
   border: none;
-  font-size: 16px;
+  padding: 2px 5px;
+}
+
+.memselect button.cancel:hover{
+ font-size: 16px;
+  cursor: pointer;
+}
+.gp-form > div button{
+  background: #021e38;
+  width: 25%;
+  padding: 8px;
+  margin: 10px;
+  border: none;
+  font-size: 14px;
   border-radius: 4px;
+  color: #fff;
   cursor: pointer;
   transition: all 0.5s;
 }
 
-.gp-form > div button:nth-child(2) {
+button.addg {
+  width: 50px;
+  padding: 5px;
+  background: #063c5c;
+  color: #fff;
+  margin: 10px 5px;
   float: right;
+  cursor: pointer;
+  border: none;
+  border-radius: 2px;
 }
 
-.gp-form > div input, .ct-form > div input {
+button.addg:hover {
+  box-shadow: 0 0 4px rgba(34, 33, 33, 0.7);
+}
+.memselect > div {
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+.memselect .memlabel {
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 5px 5px;
+  width: 237px;
+}
+
+.memselect input[type="checkbox"] {
+  margin: 5px;
+}
+.memselect > div input[type="checkbox"]:checked, .memselect > div input[type="checkbox"]:checked ~ div {
+  background: #727577;
+  color: #fff;
+}
+
+ .gp-form > div input {
   width: 100%;
   box-sizing: border-box;
   padding: 5px;
@@ -442,14 +496,24 @@ button.ubttn:hover {
   transition: all 0.5s;
 }
 
-.gp-form > div, .ct-form > div {
+.gp-form > div {
   margin: 10px;
 }
 
-.ct-form > div input:focus, .gp-form > div input:focus {
+.gp-form > div input:focus {
   border-color: #f8851a;
 }
 
+.numunread {
+  padding: 5px;
+  color: #c91919;
+  margin-left: 10px;
+}
+.numdraft{
+  padding: 5px;
+  color: #868282;
+  margin-left: 10px;
+}
 
 @media screen and (min-width: 600px) {
   .table-div {
@@ -457,7 +521,7 @@ button.ubttn:hover {
     
   }
 
-  .gp-form, .gp-members, .ct-form {
+  .memselect, .gp-members, .gp-form {
     top: 25%;
     left: 40%;
   }
@@ -522,7 +586,7 @@ button.ubttn:hover {
     margin-left: 200px;
   }
 
-  .gp-form{
+  .memselect{
     left: 30%;
   }
 
@@ -531,8 +595,8 @@ button.ubttn:hover {
   }
   
   .compose-layout,.rf-layout {
-    top: 45%;
-    left: 65%;
+    top: 55%;
+    left: 70%;
     width: 100%;
     max-width: 600px;
   }
