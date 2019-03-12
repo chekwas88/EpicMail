@@ -12,6 +12,49 @@ body {
   font-family: 'Ubuntu', sans-serif;
 }
 
+.landingContainer {
+  width: 100%;
+  margin: 0;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+  background: #2193b0;
+  background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0);
+  background: linear-gradient(to right, #6dd5ed, #2193b0);
+  font-family: 'Source Sans Pro', sans-serif;
+
+}
+.bgl {
+  background-image: url('../images/landing-img2.png');
+  height: 75%;
+}
+
+.bgl a {
+  text-decoration: none;
+}
+.getstarted {
+  background: #021e38;
+  position: absolute;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 5px;
+  top: 50%;
+  left: 50%;
+  padding: 15px;
+  z-index: 2;
+  
+}
+
+.getstarted:hover {
+  background: #0c4958;
+}
+.message {
+  color: #fff;
+  padding: 10px;
+  margin: 10px auto;
+  text-align: center;
+}
+
 .navbar {
   color: #fff;
   margin: 0;
@@ -85,9 +128,10 @@ body {
 }
 
 footer {
-  color: #000;
+  color: #fff;
   padding: 10px;
   font-weight: 550;
+  background: #021e38;
   text-align: center;
 }
 .logout {

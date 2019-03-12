@@ -1,107 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Login</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>EpicMail</title>
   <link rel="stylesheet" type="text/css" media="screen" href="./styles/general.css" />
-  <link rel="stylesheet" type="text/css" media="screen" href="./styles/userAuth.css" />
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro|Ubuntu" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" 
   integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" 
   crossorigin="anonymous">
 </head>
+
 <body>
-  <nav class="navbar">
-    <div id="burger" class="toggle-burger hide">
-      <div>
-        <Span></Span>
-        <Span></Span>
-        <Span></Span>
-      </div>
-    </div>
-    <div class="logo">
-      <span><a href="./index.html"><i class="fab fa-bandcamp"></i></a></span>
-    </div>
-    <ul id="bars" class="hide">
-      <li>
-        <a href="./index.html">
-          Login
-        </a> 
-      </li>
-      <li>
-        <a href="./mail.html">
-          <span><i class="far fa-envelope"></i></span>
-          <span>Mail</span>
-        </a>
-      </li>
-      <li>
-        <a class="logout" href="./index.html">
-         Logout
-        </a>
-      </li>
-    </ul>
-  </nav>
-  <div class="pagecontent">
+  <div class="landingContainer">
+    <nav class="navbar">
+        <div id="burger" class="toggle-burger hide">
+          <div>
+            <Span></Span>
+            <Span></Span>
+            <Span></Span>
+          </div>
+          
+        </div>
+        <div class="logo">
+            <span><a href="./index.html"><i class="fab fa-bandcamp"></i></a></span>
+        </div>
+        <ul id="bars" class="hide">
+          <li>
+            <a href="./login.html">
+              Login
+            </a> 
+          </li>
+      </ul>
+    </nav>
     <div class="message">
-      <h2>Welcome to EPIC Mail.<br> Sign in to continue...</h2>
+        <h2>Welcome to EPIC Mail.<br> Emailing Just Got Easier and Better</h2>
     </div>
-    <div class="container">
-      <div>
-        <nav>
-          <div class="active login">Login</div>
-          <div class="signup">SignUp</div>
-        </nav>
-        <div id="login">
-          <form class="userform">
-            <div>
-              <label for="useremail">Email</label>
-              <input id="useremail" type="email" name="email" placeholder="username@epicmail.com" required />
-            </div>
-            <div>
-              <label for="secret">Password</label>
-              <input id="secret" type="password" name="password" required/>
-            </div>
-            <a class="fp" href="./forgotpassword.html">forgot password?</a>
-            <div>
-              <button id="submit">Login</button>
-            </div>
-            
-          </form>
-        </div>
-        <div id="signup">
-          <form class="userform">
-            <div>
-              <label for="fname">Firstname</label>
-              <input id="fname" type="text" name="firstname" placeholder="John" required/>
-            </div>
-            <div>
-              <label for="lname">Lastname</label>
-              <input id="lname" type="text" name="lastname" placeholder="Doe" required/>
-            </div>
-            <div>
-              <label for="useremail">Email</label>
-              <input id="useremail" type="email" name="email" placeholder="username@epicmail.com" required/>
-            </div>
-            <div>
-              <label for="secret">Password</label>
-              <input id="secret" type="password" name="password" required/>
-            </div>
-            <div>
-              <label for="secret">Confirm Password</label>
-              <input id="secret" type="password" name="confirmpassword" required/>
-            </div>
-            <div>
-                <button id="submit">SignUp</button>
-            </div>
-          </form>
-        </div>
-      </div>
+    <div class="bgl">
+      <a class="getstarted" href="./login.html">Get Started</a>
     </div>
-    <footer id="authfooter" class="login">© EpicMail 2019. All rights Reserved.</footer>
   </div>
+  <footer class="login">© EpicMail 2019. All rights Reserved.</footer>
   <script src="./scripts/nav.js"></script>
-  <script src="./scripts/userAuth.js"></script>
 </body>
 </html>
