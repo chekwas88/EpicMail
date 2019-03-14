@@ -1,0 +1,608 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "EpicMail",
+    "description": "Epic mail is a web app that helps people exchange messages/information over the internet.",
+    "version": "1.0",
+    "contact": {
+      "email": "abc@gmail.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://agentcorvinus-epic-mail.herokuapp.com"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Users",
+      "description": "Users of the app"
+    },
+    {
+      "name": "Messages",
+      "description": "Messages created or saved using the app"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "paths": {
+    "/api/v1/auth/signup": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+         "summary": "Registers a new user",
+        "description": "Route to register a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "firstname": {
+                    "type": "string"
+                  },
+                  "lastname": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "confirmpassword": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Account created successfully",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string"
+                          },
+                          "token": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Login a user",
+        "description": "Route to login a user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Login was successful",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type": "string"
+                          },
+                          "token": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/messages": {
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "messages"
+        ],
+        "summary": "Get all received messages",
+        "description": "This endpoint gets all the received message of a user",
+        "responses": {
+          "200": {
+            "description": "Returns all received messages successfully",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                          "type": "string"
+                          },
+                          "data": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer"
+                                },
+                                "createdOn": {
+                                  "type": "string"
+                                },
+                                "subject": {
+                                  "type": "string"
+                                },
+                                "message": {
+                                  "type": "string"
+                                },
+                                "status": {
+                                  "type": "string"
+                                },
+                                "senderId": {
+                                  "type": "integer"
+                                },
+                                "recipients": {
+                                  "type": "array",
+                                  "items": {
+                                    "type":"string"
+                                  }
+                                },
+                                "receiverId": {
+                                  "type": "array",
+                                  "items": {
+                                    "type":"string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+    
+      "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "messages"
+        ],
+        "summary": "Create/sends a new message",
+        "description": "This endpoint creates a new message",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "createdOn": {
+                    "type": "string"
+                  },
+                  "subject": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "parentMessageId": {
+                    "type": "integer"
+                  },
+                  "recipients": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successfully create a new red-flag record",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type":"string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/messages/unread": {
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "messages"
+        ],
+        "summary": "Get all unread messages",
+        "description": "This endpoint gets all the unread messages of a user",
+        "responses": {
+          "200": {
+            "description": "Returns all unread messages of a user successfully",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                          "type": "string"
+                          },
+                          "data": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer"
+                                },
+                                "createdOn": {
+                                  "type": "string"
+                                },
+                                "subject": {
+                                  "type": "string"
+                                },
+                                "message": {
+                                  "type": "string"
+                                },
+                                "status": {
+                                  "type": "string"
+                                },
+                                "senderId": {
+                                  "type": "integer"
+                                },
+                                "recipients": {
+                                  "type": "array",
+                                  "items": {
+                                    "type":"string"
+                                  }
+                                },
+                                "receiverId": {
+                                  "type": "array",
+                                  "items": {
+                                    "type":"string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/api/v1/messages/sent": {
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "messages"
+        ],
+        "summary": "Get all sent messages",
+        "description": "This endpoint gets all the sent messages of a user",
+        "responses": {
+          "200": {
+            "description": "Returns all sent messages of a user successfully",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                          "type": "string"
+                          },
+                          "data": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer"
+                                },
+                                "createdOn": {
+                                  "type": "string"
+                                },
+                                "subject": {
+                                  "type": "string"
+                                },
+                                "message": {
+                                  "type": "string"
+                                },
+                                "status": {
+                                  "type": "string"
+                                },
+                                "senderId": {
+                                  "type": "integer"
+                                },
+                                "recipients": {
+                                  "type": "array",
+                                  "items": {
+                                    "type":"string"
+                                  }
+                                },
+                                "receiverId": {
+                                  "type": "array",
+                                  "items": {
+                                    "type":"integer"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+  
+    "/api/v1/messages/{message_id}": {
+      "parameters": [
+        {
+          "name": "message_id",
+          "in": "path",
+          "description": "id of message",
+          "required": true,
+          "schema": {
+            "type": "integer"
+          },
+          "style": "simple"
+        }
+      ],
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "messages"
+        ],
+        "summary": "Get specific message of a user",
+        "description": "This endpoint retruns specific message of a user",
+        "responses": {
+          "200": {
+            "description": "Returns specific message of a user successfully",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                      
+                        "properties": {
+                          "message": {
+                            "type": "string"
+                          },
+                          "data": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer"
+                                },
+                                "createdOn": {
+                                  "type": "string"
+                                },
+                                "subject": {
+                                  "type": "string"
+                                },
+                                "message": {
+                                  "type": "string"
+                                },
+                                "status": {
+                                  "type": "string"
+                                },
+                                "senderId": {
+                                  "type": "integer"
+                                },
+                                "recipients": {
+                                  "type": "array",
+                                  "items": {
+                                    "type":"string"
+                                  }
+                                },
+                                "receiverId": {
+                                  "type": "array",
+                                  "items": {
+                                    "type":"integer"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "messages"
+        ],
+        "summary": "Deletes a specific message of a user",
+        "description": "This endpoint deletes specific message of a user",
+        "responses": {
+          "200": {
+            "description": "Deletes specific message of a user successfully",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "message": {
+                            "type":"string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      
+    }
+  }
+}
