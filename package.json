@@ -4,7 +4,7 @@
   "description": "A mail app",
   "main": "app.js",
   "scripts": {
-    "start": "./server/app.js --exec babel-node --presets babel-preset-env ",
+    "start": "babel-node ./server/app.js --presets babel-preset-env ",
     "test": "nyc mocha ./server/test --require babel-register --exit",
     "start:dev": "nodemon ./server/app.js --exec babel-node --presets babel-preset-env ",
     "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
@@ -27,12 +27,13 @@
     "body-parser": "^1.18.3",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
+    "cors": "^2.8.5",
     "coveralls": "^3.0.3",
     "express": "^4.16.4",
     "joi": "^14.3.1",
     "mocha": "^6.0.0",
-    "mocha-lcov-reporter": "^1.3.0"
-    
+    "mocha-lcov-reporter": "^1.3.0",
+    "swagger-ui-express": "^4.0.2"
   },
   "devDependencies": {
     "eslint": "^5.15.0",
