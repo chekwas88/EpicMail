@@ -45,8 +45,8 @@ describe('GET api/v1/messages/sent', () => {
       .get('/api/v1/messages/sent')
       .set('authorization', `Bearer ${token}`)
       .end((err, res) => {
-        assert.isArray(res.body.data);
-        assert.equal(res.body.message, 'sent messages retrieved');
+        assert.isArray(res.body.data[0].data);
+        assert.equal(res.body.data[0].message, 'sent messages retrieved');
         assert.equal(res.status, 200);
         done(err);
       });
@@ -57,8 +57,8 @@ describe('GET api/v1/messages/sent', () => {
       .get('/api/v1/messages/sent')
       .set('authorization', `Bearer ${token}`)
       .end((err, res) => {
-        if (res.body.data.length <= 0) {
-          assert.equal(res.body.message, 'sent message is empty');
+        if (res.body.data[0].data.length === 0) {
+          assert.equal(res.body.data[0].message, 'sent message is empty');
         }
         assert.equal(res.status, 200);
         done(err);

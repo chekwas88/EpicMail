@@ -42,21 +42,8 @@ describe('GET api/v1/messages/:id', () => {
       .get('/api/v1/messages/1')
       .set('authorization', `Bearer ${token}`)
       .end((err, res) => {
-        assert.isObject(res.body.data);
-        assert.equal(res.body.message, 'message retrieved');
-        assert.equal(res.status, 200);
-        done(err);
-      });
-  });
-
-  it('it returns not found error if no data is found', (done) => {
-    request(app)
-      .get('/api/v1/messages/1')
-      .set('authorization', `Bearer ${token}`)
-      .end((err, res) => {
-        if (!res.body.data) {
-          assert.equal(res.body.error, 'NotFound: no such message was found');
-        }
+        assert.isArray(res.body.data);
+        assert.equal(res.body.data[0].message, 'message retrieved');
         assert.equal(res.status, 200);
         done(err);
       });

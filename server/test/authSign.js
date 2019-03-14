@@ -15,9 +15,9 @@ describe('Post api/v1/auth/login', () => {
         password: 'password',
       })
       .end((err, res) => {
-        assert.equal(res.body.message, 'login was successful');
+        assert.equal(res.body.data[0].message, 'login was successful');
         assert.equal(res.status, 201);
-        assert.isObject(res.body);
+        assert.isArray(res.body.data);
         done(err);
       });
   });
@@ -30,7 +30,7 @@ describe('Post api/v1/auth/login', () => {
         password: 'password',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'BadRequest: "email" is not allowed to be empty');
+        assert.equal(res.body.errors.email, 'A valid email type should be provided');
         assert.equal(res.status, 400);
         done(err);
       });
@@ -44,7 +44,7 @@ describe('Post api/v1/auth/login', () => {
         password: '',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'BadRequest: "password" is not allowed to be empty');
+        assert.equal(res.body.errors.password, 'Password should not be empty');
         assert.equal(res.status, 400);
         done(err);
       });
@@ -57,7 +57,7 @@ describe('Post api/v1/auth/login', () => {
         password: 'password',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'BadRequest: "email" is required');
+        assert.equal(res.body.errors.email, 'A valid email type should be provided');
         assert.equal(res.status, 400);
         done(err);
       });
@@ -70,7 +70,7 @@ describe('Post api/v1/auth/login', () => {
         email: 'princechekwas@gmail.com',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'BadRequest: "password" is required');
+        assert.equal(res.body.errors.password, 'Password should not be empty');
         assert.equal(res.status, 400);
         done(err);
       });

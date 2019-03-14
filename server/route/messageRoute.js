@@ -2,7 +2,6 @@ import express from 'express';
 import MessageController from '../controllers/message';
 import ValidateMessage from '../middleware/validateMessage';
 import Token from '../middleware/verifytoken';
-// import helper from '../utils/helper';
 
 const router = express.Router();
 
@@ -10,8 +9,9 @@ router.post(
   '/api/v1/messages',
   ValidateMessage.validateMessageData,
   Token.verifyToken,
-  MessageController.sendMessage,
+  MessageController.createMessage,
 );
+
 
 router.get(
   '/api/v1/messages',

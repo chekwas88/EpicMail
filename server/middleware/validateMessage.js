@@ -1,10 +1,4 @@
-import Joi from 'joi';
 import HelperUtils from '../utils/helper';
-// import users from '../model/users';
-// import error from '../utils/error';
-// import message from '../model/message';
-
-// const { AuthenticationError } = error;
 
 class ValidateMessage {
   /**
@@ -15,15 +9,14 @@ class ValidateMessage {
      *
   */
   static validateMessageData(req, res, next) {
-    const schema = {
-      createdOn: Joi.string().required(),
-      subject: Joi.string().required(),
-      message: Joi.string().required(),
-      status: Joi.string().required(),
-      parentMessageId: Joi.number().integer(),
-      recipients: Joi.array().items(Joi.string().email()).single().required(),
-    };
-    HelperUtils.schemaValidation(req, schema, res, next);
+    const errors = HelperUtils.messageSchemavalidation(req);
+    if (Object.entries(errors).length !== 0 && errors.constructor === Object) {
+      return res.status(400).json({
+        status: res.statusCode,
+        errors,
+      });
+    }
+    return next();
   }
 }
 

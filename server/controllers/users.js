@@ -1,8 +1,5 @@
 import users from '../model/users';
 import HelperUtils from '../utils/helper';
-// import error from '../utils/error';
-
-// const { BadRequestError } = error;
 
 class UserController {
   /**
@@ -16,11 +13,12 @@ class UserController {
     const id = users.length + 1;
     const user = {
       id,
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
-      email: req.body.email,
-      password: req.body.password,
-      confirmpassword: req.body.confirmpassword,
+      firstname: req.body.firstname.trim(),
+      lastname: req.body.lastname.trim(),
+      email: req.body.email.trim(),
+      password: req.body.password.trim(),
+      confirmpassword: req.body.confirmpassword.trim(),
+      isAdmin: req.body.isAdmin,
     };
     users.push(user);
     const regUser = users.find(u => u.id === id);
@@ -28,8 +26,12 @@ class UserController {
     regUser.token = token;
     return res.status(201).json({
       status: res.statusCode,
-      message: 'Account created successfully',
-      data: [{ token }],
+      data: [
+        {
+          token,
+          message: 'Account created successfully',
+        },
+      ],
     });
   }
 
@@ -42,17 +44,20 @@ class UserController {
 
   static loginUser(req, res) {
     const loginDetails = {
-      email: req.body.email,
-      password: req.body.password,
+      email: req.body.email.trim(),
+      password: req.body.password.trim(),
     };
     const authUser = users.find(user => user.email === loginDetails.email);
     const token = HelperUtils.generateToken();
     authUser.token = token;
-    // console.log(req.user);
     return res.status(201).json({
       status: res.statusCode,
-      message: 'login was successful',
-      data: [{ token }],
+      data: [
+        {
+          token,
+          message: 'login was successful',
+        },
+      ],
     });
   }
 }

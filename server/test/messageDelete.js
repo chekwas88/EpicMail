@@ -37,25 +37,13 @@ describe('GET api/v1/messages/:id', () => {
         done(err);
       });
   });
+
   it('it deletes a messages', (done) => {
     request(app)
-      .delete('/api/v1/messages/1')
+      .delete('/api/v1/messages/3')
       .set('authorization', `Bearer ${token}`)
       .end((err, res) => {
         assert.equal(res.body.data[0].message, 'message deleted');
-        assert.equal(res.status, 200);
-        done(err);
-      });
-  });
-
-  it('it returns not found error if no data is found', (done) => {
-    request(app)
-      .delete('/api/v1/messages/1')
-      .set('authorization', `Bearer ${token}`)
-      .end((err, res) => {
-        if (!res.body.data) {
-          assert.equal(res.body.error, 'NotFound: no such message was found');
-        }
         assert.equal(res.status, 200);
         done(err);
       });
