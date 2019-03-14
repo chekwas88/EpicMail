@@ -1,6 +1,7 @@
 const composeLayout = document.getElementById('compose-new');
 const layoutRF = document.getElementById('replyforward');
 const compose = document.getElementById('compose');
+const compoCancel = document.getElementById('compox');
 const send = document.getElementById('compose-send');
 const deleteBtn = document.getElementById('compose-delete');
 const rfSend = document.getElementById('rf-send');
@@ -113,6 +114,7 @@ gpAddCancel.addEventListener('click', () => {
 });
 
 send.addEventListener('click', removeComposeModal);
+compoCancel.addEventListener('click', removeComposeModal);
 deleteBtn.addEventListener('click', removeComposeModal);
 rfSend.addEventListener('click', removeRFModal);
 rfdelete.addEventListener('click', removeRFModal);
