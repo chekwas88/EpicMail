@@ -106,13 +106,13 @@
             <span>18/03/2019</span>
             <span><i id="rf-delete" class="fas fa-trash"></i></span>
           </div>
-          <div>
+          <div class="read">
             <span>Marshal Erickson</span>
             <span>Dear Barney, I'm in the bar...</span>
             <span>02/03/2019</span>
             <span><i id="rf-delete" class="fas fa-trash"></i></span>
           </div>
-          <div>
+          <div class="read">
             <span>Lily Aldrin</span>
             <span>Dude where the heck are...</span>
             <span>02/02/2019</span>
@@ -147,7 +147,10 @@
       <div id="compose-new" class="compose-layout hide">
         <div class="compose-div">
           <div>
-            <header><h3>New Message</h3></header>
+            <header>
+              <h3>New Message</h3>
+              <button id="compox">X</button>
+            </header>
             <input id="recips" type="text" name="recipients" placeholder="Recipients" required />
             <input type="text" name="subject" placeholder="Subject" required />
             <textarea name="message" cols="65" rows="15" required></textarea>
