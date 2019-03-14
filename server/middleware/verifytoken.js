@@ -12,7 +12,6 @@ class Token {
       }
       const token = req.headers.authorization.split(' ')[1];
       const verifiedUser = users.find(u => u.token === token);
-      // console.log(verifiedUser);
       if (!verifiedUser) {
         throw new UnAuthorizedError('token not verified');
       }

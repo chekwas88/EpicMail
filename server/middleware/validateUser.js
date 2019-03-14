@@ -1,4 +1,3 @@
-import Joi from 'joi';
 import HelperUtils from '../utils/helper';
 import users from '../model/users';
 import error from '../utils/error';
@@ -14,16 +13,16 @@ class Validate {
      *
   */
   static validateUserRegData(req, res, next) {
-    const schema = {
-      firstname: Joi.string().required(),
-      lastname: Joi.string().required(),
-      email: Joi.string().email().required(),
-      password: Joi.string().required(),
-      confirmpassword: Joi.string().required(),
-      isAdmin: Joi.boolean().required(),
-    };
-    HelperUtils.schemaValidation(req, schema, res, next);
+    const errors = HelperUtils.registerUserValidation(req);
+    if (Object.entries(errors).length !== 0 && errors.constructor === Object) {
+      return res.status(400).json({
+        status: res.statusCode,
+        errors,
+      });
+    }
+    return next();
   }
+
 
   /**
      * @function  validateUserLoginData - check for input validation before user login
@@ -33,11 +32,14 @@ class Validate {
      *
   */
   static validateUserLoginData(req, res, next) {
-    const schema = {
-      email: Joi.string().email().required(),
-      password: Joi.string().required(),
-    };
-    HelperUtils.schemaValidation(req, schema, res, next);
+    const errors = HelperUtils.loginSchemaValidation(req);
+    if (Object.entries(errors).length !== 0 && errors.constructor === Object) {
+      return res.status(400).json({
+        status: res.statusCode,
+        errors,
+      });
+    }
+    return next();
   }
 
   /**
@@ -50,7 +52,7 @@ class Validate {
   static validateUserRegPassword(req, res, next) {
     try {
       if (req.body.password !== req.body.confirmpassword) {
-        throw new AuthenticationError('Please confirm your password');
+        throw new AuthenticationError('password and confirmpassword should be same');
       }
       return next();
     } catch (e) {

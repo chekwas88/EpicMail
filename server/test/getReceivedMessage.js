@@ -43,7 +43,7 @@ describe('GET api/v1/messages', () => {
       .set('authorization', `Bearer ${token}`)
       .end((err, res) => {
         assert.isArray(res.body.data);
-        assert.equal(res.body.message, 'inbox messages retrieved');
+        assert.equal(res.body.data[0].message, 'inbox messages retrieved');
         assert.equal(res.status, 200);
         done(err);
       });
@@ -54,8 +54,8 @@ describe('GET api/v1/messages', () => {
       .get('/api/v1/messages')
       .set('authorization', `Bearer ${token}`)
       .end((err, res) => {
-        if (res.body.data.length <= 0) {
-          assert.equal(res.body.message, 'Your inbox is empty');
+        if (res.body.data[0].data.length === 0) {
+          assert.equal(res.body.data[0].message, 'Your inbox is empty');
         }
         assert.equal(res.status, 200);
         done(err);

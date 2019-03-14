@@ -19,9 +19,9 @@ describe('Post api/v1/auth/signup', () => {
         isAdmin: 'true',
       })
       .end((err, res) => {
-        assert.equal(res.body.message, 'Account created successfully');
+        assert.equal(res.body.data[0].message, 'Account created successfully');
         assert.equal(res.status, 201);
-        assert.isObject(res.body);
+        assert.isArray(res.body.data);
         done(err);
       });
   });
@@ -37,7 +37,10 @@ describe('Post api/v1/auth/signup', () => {
         isAdmin: 'true',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'BadRequest: "firstname" is not allowed to be empty');
+        assert.equal(
+          res.body.errors.firstname,
+          'Firstname should be of type string and has a minimum of 2 characters and maximum of 50 chracters',
+        );
         assert.equal(res.status, 400);
         done(err);
       });
@@ -51,10 +54,12 @@ describe('Post api/v1/auth/signup', () => {
         email: 'ted@epicmail.com',
         password: 'pass',
         confirmpassword: 'pass',
-        isAdmin: 'true',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'BadRequest: "lastname" is not allowed to be empty');
+        assert.equal(
+          res.body.errors.lastname,
+          'Lastname should be of type string and has a minimum of 2 and maximum of 50 characters',
+        );
         assert.equal(res.status, 400);
         done(err);
       });
@@ -69,10 +74,9 @@ describe('Post api/v1/auth/signup', () => {
         email: '',
         password: 'pass',
         confirmpassword: 'pass',
-        isAdmin: 'true',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'BadRequest: "email" is not allowed to be empty');
+        assert.equal(res.body.errors.email, 'A valid email type should be provided');
         assert.equal(res.status, 400);
         done(err);
       });
@@ -87,10 +91,9 @@ describe('Post api/v1/auth/signup', () => {
         email: 'ted@epicmail.com',
         password: '',
         confirmpassword: 'pass',
-        isAdmin: 'true',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'BadRequest: "password" is not allowed to be empty');
+        assert.equal(res.body.errors.password, 'Password should not be empty');
         assert.equal(res.status, 400);
         done(err);
       });
@@ -105,28 +108,9 @@ describe('Post api/v1/auth/signup', () => {
         email: 'ted@epicmail.com',
         password: 'pass',
         confirmpassword: '',
-        isAdmin: 'true',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'BadRequest: "confirmpassword" is not allowed to be empty');
-        assert.equal(res.status, 400);
-        done(err);
-      });
-  });
-
-  it('it should return BadRequestError if admin is empty', (done) => {
-    request(app)
-      .post('/api/v1/auth/signup')
-      .send({
-        firstname: 'ted',
-        lastname: 'mosby',
-        email: 'ted@epicmail.com',
-        password: 'pass',
-        confirmpassword: 'pass',
-        isAdmin: '',
-      })
-      .end((err, res) => {
-        assert.equal(res.body.error, 'BadRequest: "isAdmin" must be a boolean');
+        assert.equal(res.body.errors.confirmpassword, 'confirmPassword should not be empty');
         assert.equal(res.status, 400);
         done(err);
       });
@@ -140,10 +124,12 @@ describe('Post api/v1/auth/signup', () => {
         email: 'ted@epicmail.com',
         password: 'pass',
         confirmpassword: 'pass',
-        isAdmin: 'true',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'BadRequest: "firstname" is required');
+        assert.equal(
+          res.body.errors.firstname,
+          'Firstname should be of type string and has a minimum of 2 characters and maximum of 50 chracters',
+        );
         assert.equal(res.status, 400);
         done(err);
       });
@@ -157,10 +143,12 @@ describe('Post api/v1/auth/signup', () => {
         email: 'ted@epicmail.com',
         password: 'pass',
         confirmpassword: 'pass',
-        isAdmin: 'true',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'BadRequest: "lastname" is required');
+        assert.equal(
+          res.body.errors.lastname,
+          'Lastname should be of type string and has a minimum of 2 and maximum of 50 characters',
+        );
         assert.equal(res.status, 400);
         done(err);
       });
@@ -174,10 +162,9 @@ describe('Post api/v1/auth/signup', () => {
         lastname: 'mosby',
         password: 'pass',
         confirmpassword: 'pass',
-        isAdmin: 'true',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'BadRequest: "email" is required');
+        assert.equal(res.body.errors.email, 'A valid email type should be provided');
         assert.equal(res.status, 400);
         done(err);
       });
@@ -190,10 +177,9 @@ describe('Post api/v1/auth/signup', () => {
         lastname: 'mosby',
         email: 'ted@epicmail.com',
         confirmpassword: 'pass',
-        isAdmin: 'true',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'BadRequest: "password" is required');
+        assert.equal(res.body.errors.password, 'Password should not be empty');
         assert.equal(res.status, 400);
         done(err);
       });
@@ -207,27 +193,9 @@ describe('Post api/v1/auth/signup', () => {
         lastname: 'mosby',
         email: 'ted@epicmail.com',
         password: 'pass',
-        isAdmin: 'true',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'BadRequest: "confirmpassword" is required');
-        assert.equal(res.status, 400);
-        done(err);
-      });
-  });
-
-  it('it should return BadRequestError if  isAdmin is not provided', (done) => {
-    request(app)
-      .post('/api/v1/auth/signup')
-      .send({
-        firstname: 'ted',
-        lastname: 'mosby',
-        email: 'ted@epicmail.com',
-        password: 'pass',
-        confirmpassword: 'pass',
-      })
-      .end((err, res) => {
-        assert.equal(res.body.error, 'BadRequest: "isAdmin" is required');
+        assert.equal(res.body.errors.confirmpassword, 'confirmPassword should not be empty');
         assert.equal(res.status, 400);
         done(err);
       });
@@ -242,10 +210,9 @@ describe('Post api/v1/auth/signup', () => {
         email: 'ted@epicmail.com',
         password: 'pass',
         confirmpassword: 'password',
-        isAdmin: 'true',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'AuthenticationError: Please confirm your password');
+        assert.equal(res.body.error, 'AuthenticationError: password and confirmpassword should be same');
         assert.equal(res.status, 403);
         done(err);
       });

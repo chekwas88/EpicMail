@@ -45,7 +45,7 @@ describe('Post api/v1/messages', () => {
         subject: 'Meeting',
         message: 'This is to inform you that there will be a staff meeting today at 2pm prompt',
         status: 'draft',
-        recipients: ['lily@epicmail.com'],
+        recipients: 'lily@epicmail.com',
       })
       .end((err, res) => {
         assert.equal(res.status, 401);
@@ -62,10 +62,10 @@ describe('Post api/v1/messages', () => {
         subject: 'Meeting',
         message: 'This is to inform you that there will be a staff meeting today at 2pm prompt',
         status: 'draft',
-        recipients: ['lily@epicmail.com'],
+        recipients: 'lily@epicmail.com',
       })
       .end((err, res) => {
-        assert.equal(res.body.message, 'Message sent');
+        assert.equal(res.body.data[0].message, 'Message created');
         assert.equal(res.status, 201);
         done(err);
       });
@@ -80,10 +80,10 @@ describe('Post api/v1/messages', () => {
         subject: 'Meeting',
         message: 'This is to inform you that there will be a staff meeting today at 2pm prompt',
         status: 'draft',
-        recipients: ['lily@epicmail.com'],
+        recipients: 'lily@epicmail.com',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'BadRequest: "createdOn" is not allowed to be empty');
+        assert.equal(res.body.errors.createdOn, 'createdOn should not be empty');
         assert.equal(res.status, 400);
         done(err);
       });
@@ -98,10 +98,10 @@ describe('Post api/v1/messages', () => {
         subject: '',
         message: 'This is to inform you that there will be a staff meeting today at 2pm prompt',
         status: 'draft',
-        recipients: ['lily@epicmail.com'],
+        recipients: 'lily@epicmail.com',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'BadRequest: "subject" is not allowed to be empty');
+        assert.equal(res.body.errors.subject, 'subject should not be empty and must be minimum of 2 to maximum 50 characters');
         assert.equal(res.status, 400);
         done(err);
       });
@@ -116,10 +116,10 @@ describe('Post api/v1/messages', () => {
         subject: 'meeting',
         message: '',
         status: 'draft',
-        recipients: ['lily@epicmail.com'],
+        recipients: 'lily@epicmail.com',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'BadRequest: "message" is not allowed to be empty');
+        assert.equal(res.body.errors.message, 'message should not be empty');
         assert.equal(res.status, 400);
         done(err);
       });
@@ -134,10 +134,10 @@ describe('Post api/v1/messages', () => {
         subject: 'meeting',
         message: 'This is to inform you that there will be a staff meeting today at 2pm prompt',
         status: '',
-        recipients: ['lily@epicmail.com'],
+        recipients: 'lily@epicmail.com',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'BadRequest: "status" is not allowed to be empty');
+        assert.equal(res.body.errors.status, 'status should not be empty');
         assert.equal(res.status, 400);
         done(err);
       });
@@ -155,7 +155,10 @@ describe('Post api/v1/messages', () => {
         recipients: '',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'BadRequest: "recipients" is not allowed to be empty');
+        assert.equal(
+          res.body.errors.recipients,
+          'recipients should be an array of emails and should not be empty',
+        );
         assert.equal(res.status, 400);
         done(err);
       });
@@ -169,10 +172,10 @@ describe('Post api/v1/messages', () => {
         subject: 'Meeting',
         message: 'This is to inform you that there will be a staff meeting today at 2pm prompt',
         status: 'draft',
-        recipients: ['lily@epicmail.com'],
+        recipients: 'lily@epicmail.com',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'BadRequest: "createdOn" is required');
+        assert.equal(res.body.errors.createdOn, 'createdOn should not be empty');
         assert.equal(res.status, 400);
         done(err);
       });
@@ -189,7 +192,10 @@ describe('Post api/v1/messages', () => {
         recipients: ['lily@epicmail.com'],
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'BadRequest: "subject" is required');
+        assert.equal(
+          res.body.errors.subject,
+          'subject should not be empty and must be minimum of 2 to maximum 50 characters',
+        );
         assert.equal(res.status, 400);
         done(err);
       });
@@ -203,10 +209,27 @@ describe('Post api/v1/messages', () => {
         createdOn: '03/09/2019',
         subject: 'Meeting',
         status: 'draft',
-        recipients: ['lily@epicmail.com'],
+        recipients: 'lily@epicmail.com',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'BadRequest: "message" is required');
+        assert.equal(res.body.errors.message, 'message should not be empty');
+        assert.equal(res.status, 400);
+        done(err);
+      });
+  });
+
+  it('it should return BadRequestError if status is not provided', (done) => {
+    request(app)
+      .post('/api/v1/messages')
+      .set('authorization', `Bearer ${token}`)
+      .send({
+        createdOn: '03/09/2019',
+        subject: 'meeting',
+        message: 'This is to inform you that there will be a staff meeting today at 2pm prompt',
+        recipients: 'lily@epicmail.com',
+      })
+      .end((err, res) => {
+        assert.equal(res.body.errors.status, 'status should not be empty');
         assert.equal(res.status, 400);
         done(err);
       });
@@ -223,7 +246,10 @@ describe('Post api/v1/messages', () => {
         status: 'draft',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'BadRequest: "recipients" is required');
+        assert.equal(
+          res.body.errors.recipients,
+          'recipients should be an array of emails and should not be empty',
+        );
         assert.equal(res.status, 400);
         done(err);
       });
@@ -237,7 +263,7 @@ describe('Post api/v1/messages', () => {
         subject: 'Meeting',
         message: 'This is to inform you that there will be a staff meeting today at 2pm prompt',
         status: 'draft',
-        recipients: ['lily@email.com'],
+        recipients: 'lily@email.com',
       })
       .end((err, res) => {
         assert.equal(res.body.error, 'NotFoundError: No registered email address was found');
