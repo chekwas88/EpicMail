@@ -1,5 +1,7 @@
 import express, { json } from 'express';
 import cors from 'cors';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from '../swagger.json';
 import userRoute from './route/userRoute';
 import messageRoute from './route/messageRoute';
 
@@ -15,6 +17,7 @@ app.use((req, res, next) => {
 });
 
 app.use(json());
+app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(userRoute);
 app.use(messageRoute);
 
