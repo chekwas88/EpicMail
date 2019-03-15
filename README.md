@@ -30,10 +30,14 @@ Epic mail is a web app that helps people exchange messages/information over the 
 | DELETE  https://agentcorvinus-epic-mail.herokuapp.com/api/v1/messages/:messageId                     | Delete a specific message    | 
 
 ## UI Template
-https://chekwas88.github.io/EpicMail/index.html
+The UI template is hosted on [Template](https://chekwas88.github.io/EpicMail/index.html)
+
 
 ## API URL
 https://agentcorvinus-epic-mail.herokuapp.com/
+
+## DOCUMENTATION
+For the full API documentation visit [Documentation](https://agentcorvinus-epic-mail.herokuapp.com/api/v1/docs)
 
 ## Requirement and Installation
 This project requires you to have **Node** and  **Git** installed in your system.
