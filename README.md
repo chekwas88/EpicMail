@@ -27,7 +27,10 @@ Epic mail is a web app that helps people exchange messages/information over the 
 | GET     https://agentcorvinus-epic-mail.herokuapp.com/api/v1/messages/unread                         | get all unread messages      | 
 | GET     https://agentcorvinus-epic-mail.herokuapp.com/api/v1/messages/sent                           | get all sent messages        | 
 | GET     https://agentcorvinus-epic-mail.herokuapp.com/api/v1/messages/:messageId                     | get a specific message       |
-| DELETE  https://agentcorvinus-epic-mail.herokuapp.com/api/v1/messages/:messageId                     | Delete a specific message    | 
+| DELETE  https://agentcorvinus-epic-mail.herokuapp.com/api/v1/messages/:messageId                     | Delete a specific message    |
+
+## Pivotal stories Link
+[Stories](https://www.pivotaltracker.com/n/projects/2315381)
 
 ## UI Template
 The UI template is hosted on [Template](https://chekwas88.github.io/EpicMail/index.html)
