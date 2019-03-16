@@ -23,7 +23,7 @@ describe('GET api/v1/messages/:id', () => {
       .set('authorization', 'Bearer jxxxxxxxxxxxxnns66s')
       .end((err, res) => {
         assert.equal(res.status, 401);
-        assert.equal(res.body.error, 'UnAuthorizedError: token not verified');
+        assert.equal(res.body.error, 'AuthenticationError: token not verified');
         done(err);
       });
   });
@@ -32,7 +32,7 @@ describe('GET api/v1/messages/:id', () => {
     request(app)
       .get('/api/v1/messages/1')
       .end((err, res) => {
-        assert.equal(res.status, 401);
+        assert.equal(res.status, 403);
         assert.equal(res.body.error, 'UnAuthorizedError: No authorization is provided');
         done(err);
       });
@@ -42,9 +42,21 @@ describe('GET api/v1/messages/:id', () => {
       .get('/api/v1/messages/1')
       .set('authorization', `Bearer ${token}`)
       .end((err, res) => {
-        assert.isArray(res.body.data);
         assert.equal(res.body.data[0].message, 'message retrieved');
         assert.equal(res.status, 200);
+        done(err);
+      });
+  });
+
+  it('it throws error if no user\'s message with such id is found', (done) => {
+    request(app)
+      .get('/api/v1/messages/1')
+      .set('authorization', `Bearer ${token}`)
+      .end((err, res) => {
+        if (!res.body.data) {
+          assert.equal(res.body.error, 'NotFoundError: no such message was found');
+          assert.equal(res.status, 404);
+        }
         done(err);
       });
   });

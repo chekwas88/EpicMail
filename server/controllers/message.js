@@ -49,7 +49,7 @@ class MessageController {
         status: res.statusCode,
         data: [
           {
-            message: 'Message created',
+            message: 'Message sent',
           },
         ],
       });
@@ -160,21 +160,23 @@ class MessageController {
   static getAMessage(req, res) {
     const insessionUser = helperUtils.getUserInSession(req);
     const { id } = insessionUser;
-    const inboxdata = helperUtils.getAllReceivedMessages(id);
-    const sentbox = helperUtils.getAllSentMessages(id);
+    const inboxdata = helperUtils.getAllInbox(id);
+    const sentbox = helperUtils.getAllSentbox(id);
     let data;
-    const inboxmsg = inboxdata.find(i => i.id === parseInt(req.params.id, 10));
-    const sentboxmsg = sentbox.find(d => d.id === parseInt(req.params.id, 10));
+    const inboxmsg = inboxdata.find(i => i.messageId === parseInt(req.params.id, 10));
+    const sentboxmsg = sentbox.find(d => d.messageId === parseInt(req.params.id, 10));
     try {
       if (!inboxmsg && !sentboxmsg) {
         throw new NotFoundError('no such message was found');
       }
       if (inboxmsg) {
-        data = inboxmsg;
+        const gtmsg = messages.find(m => m.id === inboxmsg.messageId);
+        gtmsg.status = 'read';
+        data = gtmsg;
       }
-
       if (sentboxmsg) {
-        data = sentboxmsg;
+        const stmsg = messages.find(m => m.id === sentboxmsg.messageId);
+        data = stmsg;
       }
       return res.status(200).json({
         status: res.statusCode,
@@ -206,34 +208,32 @@ class MessageController {
     let dataIndex;
     const inboxmessage = inbox.find(i => i.messageId === parseInt(req.params.id, 10));
     const sentboxmessage = sent.find(s => s.messageId === parseInt(req.params.id, 10));
-    try {
-      if (!inboxmessage && !sentboxmessage) {
-        throw new NotFoundError('no such message was found');
+    if (inboxmessage) {
+      const userReceiverId = inboxmessage.receiverId.find(rd => rd === id);
+      const receiverIds = inboxmessage.receiverId;
+      if (userReceiverId) {
+        dataIndex = receiverIds.indexOf(userReceiverId);
+        receiverIds.splice(dataIndex, 1);
+        return res.status(200).json({
+          status: res.statusCode,
+          data: [{ message: 'message deleted' }],
+        });
       }
-      if (inboxmessage) {
-        const userReceiverId = inboxmessage.receiverId.filter(rd => rd === id);
-        const receiverIds = inboxmessage.receiverId;
-        if (userReceiverId) {
-          dataIndex = receiverIds.indexOf(userReceiverId);
-          receiverIds.splice(dataIndex, 1);
-        }
-      }
-      if (sentboxmessage) {
-        if (sentboxmessage.senderId === id) {
-          dataIndex = sent.indexOf(sentboxmessage);
-          sent.splice(dataIndex, 1);
-        }
-      }
-      return res.status(200).json({
-        status: res.statusCode,
-        data: [{ message: 'message deleted' }],
-      });
-    } catch (e) {
-      return res.status(404).json({
-        status: res.statusCode,
-        error: `${e.name}: ${e.message}`,
-      });
     }
+    if (sentboxmessage) {
+      if (sentboxmessage.senderId === id) {
+        dataIndex = sent.indexOf(sentboxmessage);
+        sent.splice(dataIndex, 1);
+        return res.status(200).json({
+          status: res.statusCode,
+          data: [{ message: 'message deleted' }],
+        });
+      }
+    }
+    return res.status(404).json({
+      status: res.statusCode,
+      error: 'no such message was found',
+    });
   }
 }
 

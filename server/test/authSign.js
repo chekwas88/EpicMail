@@ -30,7 +30,7 @@ describe('Post api/v1/auth/login', () => {
         password: 'password',
       })
       .end((err, res) => {
-        assert.equal(res.body.errors.email, 'A valid email type should be provided');
+        assert.equal(res.body.errors.email, 'Email should be provided and should be a valid email type');
         assert.equal(res.status, 400);
         done(err);
       });
@@ -44,7 +44,7 @@ describe('Post api/v1/auth/login', () => {
         password: '',
       })
       .end((err, res) => {
-        assert.equal(res.body.errors.password, 'Password should not be empty');
+        assert.equal(res.body.errors.password, 'Password should be provided and should have minimum of 6 characters');
         assert.equal(res.status, 400);
         done(err);
       });
@@ -57,7 +57,7 @@ describe('Post api/v1/auth/login', () => {
         password: 'password',
       })
       .end((err, res) => {
-        assert.equal(res.body.errors.email, 'A valid email type should be provided');
+        assert.equal(res.body.errors.email, 'Email should be provided and should be a valid email type');
         assert.equal(res.status, 400);
         done(err);
       });
@@ -70,13 +70,13 @@ describe('Post api/v1/auth/login', () => {
         email: 'princechekwas@gmail.com',
       })
       .end((err, res) => {
-        assert.equal(res.body.errors.password, 'Password should not be empty');
+        assert.equal(res.body.errors.password, 'Password should be provided and should have minimum of 6 characters');
         assert.equal(res.status, 400);
         done(err);
       });
   });
 
-  it('it should return AuthenticationError if user email is invalid', (done) => {
+  it('it should return BadRequestError if user email is invalid', (done) => {
     request(app)
       .post('/api/v1/auth/login')
       .send({
@@ -84,13 +84,13 @@ describe('Post api/v1/auth/login', () => {
         password: 'password',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'AuthenticationError: invalid email or password');
-        assert.equal(res.status, 403);
+        assert.equal(res.body.error, 'BadRequest: invalid email or password');
+        assert.equal(res.status, 400);
         done(err);
       });
   });
 
-  it('it should return AuthenticationError if user password is invalid', (done) => {
+  it('it should return BadRequestError if user password is invalid', (done) => {
     request(app)
       .post('/api/v1/auth/login')
       .send({
@@ -98,8 +98,8 @@ describe('Post api/v1/auth/login', () => {
         password: 'pass',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'AuthenticationError: invalid email or password');
-        assert.equal(res.status, 403);
+        assert.equal(res.body.error, 'BadRequest: invalid email or password');
+        assert.equal(res.status, 400);
         done(err);
       });
   });

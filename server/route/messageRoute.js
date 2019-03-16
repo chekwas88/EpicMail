@@ -7,8 +7,8 @@ const router = express.Router();
 
 router.post(
   '/api/v1/messages',
-  ValidateMessage.validateMessageData,
   Token.verifyToken,
+  ValidateMessage.validateMessageData,
   MessageController.createMessage,
 );
 

@@ -1,7 +1,6 @@
 .content {
   width: 100%;
-  margin: 0 auto;
-  margin: 0 auto 40px auto;
+  margin: -250px auto 40px auto;
   background: #fff;
   display: flex;
   justify-content: center;
@@ -21,13 +20,16 @@
 }
 
 @media screen and (min-width: 600px) {
+  .content {
+     margin-top: -50%;
+  }
   .content div {
     flex: 0 0 250px;
   }
 }
 
 @media screen and (min-width: 1000px) {
-  .content div {
-    flex: 0 0 250px;
+  .content {
+    margin-top: -15%;
   }
 }

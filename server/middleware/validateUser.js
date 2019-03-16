@@ -2,7 +2,7 @@ import HelperUtils from '../utils/helper';
 import users from '../model/users';
 import error from '../utils/error';
 
-const { AuthenticationError } = error;
+const { BadRequestError } = error;
 
 class Validate {
   /**
@@ -51,12 +51,27 @@ class Validate {
   */
   static validateUserRegPassword(req, res, next) {
     try {
-      if (req.body.password !== req.body.confirmpassword) {
-        throw new AuthenticationError('password and confirmpassword should be same');
+      if (req.body.password !== req.body.confirmPassword) {
+        throw new BadRequestError('password and confirmpassword should be same');
       }
       return next();
     } catch (e) {
-      return res.status(403).json({
+      return res.status(400).json({
+        status: res.statusCode,
+        error: `${e.name}: ${e.message}`,
+      });
+    }
+  }
+
+  static checkEmail(req, res, next) {
+    const appUser = users.find(user => user.email === req.body.email);
+    try {
+      if (appUser) {
+        throw new BadRequestError('email has been registered before');
+      }
+      return next();
+    } catch (e) {
+      return res.status(400).json({
         status: res.statusCode,
         error: `${e.name}: ${e.message}`,
       });
@@ -75,11 +90,11 @@ class Validate {
     const authUser = users.find(user => user.email === req.body.email);
     try {
       if (authUser === undefined || authUser.password !== req.body.password) {
-        throw new AuthenticationError('invalid email or password');
+        throw new BadRequestError('invalid email or password');
       }
       return next();
     } catch (e) {
-      return res.status(403).json({
+      return res.status(400).json({
         status: res.statusCode,
         error: `${e.name}: ${e.message}`,
       });

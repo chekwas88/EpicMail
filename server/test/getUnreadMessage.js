@@ -25,7 +25,7 @@ describe('GET api/v1/messages/unread', () => {
       .set('authorization', 'Bearer jxxxxxxxxxxxxnns66s')
       .end((err, res) => {
         assert.equal(res.status, 401);
-        assert.equal(res.body.error, 'UnAuthorizedError: token not verified');
+        assert.equal(res.body.error, 'AuthenticationError: token not verified');
         done(err);
       });
   });
@@ -34,7 +34,7 @@ describe('GET api/v1/messages/unread', () => {
     request(app)
       .get('/api/v1/messages/unread')
       .end((err, res) => {
-        assert.equal(res.status, 401);
+        assert.equal(res.status, 403);
         assert.equal(res.body.error, 'UnAuthorizedError: No authorization is provided');
         done(err);
       });

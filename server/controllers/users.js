@@ -13,11 +13,11 @@ class UserController {
     const id = users.length + 1;
     const user = {
       id,
-      firstname: req.body.firstname.trim(),
-      lastname: req.body.lastname.trim(),
+      firstName: req.body.firstName.trim(),
+      lastName: req.body.lastName.trim(),
       email: req.body.email.trim(),
       password: req.body.password.trim(),
-      confirmpassword: req.body.confirmpassword.trim(),
+      confirmPassword: req.body.confirmPassword.trim(),
     };
     users.push(user);
     const regUser = users.find(u => u.id === id);

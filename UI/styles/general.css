@@ -18,18 +18,18 @@ body {
   height: 100%;
   box-sizing: border-box;
   position: relative;
-  background: #2193b0;
-  background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0);
-  background: linear-gradient(to right, #6dd5ed, #2193b0);
   font-family: 'Source Sans Pro', sans-serif;
 
 }
 .bgl {
   background-image: url('../images/anime9.jpg');
-  height: 75%;
+  height: 100%;
+  width: 100%;
+  background-size: 100% 60%;
+  background-repeat: no-repeat;
 }
 
-.bgl a {
+.landingContainer > a {
   text-decoration: none;
 }
 .getstarted {
@@ -38,8 +38,8 @@ body {
   color: #fff;
   font-size: 18px;
   border-radius: 5px;
-  top: 50%;
-  left: 46%;
+  top: 25%;
+  left: 37%;
   padding: 15px;
   z-index: 2;
   
@@ -51,7 +51,7 @@ body {
 .message {
   color: #fff;
   padding: 10px;
-  margin: 10px auto;
+  margin: 0 auto;
   text-align: center;
 }
 
@@ -78,13 +78,15 @@ body {
   height: 5px;
   
 }
+
+.navbar .logo{
+ float: right;
+ padding: 3px;
+}
+
 .navbar .logo span a i {
   font-size: 40px;
   font-weight: bold;
-  position: absolute;
-  top: 4px;
-  left: 60px;
-  z-index: 2;
   color: #e68f0e
 }
 .navbar .toggle-burger {
@@ -159,6 +161,10 @@ footer.login{
   #bars.show {
     display: flex;
   }
+  .navbar .logo{
+   float: left;
+  }
+  
   #bars.hide {
     display: flex;
   }
@@ -179,6 +185,21 @@ footer.login{
     padding: 5px 20px;
     border-bottom: none;
   }
+  .getstarted {
+    left: 43%;
+  }
+ 
 }
+@media screen and (min-width: 1000px) {
+  .bgl {
+    background-size: 100% 70%
+  }
+  .getstarted {
+    left: 45%;
+  }
+  
+}
+
+
 
 

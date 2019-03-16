@@ -30,31 +30,31 @@ class HelperUtils {
    * */
 
   static registerUserValidation(req) {
-    const firstnameResult = Joi.validate({ firstname: req.body.firstname }, firstnameSchema);
-    const lastnameResult = Joi.validate({ lastname: req.body.lastname }, lastnameSchema);
+    const firstnameResult = Joi.validate({ firstname: req.body.firstName }, firstnameSchema);
+    const lastnameResult = Joi.validate({ lastname: req.body.lastName }, lastnameSchema);
     const emailResult = Joi.validate({ email: req.body.email }, emailSchema);
     const passwordResult = Joi.validate({ password: req.body.password }, passwordSchema);
     const cpasswordResult = Joi.validate(
-      { confirmpassword: req.body.confirmpassword },
+      { confirmpassword: req.body.confirmPassword },
       cpasswordSchema,
     );
     const errors = {};
     if (firstnameResult.error !== null) {
-      errors.firstname = 'Firstname should be of type string and has a minimum of 2 characters and maximum of 50 chracters';
+      errors.firstName = 'Firstname should be provided and should have minimum of 2 characters and maximum of 50 chracters and is required';
     }
 
     if (lastnameResult.error !== null) {
-      errors.lastname = 'Lastname should be of type string and has a minimum of 2 and maximum of 50 characters';
+      errors.lastName = 'Lastname should be provided and should have minimum of 2 and maximum of 50 characters and is required';
     }
 
     if (emailResult.error !== null) {
-      errors.email = 'A valid email type should be provided';
+      errors.email = 'Email should be provided and should be a valid email type';
     }
     if (passwordResult.error !== null) {
-      errors.password = 'Password should not be empty';
+      errors.password = 'Password should be provided and should have minimum of 6 characters';
     }
     if (cpasswordResult.error !== null) {
-      errors.confirmpassword = 'confirmPassword should not be empty';
+      errors.confirmPassword = 'confirmPassword should be provided and should have minimum of 6 characters';
     }
     return errors;
   }
@@ -80,10 +80,10 @@ class HelperUtils {
       errors.createdOn = 'createdOn should not be empty';
     }
     if (subjectResult.error !== null) {
-      errors.subject = 'subject should not be empty and must be minimum of 2 to maximum 50 characters';
+      errors.subject = 'subject should be provided and must be minimum of 2 to maximum 50 characters';
     }
     if (messageResult.error !== null) {
-      errors.message = 'message should not be empty';
+      errors.message = 'message should be provided';
     }
 
     if (statusResult.error !== null) {
@@ -95,7 +95,7 @@ class HelperUtils {
     }
 
     if (recipientsResult.error !== null) {
-      errors.recipients = 'recipients should be an array of emails and should not be empty';
+      errors.recipients = 'recipients should be email(s) and should be provided';
     }
     return errors;
   }
@@ -112,10 +112,10 @@ class HelperUtils {
     const emailValidation = Joi.validate({ email: req.body.email }, emailSchema);
     const passwordValidation = Joi.validate({ password: req.body.password }, passwordSchema);
     if (emailValidation.error !== null) {
-      errors.email = 'A valid email type should be provided';
+      errors.email = 'Email should be provided and should be a valid email type';
     }
     if (passwordValidation.error !== null) {
-      errors.password = 'Password should not be empty';
+      errors.password = 'Password should be provided and should have minimum of 6 characters';
     }
     return errors;
   }
@@ -174,6 +174,22 @@ class HelperUtils {
   }
 
   /**
+   * @function  getAllInbox - get all inbox of a user
+   * @param {integer}id - user id
+   * @returns {array} data
+   *
+*/
+  static getAllInbox(id) {
+    const data = [];
+    inbox.forEach((i) => {
+      if (i.receiverId.includes(id)) {
+        data.push(i);
+      }
+    });
+    return data;
+  }
+
+  /**
      * @function  getAllSentMessages - get all sent messages
      * @param {integer}id - user id
      * @returns {array} data
@@ -184,6 +200,22 @@ class HelperUtils {
     sent.forEach((s) => {
       if (s.senderId === id) {
         data.push(messages.find(m => m.id === s.messageId));
+      }
+    });
+    return data;
+  }
+
+  /**
+     * @function  getAllSentbox - get all sentbox of a user
+     * @param {integer}id - user id
+     * @returns {array} data
+     *
+  */
+  static getAllSentbox(id) {
+    const data = [];
+    sent.forEach((s) => {
+      if (s.senderId === id) {
+        data.push(s);
       }
     });
     return data;
