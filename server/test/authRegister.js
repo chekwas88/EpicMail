@@ -11,12 +11,11 @@ describe('Post api/v1/auth/signup', () => {
     request(app)
       .post('/api/v1/auth/signup')
       .send({
-        firstname: 'Ted',
-        lastname: 'Mosby',
+        firstName: 'Ted',
+        lastName: 'Mosby',
         email: 'ted@epicmail.com',
         password: 'pass',
-        confirmpassword: 'pass',
-        isAdmin: 'true',
+        confirmPassword: 'pass',
       })
       .end((err, res) => {
         assert.equal(res.body.data[0].message, 'Account created successfully');
@@ -29,17 +28,16 @@ describe('Post api/v1/auth/signup', () => {
     request(app)
       .post('/api/v1/auth/signup')
       .send({
-        firstname: '',
-        lastname: 'Mosby',
+        firstName: '',
+        lastName: 'Mosby',
         email: 'ted@epicmail.com',
         password: 'pass',
-        confirmpassword: 'pass',
-        isAdmin: 'true',
+        confirmPassword: 'pass',
       })
       .end((err, res) => {
         assert.equal(
-          res.body.errors.firstname,
-          'Firstname should be of type string and has a minimum of 2 characters and maximum of 50 chracters',
+          res.body.errors.firstName,
+          'Firstname should be provided and should have minimum of 2 characters and maximum of 50 chracters and is required',
         );
         assert.equal(res.status, 400);
         done(err);
@@ -49,16 +47,16 @@ describe('Post api/v1/auth/signup', () => {
     request(app)
       .post('/api/v1/auth/signup')
       .send({
-        firstname: 'ted',
-        lastname: '',
+        firstName: 'ted',
+        lastName: '',
         email: 'ted@epicmail.com',
         password: 'pass',
-        confirmpassword: 'pass',
+        confirmPassword: 'pass',
       })
       .end((err, res) => {
         assert.equal(
-          res.body.errors.lastname,
-          'Lastname should be of type string and has a minimum of 2 and maximum of 50 characters',
+          res.body.errors.lastName,
+          'Lastname should be provided and should have minimum of 2 and maximum of 50 characters and is required',
         );
         assert.equal(res.status, 400);
         done(err);
@@ -69,14 +67,14 @@ describe('Post api/v1/auth/signup', () => {
     request(app)
       .post('/api/v1/auth/signup')
       .send({
-        firstname: 'ted',
-        lastname: 'mosby',
+        firstName: 'ted',
+        lastName: 'mosby',
         email: '',
         password: 'pass',
-        confirmpassword: 'pass',
+        confirmPassword: 'pass',
       })
       .end((err, res) => {
-        assert.equal(res.body.errors.email, 'A valid email type should be provided');
+        assert.equal(res.body.errors.email, 'Email should be provided and should be a valid email type');
         assert.equal(res.status, 400);
         done(err);
       });
@@ -86,14 +84,14 @@ describe('Post api/v1/auth/signup', () => {
     request(app)
       .post('/api/v1/auth/signup')
       .send({
-        firstname: 'ted',
-        lastname: 'mosby',
+        firstName: 'ted',
+        lastName: 'mosby',
         email: 'ted@epicmail.com',
         password: '',
-        confirmpassword: 'pass',
+        confirmPassword: 'pass',
       })
       .end((err, res) => {
-        assert.equal(res.body.errors.password, 'Password should not be empty');
+        assert.equal(res.body.errors.password, 'Password should be provided and should have minimum of 6 characters');
         assert.equal(res.status, 400);
         done(err);
       });
@@ -103,14 +101,14 @@ describe('Post api/v1/auth/signup', () => {
     request(app)
       .post('/api/v1/auth/signup')
       .send({
-        firstname: 'ted',
-        lastname: 'mosby',
+        firstName: 'ted',
+        lastName: 'mosby',
         email: 'ted@epicmail.com',
         password: 'pass',
-        confirmpassword: '',
+        confirmPassword: '',
       })
       .end((err, res) => {
-        assert.equal(res.body.errors.confirmpassword, 'confirmPassword should not be empty');
+        assert.equal(res.body.errors.confirmPassword, 'confirmPassword should be provided and should have minimum of 6 characters');
         assert.equal(res.status, 400);
         done(err);
       });
@@ -120,15 +118,15 @@ describe('Post api/v1/auth/signup', () => {
     request(app)
       .post('/api/v1/auth/signup')
       .send({
-        lastname: 'mosby',
+        lastName: 'mosby',
         email: 'ted@epicmail.com',
         password: 'pass',
-        confirmpassword: 'pass',
+        confirmPassword: 'pass',
       })
       .end((err, res) => {
         assert.equal(
-          res.body.errors.firstname,
-          'Firstname should be of type string and has a minimum of 2 characters and maximum of 50 chracters',
+          res.body.errors.firstName,
+          'Firstname should be provided and should have minimum of 2 characters and maximum of 50 chracters and is required',
         );
         assert.equal(res.status, 400);
         done(err);
@@ -139,15 +137,15 @@ describe('Post api/v1/auth/signup', () => {
     request(app)
       .post('/api/v1/auth/signup')
       .send({
-        firstname: 'ted',
+        firstName: 'ted',
         email: 'ted@epicmail.com',
         password: 'pass',
-        confirmpassword: 'pass',
+        confirmPassword: 'pass',
       })
       .end((err, res) => {
         assert.equal(
-          res.body.errors.lastname,
-          'Lastname should be of type string and has a minimum of 2 and maximum of 50 characters',
+          res.body.errors.lastName,
+          'Lastname should be provided and should have minimum of 2 and maximum of 50 characters and is required',
         );
         assert.equal(res.status, 400);
         done(err);
@@ -158,13 +156,13 @@ describe('Post api/v1/auth/signup', () => {
     request(app)
       .post('/api/v1/auth/signup')
       .send({
-        firstname: 'ted',
-        lastname: 'mosby',
+        firstName: 'ted',
+        lastName: 'mosby',
         password: 'pass',
-        confirmpassword: 'pass',
+        confirmPassword: 'pass',
       })
       .end((err, res) => {
-        assert.equal(res.body.errors.email, 'A valid email type should be provided');
+        assert.equal(res.body.errors.email, 'Email should be provided and should be a valid email type');
         assert.equal(res.status, 400);
         done(err);
       });
@@ -173,13 +171,13 @@ describe('Post api/v1/auth/signup', () => {
     request(app)
       .post('/api/v1/auth/signup')
       .send({
-        firstname: 'ted',
-        lastname: 'mosby',
+        firstName: 'ted',
+        lastName: 'mosby',
         email: 'ted@epicmail.com',
-        confirmpassword: 'pass',
+        confirmPassword: 'pass',
       })
       .end((err, res) => {
-        assert.equal(res.body.errors.password, 'Password should not be empty');
+        assert.equal(res.body.errors.password, 'Password should be provided and should have minimum of 6 characters');
         assert.equal(res.status, 400);
         done(err);
       });
@@ -189,31 +187,48 @@ describe('Post api/v1/auth/signup', () => {
     request(app)
       .post('/api/v1/auth/signup')
       .send({
-        firstname: 'ted',
-        lastname: 'mosby',
+        firstName: 'ted',
+        lastName: 'mosby',
         email: 'ted@epicmail.com',
         password: 'pass',
       })
       .end((err, res) => {
-        assert.equal(res.body.errors.confirmpassword, 'confirmPassword should not be empty');
+        assert.equal(res.body.errors.confirmPassword, 'confirmPassword should be provided and should have minimum of 6 characters');
         assert.equal(res.status, 400);
         done(err);
       });
   });
 
-  it('it should return AuthenticationError if  password is not equal to confirmpassword', (done) => {
+  it('it should return BadRequestError if  email has been registered before', (done) => {
     request(app)
       .post('/api/v1/auth/signup')
       .send({
-        firstname: 'ted',
-        lastname: 'mosby',
-        email: 'ted@epicmail.com',
-        password: 'pass',
-        confirmpassword: 'password',
+        firstName: 'ted',
+        lastName: 'mosby',
+        email: 'princechekwas@epicmail.com',
+        password: 'password',
+        confirmPassword: 'password',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'AuthenticationError: password and confirmpassword should be same');
-        assert.equal(res.status, 403);
+        assert.equal(res.body.error, 'BadRequest: email has been registered before');
+        assert.equal(res.status, 400);
+        done(err);
+      });
+  });
+
+  it('it should return BadRequestError if  password is not equal to confirmpassword', (done) => {
+    request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        firstName: 'ted',
+        lastName: 'mosby',
+        password: 'pass',
+        confirmPassword: 'password',
+        email: 'teddy@epicmail.com',
+      })
+      .end((err, res) => {
+        assert.equal(res.body.error, 'BadRequest: password and confirmpassword should be same');
+        assert.equal(res.status, 400);
         done(err);
       });
   });

@@ -32,7 +32,7 @@ describe('Post api/v1/messages', () => {
       })
       .end((err, res) => {
         assert.equal(res.status, 401);
-        assert.equal(res.body.error, 'UnAuthorizedError: token not verified');
+        assert.equal(res.body.error, 'AuthenticationError: token not verified');
         done(err);
       });
   });
@@ -48,7 +48,7 @@ describe('Post api/v1/messages', () => {
         recipients: 'lily@epicmail.com',
       })
       .end((err, res) => {
-        assert.equal(res.status, 401);
+        assert.equal(res.status, 403);
         assert.equal(res.body.error, 'UnAuthorizedError: No authorization is provided');
         done(err);
       });
@@ -65,7 +65,7 @@ describe('Post api/v1/messages', () => {
         recipients: 'lily@epicmail.com',
       })
       .end((err, res) => {
-        assert.equal(res.body.data[0].message, 'Message created');
+        assert.equal(res.body.data[0].message, 'Message sent');
         assert.equal(res.status, 201);
         done(err);
       });
@@ -101,7 +101,7 @@ describe('Post api/v1/messages', () => {
         recipients: 'lily@epicmail.com',
       })
       .end((err, res) => {
-        assert.equal(res.body.errors.subject, 'subject should not be empty and must be minimum of 2 to maximum 50 characters');
+        assert.equal(res.body.errors.subject, 'subject should be provided and must be minimum of 2 to maximum 50 characters');
         assert.equal(res.status, 400);
         done(err);
       });
@@ -119,7 +119,7 @@ describe('Post api/v1/messages', () => {
         recipients: 'lily@epicmail.com',
       })
       .end((err, res) => {
-        assert.equal(res.body.errors.message, 'message should not be empty');
+        assert.equal(res.body.errors.message, 'message should be provided');
         assert.equal(res.status, 400);
         done(err);
       });
@@ -157,7 +157,7 @@ describe('Post api/v1/messages', () => {
       .end((err, res) => {
         assert.equal(
           res.body.errors.recipients,
-          'recipients should be an array of emails and should not be empty',
+          'recipients should be email(s) and should be provided',
         );
         assert.equal(res.status, 400);
         done(err);
@@ -194,7 +194,7 @@ describe('Post api/v1/messages', () => {
       .end((err, res) => {
         assert.equal(
           res.body.errors.subject,
-          'subject should not be empty and must be minimum of 2 to maximum 50 characters',
+          'subject should be provided and must be minimum of 2 to maximum 50 characters',
         );
         assert.equal(res.status, 400);
         done(err);
@@ -212,7 +212,7 @@ describe('Post api/v1/messages', () => {
         recipients: 'lily@epicmail.com',
       })
       .end((err, res) => {
-        assert.equal(res.body.errors.message, 'message should not be empty');
+        assert.equal(res.body.errors.message, 'message should be provided');
         assert.equal(res.status, 400);
         done(err);
       });
@@ -248,7 +248,7 @@ describe('Post api/v1/messages', () => {
       .end((err, res) => {
         assert.equal(
           res.body.errors.recipients,
-          'recipients should be an array of emails and should not be empty',
+          'recipients should be email(s) and should be provided',
         );
         assert.equal(res.status, 400);
         done(err);

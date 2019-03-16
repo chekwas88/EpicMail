@@ -23,7 +23,7 @@ describe('GET api/v1/messages/:id', () => {
       .set('authorization', 'Bearer jxxxxxxxxxxxxnns66s')
       .end((err, res) => {
         assert.equal(res.status, 401);
-        assert.equal(res.body.error, 'UnAuthorizedError: token not verified');
+        assert.equal(res.body.error, 'AuthenticationError: token not verified');
         done(err);
       });
   });
@@ -32,7 +32,7 @@ describe('GET api/v1/messages/:id', () => {
     request(app)
       .delete('/api/v1/messages/1')
       .end((err, res) => {
-        assert.equal(res.status, 401);
+        assert.equal(res.status, 403);
         assert.equal(res.body.error, 'UnAuthorizedError: No authorization is provided');
         done(err);
       });
@@ -45,6 +45,19 @@ describe('GET api/v1/messages/:id', () => {
       .end((err, res) => {
         assert.equal(res.body.data[0].message, 'message deleted');
         assert.equal(res.status, 200);
+        done(err);
+      });
+  });
+
+  it('it throws not found error a messages', (done) => {
+    request(app)
+      .delete('/api/v1/messages/3')
+      .set('authorization', `Bearer ${token}`)
+      .end((err, res) => {
+        if (!res.body.data) {
+          assert.equal(res.body.error, 'no such message was found');
+          assert.equal(res.status, 404);
+        }
         done(err);
       });
   });

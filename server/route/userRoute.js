@@ -7,6 +7,7 @@ const router = express.Router();
 router.post(
   '/api/v1/auth/signup',
   validateUser.validateUserRegData,
+  validateUser.checkEmail,
   validateUser.validateUserRegPassword,
   UserController.registerUser,
 );
