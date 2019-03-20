@@ -95,7 +95,6 @@ class MessageUtils {
   */
   static async getAllUserReceivedMessages(id) {
     const inboxMsg = await MessageUtils.checkInbox(id);
-    console.log(inboxMsg);
     if (inboxMsg.length === 0 || inboxMsg === undefined) {
       return 'Your inbox is empty';
     }
@@ -117,12 +116,10 @@ class MessageUtils {
 
   static async getAllUserUnreadMessages(id) {
     const inboxMsg = await MessageUtils.checkInbox(id);
-    console.log(inboxMsg);
     if (inboxMsg.length === 0 || inboxMsg === undefined) {
       return 'Your inbox is empty';
     }
     const msg = inboxMsg.filter(i => i.status === 'unread');
-    console.log(msg);
     if (msg.length === 0 || msg === undefined) {
       return 'Your inbox is empty';
     }
@@ -135,7 +132,6 @@ class MessageUtils {
         data.push(m);
       }
     });
-    console.log(data);
     return data;
   }
 

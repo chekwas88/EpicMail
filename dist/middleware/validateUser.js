@@ -89,7 +89,7 @@ class Validate {
       if (response.rows[0]) {
         return res.status(400).json({
           status: res.statusCode,
-          error: 'password and confirmpassword should be same'
+          error: 'email has been registered before'
         });
       }
       return next();

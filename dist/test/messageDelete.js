@@ -42,7 +42,7 @@ let token;
   });
 
   (0, _mocha.it)('it deletes a messages', done => {
-    (0, _chai.request)(_app2.default).delete('/api/v1/messages/8').set('authorization', `Bearer ${token}`).end((err, res) => {
+    (0, _chai.request)(_app2.default).delete('/api/v1/messages/13').set('authorization', `Bearer ${token}`).end((err, res) => {
       _chai.assert.equal(res.body.data[0].message, 'message deleted');
       _chai.assert.equal(res.status, 200);
       done(err);

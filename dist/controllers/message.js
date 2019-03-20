@@ -140,9 +140,9 @@ class MessageController {
       if (inboxMsg.status !== status[3]) {
         const { messageid } = inboxMsg;
         const { rows } = await _dbConnection2.default.query(_queries2.default.getAnInboxMessageQuery, [messageid, id]);
-        const result = rows[0];
-        if (result !== undefined) {
-          const data = await _messageHelper2.default.updateStatus(status[1], result.id, id);
+        const data = rows[0];
+        if (data !== undefined) {
+          await _messageHelper2.default.updateStatus(status[1], data.id, id);
           return res.status(200).json({
             status: res.statusCode,
             data: [{

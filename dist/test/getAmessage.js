@@ -28,7 +28,7 @@ let token;
   (0, _mocha.it)('it should return an error if token cannot be verifed', done => {
     (0, _chai.request)(_app2.default).get('/api/v1/messages/1').set('authorization', 'Bearer jxxxxxxxxxxxxnns66s').end((err, res) => {
       _chai.assert.equal(res.status, 401);
-      _chai.assert.equal(res.body.error, 'AuthenticationError: token not verified');
+      _chai.assert.equal(res.body.error, 'token not verified');
       done(err);
     });
   });

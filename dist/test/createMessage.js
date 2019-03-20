@@ -34,7 +34,7 @@ let token;
       recipients: 'lily@epicmail.com'
     }).end((err, res) => {
       _chai.assert.equal(res.status, 401);
-      _chai.assert.equal(res.body.error, 'AuthenticationError: token not verified');
+      _chai.assert.equal(res.body.error, 'token not verified');
       done(err);
     });
   });
@@ -47,7 +47,7 @@ let token;
       recipients: 'lily@epicmail.com'
     }).end((err, res) => {
       _chai.assert.equal(res.status, 403);
-      _chai.assert.equal(res.body.error, 'UnAuthorizedError: No authorization is provided');
+      _chai.assert.equal(res.body.error, 'No authorization is provided');
       done(err);
     });
   });
