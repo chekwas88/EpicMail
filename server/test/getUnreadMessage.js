@@ -11,7 +11,7 @@ describe('GET api/v1/messages/unread', () => {
   before((done) => {
     request(app)
       .post('/api/v1/auth/login')
-      .send({ email: 'corvinus@epicmail.com', password: '123456' })
+      .send({ email: 'ted@epicmail.com', password: '123456' })
       .end((err, res) => {
         // eslint-disable-next-line prefer-destructuring
         token = res.body.data[0].token;

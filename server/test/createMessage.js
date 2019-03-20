@@ -11,7 +11,7 @@ describe('Post api/v1/messages', () => {
   before((done) => {
     request(app)
       .post('/api/v1/auth/login')
-      .send({ email: 'corvinus@epicmail.com', password: '123456' })
+      .send({ email: 'ted@epicmail.com', password: '123456' })
       .end((err, res) => {
         // eslint-disable-next-line prefer-destructuring
         token = res.body.data[0].token;
@@ -26,7 +26,7 @@ describe('Post api/v1/messages', () => {
       .send({
         subject: 'Meeting',
         message: 'This is to inform you that there will be a staff meeting today at 2pm prompt',
-        recipients: 'lily@epicmail.com',
+        recipients: 'ted@epicmail.com',
       })
       .end((err, res) => {
         assert.equal(res.status, 401);
@@ -39,10 +39,9 @@ describe('Post api/v1/messages', () => {
     request(app)
       .post('/api/v1/messages')
       .send({
-
         subject: 'Meeting',
         message: 'This is to inform you that there will be a staff meeting today at 2pm prompt',
-        recipients: 'lily@epicmail.com',
+        recipients: 'ted@epicmail.com',
       })
       .end((err, res) => {
         assert.equal(res.status, 403);
@@ -57,7 +56,7 @@ describe('Post api/v1/messages', () => {
       .send({
         subject: 'Meeting',
         message: 'This is to inform you that there will be a staff meeting today at 2pm prompt',
-        recipients: 'lily@epicmail.com',
+        recipients: 'ted@epicmail.com',
       })
       .end((err, res) => {
         assert.equal(res.body.data[0].message, 'Message sent');
@@ -73,7 +72,7 @@ describe('Post api/v1/messages', () => {
       .send({
         subject: '',
         message: 'This is to inform you that there will be a staff meeting today at 2pm prompt',
-        recipients: 'lily@epicmail.com',
+        recipients: 'ted@epicmail.com',
       })
       .end((err, res) => {
         assert.equal(res.body.errors.subject, 'subject should be provided and must be minimum of 2 to maximum 50 characters');
@@ -89,8 +88,7 @@ describe('Post api/v1/messages', () => {
       .send({
         subject: 'meeting',
         message: '',
-        status: 'draft',
-        recipients: 'lily@epicmail.com',
+        recipients: 'ted@epicmail.com',
       })
       .end((err, res) => {
         assert.equal(res.body.errors.message, 'message should be provided');
@@ -123,10 +121,8 @@ describe('Post api/v1/messages', () => {
       .post('/api/v1/messages')
       .set('authorization', `Bearer ${token}`)
       .send({
-        createdOn: '03/09/2019',
         message: 'This is to inform you that there will be a staff meeting today at 2pm prompt',
-        status: 'draft',
-        recipients: 'lily@epicmail.com',
+        recipients: 'ted@epicmail.com',
       })
       .end((err, res) => {
         assert.equal(
@@ -143,10 +139,8 @@ describe('Post api/v1/messages', () => {
       .post('/api/v1/messages')
       .set('authorization', `Bearer ${token}`)
       .send({
-        createdOn: '03/09/2019',
         subject: 'Meeting',
-        status: 'draft',
-        recipients: 'lily@epicmail.com',
+        recipients: 'ted@epicmail.com',
       })
       .end((err, res) => {
         assert.equal(res.body.errors.message, 'message should be provided');
@@ -160,7 +154,6 @@ describe('Post api/v1/messages', () => {
       .post('/api/v1/messages')
       .set('authorization', `Bearer ${token}`)
       .send({
-        createdOn: '03/09/2019',
         subject: 'meeting',
         message: 'This is to inform you that there will be a staff meeting today at 2pm prompt',
       })

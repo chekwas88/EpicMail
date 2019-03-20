@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node ./dist/app.js",
-    "test": "nyc mocha ./server/test --require babel-register --require babel-polyfill --exit",
+    "cdtables": "cross-env NODE_ENV=test babel-node ./server/db/dbQuery.js",
+    "test": "npm run cdtables && cross-env NODE_ENV=test nyc mocha ./server/test --require babel-register --require babel-polyfill --exit",
     "build": "babel server -d dist",
     "start:dev": "nodemon ./server/app.js --exec babel-node --presets babel-preset-env ",
     "createTables": "node server/db/createTables.js",

@@ -8,7 +8,7 @@ let connectionString;
 if (process.env.NODE_ENV === 'development') {
   connectionString = process.env.DEVDB;
 } else if (process.env.NODE_ENV === 'test') {
-  connectionString = process.env.DEVDB;
+  connectionString = process.env.TESTDB;
 }
 
 const pool = new Pool({
@@ -94,6 +94,44 @@ const sentTable = () => {
   pool.query(querytext)
     .then((res) => {
       console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+      pool.end();
+    });
+};
+
+const grouptable = () => {
+  const querytext =
+  `CREATE TABLE IF NOT EXISTS 
+  groups(
+    id SERIAL PRIMARY KEY NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    createdby INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    role VARCHAR(50) DEFAULT 'Admin'
+  );`;
+  pool.query(querytext)
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+      pool.end();
+    });
+};
+const groupmember = () => {
+  const querytext =
+    `CREATE TABLE IF NOT EXISTS 
+    groupmembers(
+      id SERIAL PRIMARY KEY NOT NULL,
+      groupid INT NOT NULL REFERENCES groups(id) ON DELETE CASCADE,
+      userid INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      role VARCHAR(50) DEFAULT 'user',
+      memberemail TEXT NOT NULL
+    );`;
+  pool.query(querytext)
+    .then((res) => {
+      console.log(res);
       pool.end();
     })
     .catch((err) => {
@@ -106,3 +144,5 @@ createusersTable();
 messageTable();
 inboxTable();
 sentTable();
+grouptable();
+groupmember();

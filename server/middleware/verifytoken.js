@@ -13,7 +13,7 @@ class Token {
       });
     }
     const token = req.headers.authorization.split(' ')[1];
-    jwt.verify(token, secret, (err, decoded) => {
+    return jwt.verify(token, secret, (err, decoded) => {
       if (err) {
         return res.status(401).json({
           status: res.statusCode,
@@ -21,9 +21,8 @@ class Token {
         });
       }
       req.user = decoded;
-      return req.user;
+      return next();
     });
-    return next();
   }
 }
 export default Token;

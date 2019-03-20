@@ -1,15 +1,16 @@
+import dotenv from 'dotenv';
 import { Pool } from 'pg';
 
-let connectionString;
-if (process.env.NODE_ENV === 'development') {
-  connectionString = process.env.DEVDB;
-} else if (process.env.NODE_ENV === 'test') {
-  connectionString = process.env.DEVDB;
-} else {
-  connectionString = process.env.PRODB;
+dotenv.config();
+
+let connectionString= process.env.DEVDB;
+
+if (process.env.NODE_ENV === 'test') {
+  connectionString = process.env.TESTDB;
 }
 const pool = new Pool({
   connectionString,
 });
+console.log(process.env.NODE_ENV, '======================================', connectionString, process.env.SECRET_KEY);
 
 export default pool;

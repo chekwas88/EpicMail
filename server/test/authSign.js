@@ -11,7 +11,7 @@ describe('Post api/v1/auth/login', () => {
     request(app)
       .post('/api/v1/auth/login')
       .send({
-        email: 'corvinus@epicmail.com',
+        email: 'ted@epicmail.com',
         password: '123456',
       })
       .end((err, res) => {
@@ -27,7 +27,7 @@ describe('Post api/v1/auth/login', () => {
       .post('/api/v1/auth/login')
       .send({
         email: '',
-        password: 'password',
+        password: '123456',
       })
       .end((err, res) => {
         assert.equal(res.body.errors.email, 'Email should be provided and should be a valid email type');
@@ -40,7 +40,7 @@ describe('Post api/v1/auth/login', () => {
     request(app)
       .post('/api/v1/auth/login')
       .send({
-        email: 'corvinus@epicmail.com',
+        email: 'ted@epicmail.com',
         password: '',
       })
       .end((err, res) => {
@@ -54,7 +54,7 @@ describe('Post api/v1/auth/login', () => {
     request(app)
       .post('/api/v1/auth/login')
       .send({
-        password: 'password',
+        password: '123456',
       })
       .end((err, res) => {
         assert.equal(res.body.errors.email, 'Email should be provided and should be a valid email type');
@@ -67,7 +67,7 @@ describe('Post api/v1/auth/login', () => {
     request(app)
       .post('/api/v1/auth/login')
       .send({
-        email: 'corvinus@epicmail.com',
+        email: 'ted@epicmail.com',
       })
       .end((err, res) => {
         assert.equal(res.body.errors.password, 'Password should be provided and should have minimum of 6 characters');
@@ -81,7 +81,7 @@ describe('Post api/v1/auth/login', () => {
       .post('/api/v1/auth/login')
       .send({
         email: 'prince@mail.com',
-        password: 'password',
+        password: '123456',
       })
       .end((err, res) => {
         assert.equal(res.body.error, 'invalid email or password');
@@ -94,7 +94,7 @@ describe('Post api/v1/auth/login', () => {
     request(app)
       .post('/api/v1/auth/login')
       .send({
-        email: 'corvinus@epicmail.com',
+        email: 'ted@epicmail.com',
         password: 'password',
       })
       .end((err, res) => {

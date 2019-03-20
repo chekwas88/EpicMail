@@ -10,7 +10,7 @@ describe('GET api/v1/messages/:id', () => {
   before((done) => {
     request(app)
       .post('/api/v1/auth/login')
-      .send({ email: 'corvinus@epicmail.com', password: '123456' })
+      .send({ email: 'ted@epicmail.com', password: '123456' })
       .end((err, res) => {
         // eslint-disable-next-line prefer-destructuring
         token = res.body.data[0].token;
@@ -30,7 +30,7 @@ describe('GET api/v1/messages/:id', () => {
 
   it('it should return an error if token is not provided', (done) => {
     request(app)
-      .get('/api/v1/messages/7')
+      .get('/api/v1/messages/1')
       .end((err, res) => {
         assert.equal(res.status, 403);
         assert.equal(res.body.error, 'No authorization is provided');
@@ -39,7 +39,7 @@ describe('GET api/v1/messages/:id', () => {
   });
   it('it gets a message', (done) => {
     request(app)
-      .get('/api/v1/messages/7')
+      .get('/api/v1/messages/1')
       .set('authorization', `Bearer ${token}`)
       .end((err, res) => {
         assert.equal(res.body.data[0].message, 'message retrieved');
