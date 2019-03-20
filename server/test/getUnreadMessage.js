@@ -11,7 +11,7 @@ describe('GET api/v1/messages/unread', () => {
   before((done) => {
     request(app)
       .post('/api/v1/auth/login')
-      .send({ email: 'princechekwas@epicmail.com', password: 'password' })
+      .send({ email: 'ted@epicmail.com', password: '123456' })
       .end((err, res) => {
         // eslint-disable-next-line prefer-destructuring
         token = res.body.data[0].token;
@@ -25,7 +25,7 @@ describe('GET api/v1/messages/unread', () => {
       .set('authorization', 'Bearer jxxxxxxxxxxxxnns66s')
       .end((err, res) => {
         assert.equal(res.status, 401);
-        assert.equal(res.body.error, 'AuthenticationError: token not verified');
+        assert.equal(res.body.error, 'token not verified');
         done(err);
       });
   });
@@ -35,7 +35,7 @@ describe('GET api/v1/messages/unread', () => {
       .get('/api/v1/messages/unread')
       .end((err, res) => {
         assert.equal(res.status, 403);
-        assert.equal(res.body.error, 'UnAuthorizedError: No authorization is provided');
+        assert.equal(res.body.error, 'No authorization is provided');
         done(err);
       });
   });
@@ -47,19 +47,6 @@ describe('GET api/v1/messages/unread', () => {
       .end((err, res) => {
         assert.isArray(res.body.data[0].data);
         assert.equal(res.body.data[0].message, 'unread messages retrieved');
-        assert.equal(res.status, 200);
-        done(err);
-      });
-  });
-
-  it('it returns empty when there is no unread messages', (done) => {
-    request(app)
-      .get('/api/v1/messages/unread')
-      .set('authorization', `Bearer ${token}`)
-      .end((err, res) => {
-        if (res.body.data[0].data.length === 0) {
-          assert.equal(res.body.message, 'No unread message');
-        }
         assert.equal(res.status, 200);
         done(err);
       });

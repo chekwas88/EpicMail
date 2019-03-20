@@ -19,11 +19,11 @@ export const lastnameSchema = {
     .regex(/^[a-zA-Z]+$/),
 };
 export const emailSchema = {
-  email: Joi.string().email().required(),
+  email: Joi.string().email().required().trim(),
 };
 export const passwordSchema = {
-  password: Joi.string().required().trim(),
+  password: Joi.string().required().min(6).trim(),
 };
 export const cpasswordSchema = {
-  confirmpassword: Joi.string().required().trim(),
+  confirmpassword: Joi.string().required().min(6).trim(),
 };

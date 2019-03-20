@@ -1,11 +1,8 @@
-import helperUtils from '../utils/helper';
-import error from '../utils/error';
-import messages from '../model/message';
-import inbox from '../model/inbox';
-import sent from '../model/sent';
-import users from '../model/users';
+import HelperUtils from '../utils/messageHelper';
+import pool from '../db/dbConnection';
+import queries from '../utils/queries';
 
-const { NotFoundError } = error;
+const status = ['unread', 'read', 'sent', 'delete'];
 
 class MessageController {
   /**
@@ -15,51 +12,34 @@ class MessageController {
      * @returns {object}
      *
   */
-  static createMessage(req, res) {
-    const token = req.headers.authorization.split(' ')[1];
-    const userInsession = users.find(u => u.token === token);
-    const senderId = userInsession.id;
-    const id = messages.length + 1;
-    const messageDetails = {
-      id,
-      createdOn: req.body.createdOn.trim(),
+  static async createMessage(req, res) {
+    const { id } = req.user;
+    const mD = {
       subject: req.body.subject.trim(),
       message: req.body.message,
-      status: req.body.status.trim(),
-      senderId,
-      recipients: req.body.recipients.trim().split(' '),
+      recipients: req.body.recipients,
     };
-    const Authrecipients = helperUtils.validateRecipients(messageDetails.recipients);
-    try {
-      if (Authrecipients.length === 0) {
-        throw new NotFoundError('No registered email address was found');
-      }
-      messages.push(messageDetails);
-      const createdMsg = messages.find(m => m.id === id);
-      createdMsg.receiverId = helperUtils.getReceiverIds(Authrecipients);
-      createdMsg.status = 'sent';
-      const { receiverId, createdOn } = createdMsg;
-      const sentboxData = helperUtils.createSentBox(createdMsg.senderId, createdMsg.id, createdOn);
-      sent.push(sentboxData);
-
-      createdMsg.status = 'unread';
-      const inboxData = helperUtils.createInBox(receiverId, createdMsg.id, createdOn);
-      inbox.push(inboxData);
-      return res.status(201).json({
-        status: res.statusCode,
-        data: [
-          {
-            message: 'Message sent',
-          },
-        ],
-      });
-    } catch (e) {
-      return res.status(404).json({
-        status: res.statusCode,
-        error: `${e.name}: ${e.message}`,
-      });
-    }
+    const receiver = await HelperUtils.getUser(mD.recipients);
+    const receiverid = receiver.id;
+    const { rows } = await pool.query(
+      queries.sendMessageQuery, [mD.subject, mD.message, id, mD.recipients, receiverid],
+    );
+    const data = rows[0];
+    const rId = data.receiverid;
+    const messageid = data.id;
+    await HelperUtils.createSentBox(messageid, rId, id);
+    await HelperUtils.createInBox(messageid, rId, id);
+    return res.status(201).json({
+      status: res.statusCode,
+      data: [
+        {
+          data,
+          message: 'Message sent',
+        },
+      ],
+    });
   }
+
 
   /**
      * @function  getReceivedMessages - get a user's received messages
@@ -68,14 +48,12 @@ class MessageController {
      * @returns {object}
      *
   */
-  static getReceivedMessages(req, res) {
-    const Insession = helperUtils.getUserInSession(req);
-    const { id } = Insession;
-    const data = helperUtils.getAllReceivedMessages(id);
-    if (data.length === 0) {
+  static async getReceivedMessages(req, res) {
+    const { id } = req.user;
+    const data = await HelperUtils.getAllUserReceivedMessages(id);
+    if (data === 'Your inbox is empty') {
       return res.status(200).json({
-        status: res.statusCode,
-        message: 'Your inbox is empty',
+        message: data,
       });
     }
     return res.status(200).json({
@@ -96,15 +74,12 @@ class MessageController {
      * @returns {object}
      *
   */
-  static getUnreadMessages(req, res) {
-    const userInsession = helperUtils.getUserInSession(req);
-    const { id } = userInsession;
-    const allmsgs = helperUtils.getAllReceivedMessages(id);
-    const data = allmsgs.filter(am => am.status === 'unread');
-    if (data.length === 0) {
+  static async getUnreadMessages(req, res) {
+    const { id } = req.user;
+    const data = await HelperUtils.getAllUserUnreadMessages(id);
+    if (data === 'Your inbox is empty') {
       return res.status(200).json({
-        status: res.statusCode,
-        message: 'No unread message',
+        message: data,
       });
     }
     return res.status(200).json({
@@ -125,18 +100,12 @@ class MessageController {
      * @returns {object}
      *
   */
-  static getSentMessages(req, res) {
-    const user = helperUtils.getUserInSession(req);
-    const { id } = user;
-    const data = helperUtils.getAllSentMessages(id);
-    if (data.length === 0) {
+  static async getSentMessages(req, res) {
+    const { id } = req.user;
+    const data = await HelperUtils.getAllUserSentMessages(id);
+    if (data === 'No sent messages') {
       return res.status(200).json({
-        status: res.statusCode,
-        data: [
-          {
-            message: 'sent message is empty',
-          },
-        ],
+        message: data,
       });
     }
     return res.status(200).json({
@@ -157,42 +126,53 @@ class MessageController {
      * @returns {object}
      *
   */
-  static getAMessage(req, res) {
-    const insessionUser = helperUtils.getUserInSession(req);
-    const { id } = insessionUser;
-    const inboxdata = helperUtils.getAllInbox(id);
-    const sentbox = helperUtils.getAllSentbox(id);
-    let data;
-    const inboxmsg = inboxdata.find(i => i.messageId === parseInt(req.params.id, 10));
-    const sentboxmsg = sentbox.find(d => d.messageId === parseInt(req.params.id, 10));
-    try {
-      if (!inboxmsg && !sentboxmsg) {
-        throw new NotFoundError('no such message was found');
+  static async getAMessage(req, res) {
+    const { id } = req.user;
+    const messageId = parseInt(req.params.id, 10);
+    const inboxMsg = await HelperUtils.getAninbox(messageId, id);
+    const sentMsg = await HelperUtils.getASentbox(messageId, id, status[2]);
+    if (inboxMsg !== undefined) {
+      if (inboxMsg.status !== status[3]) {
+        const { messageid } = inboxMsg;
+        const { rows } = await pool.query(
+          queries.getAnInboxMessageQuery, [messageid, id],
+        );
+        const data = rows[0];
+        if (data !== undefined) {
+          await HelperUtils.updateStatus(status[1], data.id, id);
+          return res.status(200).json({
+            status: res.statusCode,
+            data: [
+              {
+                message: 'message retrieved',
+                data,
+              },
+            ],
+          });
+        }
       }
-      if (inboxmsg) {
-        const gtmsg = messages.find(m => m.id === inboxmsg.messageId);
-        gtmsg.status = 'read';
-        data = gtmsg;
-      }
-      if (sentboxmsg) {
-        const stmsg = messages.find(m => m.id === sentboxmsg.messageId);
-        data = stmsg;
-      }
-      return res.status(200).json({
-        status: res.statusCode,
-        data: [
-          {
-            message: 'message retrieved',
-            data,
-          },
-        ],
-      });
-    } catch (e) {
-      return res.status(404).json({
-        status: res.statusCode,
-        error: `${e.name}: ${e.message}`,
-      });
     }
+    if (sentMsg !== undefined) {
+      const { rows } = await pool.query(
+        queries.getASentboxMessageQuery, [sentMsg.messageid, id],
+      );
+      const data = rows[0];
+      if (data !== undefined) {
+        return res.status(200).json({
+          status: res.statusCode,
+          data: [
+            {
+              message: 'message retrieved',
+              data,
+            },
+          ],
+        });
+      }
+    }
+    return res.status(404).json({
+      status: res.statusCode,
+      error: 'no such message was found',
+    });
   }
 
   /**
@@ -202,33 +182,26 @@ class MessageController {
      * @returns {object}
      *
   */
-  static deleteAMessage(req, res) {
-    const userInsession = helperUtils.getUserInSession(req);
-    const { id } = userInsession;
-    let dataIndex;
-    const inboxmessage = inbox.find(i => i.messageId === parseInt(req.params.id, 10));
-    const sentboxmessage = sent.find(s => s.messageId === parseInt(req.params.id, 10));
-    if (inboxmessage) {
-      const userReceiverId = inboxmessage.receiverId.find(rd => rd === id);
-      const receiverIds = inboxmessage.receiverId;
-      if (userReceiverId) {
-        dataIndex = receiverIds.indexOf(userReceiverId);
-        receiverIds.splice(dataIndex, 1);
+  static async deleteAMessage(req, res) {
+    const { id } = req.user;
+    const messageId = parseInt(req.params.id, 10);
+    const inboxMsg = await HelperUtils.getAninbox(messageId, id);
+    const sentMsg = await HelperUtils.getASentbox(messageId, id, status[2]);
+    if (inboxMsg !== undefined) {
+      if (inboxMsg.status !== status[3]) {
+        await pool.query(queries.DeleteInbox, [status[3], messageId, id]);
         return res.status(200).json({
           status: res.statusCode,
           data: [{ message: 'message deleted' }],
         });
       }
     }
-    if (sentboxmessage) {
-      if (sentboxmessage.senderId === id) {
-        dataIndex = sent.indexOf(sentboxmessage);
-        sent.splice(dataIndex, 1);
-        return res.status(200).json({
-          status: res.statusCode,
-          data: [{ message: 'message deleted' }],
-        });
-      }
+    if (sentMsg !== undefined) {
+      await pool.query(queries.DeleteSentbox, [status[3], messageId, id]);
+      return res.status(200).json({
+        status: res.statusCode,
+        data: [{ message: 'message deleted' }],
+      });
     }
     return res.status(404).json({
       status: res.statusCode,

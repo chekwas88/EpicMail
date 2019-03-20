@@ -9,14 +9,13 @@ export const subjectSchema = {
     .string()
     .required()
     .min(2)
-    .max(100)
-    .trim(),
+    .max(100),
 };
 export const messageSchema = {
   message: Joi.string().required(),
 };
 export const statusSchema = {
-  status: Joi.string().required().trim(),
+  status: Joi.string().required(),
 };
 
 export const parentMessageIdSchema = {
@@ -24,5 +23,5 @@ export const parentMessageIdSchema = {
 };
 
 export const recipientsSchema = {
-  recipients: Joi.array().items(Joi.string().email()).single().required(),
+  recipients: Joi.string().email().required().trim(),
 };

@@ -1,9 +1,9 @@
-import HelperUtils from '../utils/helper';
-import users from '../model/users';
-import error from '../utils/error';
+import dotenv from 'dotenv';
+import validationUtils from '../utils/validationHelper';
+import pool from '../db/dbConnection';
+import queries from '../utils/queries';
 
-const { BadRequestError } = error;
-
+dotenv.config();
 class Validate {
   /**
      * @function  validateUserRegData - check for input validation before creating a diary entry
@@ -13,7 +13,7 @@ class Validate {
      *
   */
   static validateUserRegData(req, res, next) {
-    const errors = HelperUtils.registerUserValidation(req);
+    const errors = validationUtils.registerUserValidation(req);
     if (Object.entries(errors).length !== 0 && errors.constructor === Object) {
       return res.status(400).json({
         status: res.statusCode,
@@ -32,7 +32,7 @@ class Validate {
      *
   */
   static validateUserLoginData(req, res, next) {
-    const errors = HelperUtils.loginSchemaValidation(req);
+    const errors = validationUtils.loginSchemaValidation(req);
     if (Object.entries(errors).length !== 0 && errors.constructor === Object) {
       return res.status(400).json({
         status: res.statusCode,
@@ -50,32 +50,35 @@ class Validate {
      *
   */
   static validateUserRegPassword(req, res, next) {
-    try {
-      if (req.body.password !== req.body.confirmPassword) {
-        throw new BadRequestError('password and confirmpassword should be same');
-      }
-      return next();
-    } catch (e) {
+    if (req.body.password !== req.body.confirmPassword) {
       return res.status(400).json({
         status: res.statusCode,
-        error: `${e.name}: ${e.message}`,
+        error: 'password and confirmpassword should be same',
       });
     }
+    return next();
   }
 
+  /**
+     * @function  checkEmail - check if email is has been before  registered
+     * @param {object} req - request object
+     * @param {object} res - response object
+     * @returns {function} next
+     *
+  */
   static checkEmail(req, res, next) {
-    const appUser = users.find(user => user.email === req.body.email);
-    try {
-      if (appUser) {
-        throw new BadRequestError('email has been registered before');
+    pool.query(
+      queries.loginQuery,
+      [req.body.email.trim()],
+    ).then((response) => {
+      if (response.rows[0]) {
+        return res.status(400).json({
+          status: res.statusCode,
+          error: 'email has been registered before',
+        });
       }
       return next();
-    } catch (e) {
-      return res.status(400).json({
-        status: res.statusCode,
-        error: `${e.name}: ${e.message}`,
-      });
-    }
+    });
   }
 
   /**
@@ -87,18 +90,26 @@ class Validate {
   */
 
   static validateLogin(req, res, next) {
-    const authUser = users.find(user => user.email === req.body.email);
-    try {
-      if (authUser === undefined || authUser.password !== req.body.password) {
-        throw new BadRequestError('invalid email or password');
+    pool.query(
+      queries.loginQuery,
+      [req.body.email.trim()],
+    ).then((response) => {
+      const user = response.rows[0];
+      if (!user) {
+        return res.status(400).json({
+          status: res.statusCode,
+          error: 'invalid email or password',
+        });
+      }
+      const verifyPassword = validationUtils.checkPassword(req.body.password, user.password);
+      if (!verifyPassword) {
+        return res.status(400).json({
+          status: res.statusCode,
+          error: 'invalid email or password',
+        });
       }
       return next();
-    } catch (e) {
-      return res.status(400).json({
-        status: res.statusCode,
-        error: `${e.name}: ${e.message}`,
-      });
-    }
+    });
   }
 }
 

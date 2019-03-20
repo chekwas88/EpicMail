@@ -1,4 +1,5 @@
-import HelperUtils from '../utils/helper';
+import ValidationUtils from '../utils/validationHelper';
+import MessageHelper from '../utils/messageHelper';
 
 class ValidateMessage {
   /**
@@ -9,11 +10,31 @@ class ValidateMessage {
      *
   */
   static validateMessageData(req, res, next) {
-    const errors = HelperUtils.messageSchemavalidation(req);
+    const errors = ValidationUtils.messageSchemavalidation(req);
     if (Object.entries(errors).length !== 0 && errors.constructor === Object) {
       return res.status(400).json({
         status: res.statusCode,
         errors,
+      });
+    }
+    return next();
+  }
+
+  /**
+     * @function  validateRecipient - check if a recipient or recipients are registered user(s)
+     * @param {object} mailRecipients - object
+     * @returns {array}
+     *
+  */
+
+
+  static async validateRecipient(req, res, next) {
+    const mailRecipients = req.body.recipients;
+    const user = await MessageHelper.getUser(mailRecipients);
+    if (!user) {
+      return res.status(404).json({
+        status: res.statusCode,
+        error: 'No registered email was found',
       });
     }
     return next();

@@ -1,20 +1,15 @@
+import dotenv from 'dotenv';
 import { Pool } from 'pg';
 
-class Db {
-  static dbConnect() {
-    let pool;
-    if (process.env.NODE_ENV === 'development') {
-      pool = new Pool({
-        connectionString: process.env.DEVDB,
-      });
-      // check for test env
-    } else if (process.env.NODE_ENV === 'test') {
-      pool = new Pool({
-        connectionString: process.env.TESTDB,
-      });
-    }
-    return pool;
-  }
-}
+dotenv.config();
 
-export default Db.dbConnect;
+let connectionString= process.env.DEVDB;
+
+if (process.env.NODE_ENV === 'test') {
+  connectionString = process.env.TESTDB;
+}
+const pool = new Pool({
+  connectionString,
+});
+
+export default pool;
