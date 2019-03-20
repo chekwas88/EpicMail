@@ -1,3 +1,8 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 class NotFoundError {
   constructor(message) {
     this.name = 'NotFoundError';
@@ -31,9 +36,9 @@ BadRequestError.prototype = new Error();
 AuthenticationError.prototype = new Error();
 UnAuthorizedError.prototype = new Error();
 
-export default {
+exports.default = {
   NotFoundError,
   AuthenticationError,
   BadRequestError,
-  UnAuthorizedError,
+  UnAuthorizedError
 };

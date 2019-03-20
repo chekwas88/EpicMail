@@ -9,6 +9,7 @@ router.post(
   '/api/v1/messages',
   Token.verifyToken,
   ValidateMessage.validateMessageData,
+  ValidateMessage.validateRecipient,
   MessageController.createMessage,
 );
 

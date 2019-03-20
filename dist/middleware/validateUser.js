@@ -1,9 +1,28 @@
-import dotenv from 'dotenv';
-import validationUtils from '../utils/validationHelper';
-import pool from '../db/dbConnection';
-import queries from '../utils/queries';
+'use strict';
 
-dotenv.config();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _dotenv = require('dotenv');
+
+var _dotenv2 = _interopRequireDefault(_dotenv);
+
+var _validationHelper = require('../utils/validationHelper');
+
+var _validationHelper2 = _interopRequireDefault(_validationHelper);
+
+var _dbConnection = require('../db/dbConnection');
+
+var _dbConnection2 = _interopRequireDefault(_dbConnection);
+
+var _queries = require('../utils/queries');
+
+var _queries2 = _interopRequireDefault(_queries);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_dotenv2.default.config();
 class Validate {
   /**
      * @function  validateUserRegData - check for input validation before creating a diary entry
@@ -13,16 +32,15 @@ class Validate {
      *
   */
   static validateUserRegData(req, res, next) {
-    const errors = validationUtils.registerUserValidation(req);
+    const errors = _validationHelper2.default.registerUserValidation(req);
     if (Object.entries(errors).length !== 0 && errors.constructor === Object) {
       return res.status(400).json({
         status: res.statusCode,
-        errors,
+        errors
       });
     }
     return next();
   }
-
 
   /**
      * @function  validateUserLoginData - check for input validation before user login
@@ -32,11 +50,11 @@ class Validate {
      *
   */
   static validateUserLoginData(req, res, next) {
-    const errors = validationUtils.loginSchemaValidation(req);
+    const errors = _validationHelper2.default.loginSchemaValidation(req);
     if (Object.entries(errors).length !== 0 && errors.constructor === Object) {
       return res.status(400).json({
         status: res.statusCode,
-        errors,
+        errors
       });
     }
     return next();
@@ -53,7 +71,7 @@ class Validate {
     if (req.body.password !== req.body.confirmPassword) {
       return res.status(400).json({
         status: res.statusCode,
-        error: 'password and confirmpassword should be same',
+        error: 'password and confirmpassword should be same'
       });
     }
     return next();
@@ -67,14 +85,11 @@ class Validate {
      *
   */
   static checkEmail(req, res, next) {
-    pool.query(
-      queries.loginQuery,
-      [req.body.email.trim()],
-    ).then((response) => {
+    _dbConnection2.default.query(_queries2.default.loginQuery, [req.body.email.trim()]).then(response => {
       if (response.rows[0]) {
         return res.status(400).json({
           status: res.statusCode,
-          error: 'email has been registered before',
+          error: 'password and confirmpassword should be same'
         });
       }
       return next();
@@ -90,22 +105,19 @@ class Validate {
   */
 
   static validateLogin(req, res, next) {
-    pool.query(
-      queries.loginQuery,
-      [req.body.email.trim()],
-    ).then((response) => {
+    _dbConnection2.default.query(_queries2.default.loginQuery, [req.body.email.trim()]).then(response => {
       const user = response.rows[0];
       if (!user) {
         return res.status(400).json({
           status: res.statusCode,
-          error: 'invalid email or password',
+          error: 'invalid email or password'
         });
       }
-      const verifyPassword = validationUtils.checkPassword(req.body.password, user.password);
+      const verifyPassword = _validationHelper2.default.checkPassword(req.body.password, user.password);
       if (!verifyPassword) {
         return res.status(400).json({
           status: res.statusCode,
-          error: 'invalid email or password',
+          error: 'invalid email or password'
         });
       }
       return next();
@@ -113,4 +125,4 @@ class Validate {
   }
 }
 
-export default Validate;
+exports.default = Validate;

@@ -11,8 +11,8 @@ describe('Post api/v1/auth/login', () => {
     request(app)
       .post('/api/v1/auth/login')
       .send({
-        email: 'princechekwas@epicmail.com',
-        password: 'password',
+        email: 'corvinus@epicmail.com',
+        password: '123456',
       })
       .end((err, res) => {
         assert.equal(res.body.data[0].message, 'login was successful');
@@ -40,7 +40,7 @@ describe('Post api/v1/auth/login', () => {
     request(app)
       .post('/api/v1/auth/login')
       .send({
-        email: 'princechekwas@gmail.com',
+        email: 'corvinus@epicmail.com',
         password: '',
       })
       .end((err, res) => {
@@ -67,7 +67,7 @@ describe('Post api/v1/auth/login', () => {
     request(app)
       .post('/api/v1/auth/login')
       .send({
-        email: 'princechekwas@gmail.com',
+        email: 'corvinus@epicmail.com',
       })
       .end((err, res) => {
         assert.equal(res.body.errors.password, 'Password should be provided and should have minimum of 6 characters');
@@ -84,7 +84,7 @@ describe('Post api/v1/auth/login', () => {
         password: 'password',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'BadRequest: invalid email or password');
+        assert.equal(res.body.error, 'invalid email or password');
         assert.equal(res.status, 400);
         done(err);
       });
@@ -94,11 +94,11 @@ describe('Post api/v1/auth/login', () => {
     request(app)
       .post('/api/v1/auth/login')
       .send({
-        email: 'princechekwas@gmail.com',
-        password: 'pass',
+        email: 'corvinus@epicmail.com',
+        password: 'password',
       })
       .end((err, res) => {
-        assert.equal(res.body.error, 'BadRequest: invalid email or password');
+        assert.equal(res.body.error, 'invalid email or password');
         assert.equal(res.status, 400);
         done(err);
       });

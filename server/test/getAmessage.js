@@ -10,7 +10,7 @@ describe('GET api/v1/messages/:id', () => {
   before((done) => {
     request(app)
       .post('/api/v1/auth/login')
-      .send({ email: 'princechekwas@epicmail.com', password: 'password' })
+      .send({ email: 'corvinus@epicmail.com', password: '123456' })
       .end((err, res) => {
         // eslint-disable-next-line prefer-destructuring
         token = res.body.data[0].token;
@@ -23,23 +23,23 @@ describe('GET api/v1/messages/:id', () => {
       .set('authorization', 'Bearer jxxxxxxxxxxxxnns66s')
       .end((err, res) => {
         assert.equal(res.status, 401);
-        assert.equal(res.body.error, 'AuthenticationError: token not verified');
+        assert.equal(res.body.error, 'token not verified');
         done(err);
       });
   });
 
   it('it should return an error if token is not provided', (done) => {
     request(app)
-      .get('/api/v1/messages/1')
+      .get('/api/v1/messages/7')
       .end((err, res) => {
         assert.equal(res.status, 403);
-        assert.equal(res.body.error, 'UnAuthorizedError: No authorization is provided');
+        assert.equal(res.body.error, 'No authorization is provided');
         done(err);
       });
   });
   it('it gets a message', (done) => {
     request(app)
-      .get('/api/v1/messages/1')
+      .get('/api/v1/messages/7')
       .set('authorization', `Bearer ${token}`)
       .end((err, res) => {
         assert.equal(res.body.data[0].message, 'message retrieved');
@@ -50,11 +50,11 @@ describe('GET api/v1/messages/:id', () => {
 
   it('it throws error if no user\'s message with such id is found', (done) => {
     request(app)
-      .get('/api/v1/messages/1')
+      .get('/api/v1/messages/1001')
       .set('authorization', `Bearer ${token}`)
       .end((err, res) => {
         if (!res.body.data) {
-          assert.equal(res.body.error, 'NotFoundError: no such message was found');
+          assert.equal(res.body.error, 'no such message was found');
           assert.equal(res.status, 404);
         }
         done(err);

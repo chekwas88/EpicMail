@@ -4,11 +4,12 @@
   "description": "A mail app",
   "main": "app.js",
   "scripts": {
-    "start": "babel-node ./server/app.js --presets babel-preset-env ",
-    "test": "nyc mocha ./server/test --require babel-register --exit",
+    "start": "node ./dist/app.js",
+    "test": "nyc mocha ./server/test --require babel-register --require babel-polyfill --exit",
+    "build": "babel server -d dist",
     "start:dev": "nodemon ./server/app.js --exec babel-node --presets babel-preset-env ",
-    "createTable": "babel-node server/db/createTables.js",
-    "dropTables": " babel-node server/db/dev-runnable.js dropTables",
+    "createTables": "node server/db/createTables.js",
+    "dropTables": "node server/db/dropTables.js",
     "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
@@ -22,10 +23,6 @@
   },
   "homepage": "https://github.com/chekwas88/EpicMail#readme",
   "dependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-register": "^6.26.0",
     "bcrypt": "^3.0.4",
     "body-parser": "^1.18.3",
     "chai": "^4.2.0",
@@ -43,6 +40,11 @@
     "make-runnable": "^1.3.6"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
     "cross-env": "^5.2.0",
     "eslint": "^5.15.0",
     "eslint-config-airbnb-base": "^13.1.0",

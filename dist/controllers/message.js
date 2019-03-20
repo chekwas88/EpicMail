@@ -1,6 +1,22 @@
-import HelperUtils from '../utils/messageHelper';
-import pool from '../db/dbConnection';
-import queries from '../utils/queries';
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _messageHelper = require('../utils/messageHelper');
+
+var _messageHelper2 = _interopRequireDefault(_messageHelper);
+
+var _dbConnection = require('../db/dbConnection');
+
+var _dbConnection2 = _interopRequireDefault(_dbConnection);
+
+var _queries = require('../utils/queries');
+
+var _queries2 = _interopRequireDefault(_queries);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const status = ['unread', 'read', 'sent', 'delete'];
 
@@ -17,29 +33,24 @@ class MessageController {
     const mD = {
       subject: req.body.subject.trim(),
       message: req.body.message,
-      recipients: req.body.recipients,
+      recipients: req.body.recipients
     };
-    const receiver = await HelperUtils.getUser(mD.recipients);
+    const receiver = await _messageHelper2.default.getUser(mD.recipients);
     const receiverid = receiver.id;
-    const { rows } = await pool.query(
-      queries.sendMessageQuery, [mD.subject, mD.message, id, mD.recipients, receiverid],
-    );
+    const { rows } = await _dbConnection2.default.query(_queries2.default.sendMessageQuery, [mD.subject, mD.message, id, mD.recipients, receiverid]);
     const data = rows[0];
     const rId = data.receiverid;
     const messageid = data.id;
-    await HelperUtils.createSentBox(messageid, rId, id);
-    await HelperUtils.createInBox(messageid, rId, id);
+    await _messageHelper2.default.createSentBox(messageid, rId, id);
+    await _messageHelper2.default.createInBox(messageid, rId, id);
     return res.status(201).json({
       status: res.statusCode,
-      data: [
-        {
-          data,
-          message: 'Message sent',
-        },
-      ],
+      data: [{
+        data,
+        message: 'Message sent'
+      }]
     });
   }
-
 
   /**
      * @function  getReceivedMessages - get a user's received messages
@@ -50,20 +61,18 @@ class MessageController {
   */
   static async getReceivedMessages(req, res) {
     const { id } = req.user;
-    const data = await HelperUtils.getAllUserReceivedMessages(id);
+    const data = await _messageHelper2.default.getAllUserReceivedMessages(id);
     if (data === 'Your inbox is empty') {
       return res.status(200).json({
-        message: data,
+        message: data
       });
     }
     return res.status(200).json({
       status: res.statusCode,
-      data: [
-        {
-          message: 'inbox messages retrieved',
-          data,
-        },
-      ],
+      data: [{
+        message: 'inbox messages retrieved',
+        data
+      }]
     });
   }
 
@@ -76,20 +85,18 @@ class MessageController {
   */
   static async getUnreadMessages(req, res) {
     const { id } = req.user;
-    const data = await HelperUtils.getAllUserUnreadMessages(id);
+    const data = await _messageHelper2.default.getAllUserUnreadMessages(id);
     if (data === 'Your inbox is empty') {
       return res.status(200).json({
-        message: data,
+        message: data
       });
     }
     return res.status(200).json({
       status: res.statusCode,
-      data: [
-        {
-          message: 'unread messages retrieved',
-          data,
-        },
-      ],
+      data: [{
+        message: 'unread messages retrieved',
+        data
+      }]
     });
   }
 
@@ -102,20 +109,18 @@ class MessageController {
   */
   static async getSentMessages(req, res) {
     const { id } = req.user;
-    const data = await HelperUtils.getAllUserSentMessages(id);
+    const data = await _messageHelper2.default.getAllUserSentMessages(id);
     if (data === 'No sent messages') {
       return res.status(200).json({
-        message: data,
+        message: data
       });
     }
     return res.status(200).json({
       status: res.statusCode,
-      data: [
-        {
-          message: 'sent messages retrieved',
-          data,
-        },
-      ],
+      data: [{
+        message: 'sent messages retrieved',
+        data
+      }]
     });
   }
 
@@ -129,49 +134,41 @@ class MessageController {
   static async getAMessage(req, res) {
     const { id } = req.user;
     const messageId = parseInt(req.params.id, 10);
-    const inboxMsg = await HelperUtils.getAninbox(messageId, id);
-    const sentMsg = await HelperUtils.getASentbox(messageId, id, status[2]);
+    const inboxMsg = await _messageHelper2.default.getAninbox(messageId, id);
+    const sentMsg = await _messageHelper2.default.getASentbox(messageId, id, status[2]);
     if (inboxMsg !== undefined) {
       if (inboxMsg.status !== status[3]) {
         const { messageid } = inboxMsg;
-        const { rows } = await pool.query(
-          queries.getAnInboxMessageQuery, [messageid, id],
-        );
-        const data = rows[0];
-        if (data !== undefined) {
-          await HelperUtils.updateStatus(status[1], data.id, id);
+        const { rows } = await _dbConnection2.default.query(_queries2.default.getAnInboxMessageQuery, [messageid, id]);
+        const result = rows[0];
+        if (result !== undefined) {
+          const data = await _messageHelper2.default.updateStatus(status[1], result.id, id);
           return res.status(200).json({
             status: res.statusCode,
-            data: [
-              {
-                message: 'message retrieved',
-                data,
-              },
-            ],
+            data: [{
+              message: 'message retrieved',
+              data
+            }]
           });
         }
       }
     }
     if (sentMsg !== undefined) {
-      const { rows } = await pool.query(
-        queries.getASentboxMessageQuery, [sentMsg.messageid, id],
-      );
+      const { rows } = await _dbConnection2.default.query(_queries2.default.getASentboxMessageQuery, [sentMsg.messageid, id]);
       const data = rows[0];
       if (data !== undefined) {
         return res.status(200).json({
           status: res.statusCode,
-          data: [
-            {
-              message: 'message retrieved',
-              data,
-            },
-          ],
+          data: [{
+            message: 'message retrieved',
+            data
+          }]
         });
       }
     }
     return res.status(404).json({
       status: res.statusCode,
-      error: 'no such message was found',
+      error: 'no such message was found'
     });
   }
 
@@ -185,29 +182,29 @@ class MessageController {
   static async deleteAMessage(req, res) {
     const { id } = req.user;
     const messageId = parseInt(req.params.id, 10);
-    const inboxMsg = await HelperUtils.getAninbox(messageId, id);
-    const sentMsg = await HelperUtils.getASentbox(messageId, id, status[2]);
+    const inboxMsg = await _messageHelper2.default.getAninbox(messageId, id);
+    const sentMsg = await _messageHelper2.default.getASentbox(messageId, id, status[2]);
     if (inboxMsg !== undefined) {
       if (inboxMsg.status !== status[3]) {
-        await pool.query(queries.DeleteInbox, [status[3], messageId, id]);
+        await _dbConnection2.default.query(_queries2.default.DeleteInbox, [status[3], messageId, id]);
         return res.status(200).json({
           status: res.statusCode,
-          data: [{ message: 'message deleted' }],
+          data: [{ message: 'message deleted' }]
         });
       }
     }
     if (sentMsg !== undefined) {
-      await pool.query(queries.DeleteSentbox, [status[3], messageId, id]);
+      await _dbConnection2.default.query(_queries2.default.DeleteSentbox, [status[3], messageId, id]);
       return res.status(200).json({
         status: res.statusCode,
-        data: [{ message: 'message deleted' }],
+        data: [{ message: 'message deleted' }]
       });
     }
     return res.status(404).json({
       status: res.statusCode,
-      error: 'no such message was found',
+      error: 'no such message was found'
     });
   }
 }
 
-export default MessageController;
+exports.default = MessageController;

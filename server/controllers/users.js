@@ -1,5 +1,11 @@
-import users from '../model/users';
-import HelperUtils from '../utils/helper';
+import dotenv from 'dotenv';
+import pool from '../db/dbConnection';
+import HelperUtils from '../utils/messageHelper';
+import ValidationUtils from '../utils/validationHelper';
+import queries from '../utils/queries';
+
+
+dotenv.config();
 
 class UserController {
   /**
@@ -9,26 +15,29 @@ class UserController {
     * @returns {object} json data
   */
 
-  static registerUser(req, res) {
-    const id = users.length + 1;
-    const user = {
-      id,
+  static async registerUser(req, res) {
+    const rD = {
       firstName: req.body.firstName.trim(),
       lastName: req.body.lastName.trim(),
-      email: req.body.email.trim(),
+      email: req.body.email,
       password: req.body.password.trim(),
       confirmPassword: req.body.confirmPassword.trim(),
     };
-    users.push(user);
-    const regUser = users.find(u => u.id === id);
-    const token = HelperUtils.generateToken();
-    regUser.token = token;
+    const encryptedPassword = ValidationUtils.hidePassword(rD.password);
+    const encryptedcPassword = ValidationUtils.hidePassword(rD.confirmPassword);
+    const { rows } = await pool.query(
+      queries.registerUserQuery,
+      [rD.firstName, rD.lastName, rD.email, encryptedPassword, encryptedcPassword],
+    );
+    const user = rows[0];
+    const token = HelperUtils.generateToken({ id: user.id });
     return res.status(201).json({
       status: res.statusCode,
       data: [
         {
           token,
           message: 'Account created successfully',
+          user,
         },
       ],
     });
@@ -41,14 +50,16 @@ class UserController {
     * @returns {object} json data
   */
 
-  static loginUser(req, res) {
-    const loginDetails = {
-      email: req.body.email.trim(),
-      password: req.body.password.trim(),
-    };
-    const authUser = users.find(user => user.email === loginDetails.email);
-    const token = HelperUtils.generateToken();
-    authUser.token = token;
+  static async loginUser(req, res) {
+    const { rows } = await pool.query(
+      queries.loginQuery,
+      [req.body.email.trim()],
+    );
+    const authUser = rows[0];
+    const { id } = authUser;
+    const payload = { id };
+    console.log(id);
+    const token = HelperUtils.generateToken(payload);
     return res.status(201).json({
       status: res.statusCode,
       data: [
