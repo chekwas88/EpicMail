@@ -14,6 +14,8 @@ import {
   recipientsSchema,
 } from './messageValidationSchemas';
 
+import { groupNameSchema } from './groupValidationSchema';
+
 class ValidationHelper {
 /**
    * @function registerUserValidation - validates the user registration schema object passed to it
@@ -113,6 +115,15 @@ class ValidationHelper {
     }
     if (passwordValidation.error !== null) {
       errors.password = 'Password should be provided and should have minimum of 6 characters';
+    }
+    return errors;
+  }
+
+  static createGroupValidation(req) {
+    const errors = {};
+    const groupResult = Joi.validate({ name: req.body.name }, groupNameSchema);
+    if (groupResult.error !== null) {
+      errors.name = 'Group name should be provided';
     }
     return errors;
   }
