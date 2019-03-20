@@ -22,4 +22,6 @@ export default {
   updateStatusQ: 'UPDATE inbox SET status=$1 WHERE messageid=$2 AND receiverid=$3 RETURNING messageid, receiverid',
   DeleteInbox: 'UPDATE inbox SET status=$1 WHERE messageid=$2 AND receiverid=$3',
   DeleteSentbox: 'UPDATE sent SET status=$1 WHERE messageid=$2 AND senderid=$3',
+  createGroup: `INSERT INTO groups(name, createdby) 
+  VALUES ($1, $2) RETURNING *`,
 };
