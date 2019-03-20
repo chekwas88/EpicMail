@@ -11,6 +11,5 @@ if (process.env.NODE_ENV === 'test') {
 const pool = new Pool({
   connectionString,
 });
-console.log(process.env.NODE_ENV, '======================================', connectionString, process.env.SECRET_KEY);
 
 export default pool;
