@@ -5,6 +5,7 @@ export default {
 
   loginQuery: 'SELECT * FROM users WHERE email=$1',
   allUserQ: 'SELECT * FROM users',
+  getAuser: 'SELECT * FROM users WHERE id=$1',
   allMessages: 'SELECT * FROM messages',
   getAllInbox: 'SELECT * FROM inbox WHERE receiverid=$1',
   getAllSentBox: 'SELECT * from sent WHERE status=$1 AND senderid=$2',
@@ -24,4 +25,7 @@ export default {
   DeleteSentbox: 'UPDATE sent SET status=$1 WHERE messageid=$2 AND senderid=$3',
   createGroup: `INSERT INTO groups(name, createdby) 
   VALUES ($1, $2) RETURNING *`,
+  addmember: 'INSERT INTO groupmembers(groupid, userid, memberemail) VALUES ($1, $2, $3) RETURNING*',
+  getgroup: 'SELECT * FROM groups WHERE id=$1',
+
 };

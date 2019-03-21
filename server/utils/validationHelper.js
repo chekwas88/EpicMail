@@ -119,6 +119,15 @@ class ValidationHelper {
     return errors;
   }
 
+  static addMemberValidation(req) {
+    const errors = {};
+    const emailValidation = Joi.validate({ email: req.body.email }, emailSchema);
+    if (emailValidation.error !== null) {
+      errors.name = 'Email should be provided and should be a valid email type';
+    }
+    return errors;
+  }
+
   static createGroupValidation(req) {
     const errors = {};
     const groupResult = Joi.validate({ name: req.body.name }, groupNameSchema);

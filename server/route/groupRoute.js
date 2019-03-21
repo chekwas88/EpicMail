@@ -11,4 +11,11 @@ router.post(
   GroupController.createGroup,
 );
 
+router.post(
+  '/api/v1/groups/:id/users',
+  Token.verifyToken,
+  ValidateGroup.ValidateMemberemail,
+  GroupController.addMemberToGroup,
+);
+
 export default router;
