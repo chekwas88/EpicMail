@@ -11,6 +11,12 @@ router.post(
   GroupController.createGroup,
 );
 
+router.get(
+  '/api/v1/groups',
+  Token.verifyToken,
+  GroupController.getAllgroups,
+);
+
 router.post(
   '/api/v1/groups/:id/users',
   Token.verifyToken,
