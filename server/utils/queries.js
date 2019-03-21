@@ -31,8 +31,9 @@ export default {
   deleteMember: 'DELETE FROM groupmembers WHERE groupid=$1 AND userid=$2',
   getGroupmember: 'SELECT * FROM groupmembers WHERE groupid=$1 AND userid=$2',
   updateGroup: 'UPDATE groups SET name=$1 WHERE id=$2 RETURNING*',
+
   sendToGroup: `INSERT INTO messages(subject, message, senderid, recipients, receiverid) 
   VALUES ($1, $2, $3, $4, $5) RETURNING *`,
   getAllGroupMembers: 'SELECT * FROM groupmembers WHERE groupid=$1',
-
+  getAllGroups: 'SELECT * FROM groupmembers WHERE userid=$1',
 };

@@ -206,6 +206,19 @@ class GroupController {
     return res.status(403).json({
       status: res.statusCode,
       error: 'Authorization denied',
+      
+  static async getAllgroups(req, res) {
+    const { id } = req.user;
+    const { rows } = await pool.query(queries.getAllGroups, [id]);
+    const data = rows;
+    return res.status(200).json({
+      status: res.statusCode,
+      data: [
+        {
+          message: 'All groups retrieved',
+          data,
+        },
+      ],
     });
   }
 }
