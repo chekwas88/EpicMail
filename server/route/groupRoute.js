@@ -18,4 +18,23 @@ router.post(
   GroupController.addMemberToGroup,
 );
 
+router.patch(
+  '/api/v1/groups/:id/name',
+  Token.verifyToken,
+  ValidateGroup.ValidateGroupData,
+  GroupController.updateGroup,
+);
+
+router.delete(
+  '/api/v1/groups/:id',
+  Token.verifyToken,
+  GroupController.deleteGroup,
+);
+
+router.delete(
+  '/api/v1/groups/:groupid/users/:id',
+  Token.verifyToken,
+  GroupController.deleteGroupMember,
+);
+
 export default router;
