@@ -33,8 +33,8 @@ class MessageController {
       status: res.statusCode,
       data: [
         {
-          data,
           message: 'Message sent',
+          data,
         },
       ],
     });

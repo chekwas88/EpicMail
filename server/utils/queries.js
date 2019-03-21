@@ -25,11 +25,14 @@ export default {
   DeleteSentbox: 'UPDATE sent SET status=$1 WHERE messageid=$2 AND senderid=$3',
   createGroup: `INSERT INTO groups(name, createdby) 
   VALUES ($1, $2) RETURNING *`,
-  addmember: 'INSERT INTO groupmembers(groupid, userid, memberemail) VALUES ($1, $2, $3) RETURNING*',
+  addmember: 'INSERT INTO groupmembers(groupid, userid, memberemail, role) VALUES ($1, $2, $3, $4) RETURNING groupid, userid, role',
   getgroup: 'SELECT * FROM groups WHERE id=$1',
   deleteGroup: 'DELETE FROM groups WHERE id=$1',
   deleteMember: 'DELETE FROM groupmembers WHERE groupid=$1 AND userid=$2',
   getGroupmember: 'SELECT * FROM groupmembers WHERE groupid=$1 AND userid=$2',
   updateGroup: 'UPDATE groups SET name=$1 WHERE id=$2 RETURNING*',
+  sendToGroup: `INSERT INTO messages(subject, message, senderid, recipients, receiverid) 
+  VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+  getAllGroupMembers: 'SELECT * FROM groupmembers WHERE groupid=$1',
 
 };

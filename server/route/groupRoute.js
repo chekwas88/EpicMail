@@ -14,8 +14,15 @@ router.post(
 router.post(
   '/api/v1/groups/:id/users',
   Token.verifyToken,
-  ValidateGroup.ValidateMemberemail,
+  ValidateGroup.validateGroupMember,
   GroupController.addMemberToGroup,
+);
+
+router.post(
+  '/api/v1/groups/:groupid/messages',
+  Token.verifyToken,
+  ValidateGroup.validateMessageData,
+  GroupController.sendMessageToGroup,
 );
 
 router.patch(

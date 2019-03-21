@@ -8,6 +8,7 @@
     "cdtables": "cross-env NODE_ENV=test babel-node ./server/db/dbQuery.js",
     "test": "npm run cdtables && cross-env NODE_ENV=test nyc mocha ./server/test --require babel-register --require babel-polyfill --exit",
     "build": "babel server -d dist",
+    "protable": "node ./server/db/dbQuery.js",
     "start:dev": "nodemon ./server/app.js --exec babel-node --presets babel-preset-env ",
     "createTables": "node server/db/createTables.js",
     "dropTables": "node server/db/dropTables.js",

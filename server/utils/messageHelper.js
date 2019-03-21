@@ -213,6 +213,17 @@ class MessageUtils {
     const { rows } = await pool.query(queries.updateStatusQ, [status, messageId, id]);
     return rows[0];
   }
+
+  static async sendToGroup(id, subject, message, recipient, receiverid) {
+    const { rows } = await pool.query(
+      queries.sendMessageQuery, [subject, message, id, recipient, receiverid],
+    );
+    const data = rows[0];
+    const rId = data.receiverid;
+    const messageid = data.id;
+    await MessageUtils.createSentBox(messageid, rId, id);
+    await MessageUtils.createInBox(messageid, rId, id);
+  }
 }
 
 export default MessageUtils;
