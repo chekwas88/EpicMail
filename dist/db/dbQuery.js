@@ -10,7 +10,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _dotenv2.default.config();
 
-const connectionString = process.env.TESTDB;
+const connectionString = process.env.PRODB;
 const pool = new _pg.Pool({
   connectionString
 });
