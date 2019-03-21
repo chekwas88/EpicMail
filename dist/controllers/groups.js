@@ -183,14 +183,7 @@ class GroupController {
     const gm = members.rows;
     const groupmem = gm.map(m => m.userid);
     if (groupmem.includes(id)) {
-      const othermem = gm.filter(g => g.userid !== id);
-      if (othermem.length === 0) {
-        return res.status(400).json({
-          status: res.statusCode,
-          message: 'Can\'t send email to group with one member'
-        });
-      }
-      await othermem.forEach(m => {
+      await gm.forEach(m => {
         _messageHelper2.default.sendToGroup(id, msgd.subject, msgd.message, m.memberemail, m.userid);
       });
       return res.status(201).json({

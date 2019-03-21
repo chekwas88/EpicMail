@@ -53,7 +53,25 @@ CREATE TABLE IF NOT EXISTS
     createdOn TIMESTAMP WITH TIME ZONE DEFAULT now(),
     status TEXT DEFAULT 'sent'
   );
+
+  CREATE TABLE IF NOT EXISTS 
+  groups(
+    id SERIAL PRIMARY KEY NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    createdby INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    role VARCHAR(50) DEFAULT 'Admin'
+  );
+
+  CREATE TABLE IF NOT EXISTS 
+    groupmembers(
+      id SERIAL PRIMARY KEY NOT NULL,
+      groupid INT NOT NULL REFERENCES groups(id) ON DELETE CASCADE,
+      userid INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      role VARCHAR(50) NOT NULL,
+      memberemail TEXT NOT NULL
+  );
 `;
+
 
 pool.query(query)
   // eslint-disable-next-line no-unused-vars
