@@ -20,7 +20,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 const router = _express2.default.Router();
 
-router.post('/api/v1/auth/signup', _validateUser2.default.checkEmail, _validateUser2.default.validateUserRegData, _validateUser2.default.validateUserRegPassword, _users2.default.registerUser);
+router.post('/api/v1/auth/signup', _validateUser2.default.validateUserRegData, _validateUser2.default.checkEmail, _validateUser2.default.validateUserRegPassword, _users2.default.registerUser);
 
 router.post('/api/v1/auth/login', _validateUser2.default.validateUserLoginData, _validateUser2.default.validateLogin, _users2.default.loginUser);
 

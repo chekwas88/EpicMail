@@ -40,7 +40,7 @@ class UserController {
     const rD = {
       firstName: req.body.firstName.trim(),
       lastName: req.body.lastName.trim(),
-      email: req.body.email,
+      email: req.body.email.trim(),
       password: req.body.password.trim(),
       confirmPassword: req.body.confirmPassword.trim()
     };
