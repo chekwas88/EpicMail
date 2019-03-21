@@ -31,5 +31,6 @@ export default {
   deleteMember: 'DELETE FROM groupmembers WHERE groupid=$1 AND userid=$2',
   getGroupmember: 'SELECT * FROM groupmembers WHERE groupid=$1 AND userid=$2',
   updateGroup: 'UPDATE groups SET name=$1 WHERE id=$2 RETURNING*',
+  getAllGroups: 'SELECT * FROM groupmembers WHERE userid=$1',
 
 };
