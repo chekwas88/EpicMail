@@ -11,7 +11,7 @@ class GroupController {
     const data = rows[0];
     const user = await pool.query(queries.getAuser, [id]);
     const userInsession = user.rows[0];
-    await pool.query(queries.addmember, [data.id, id, userInsession.email]);
+    await pool.query(queries.addmember, [data.id, id, userInsession.email, userInsession.role]);
     return res.status(201).json({
       status: res.statusCode,
       data: [
@@ -38,12 +38,13 @@ class GroupController {
     if (!user) {
       return res.status(404).json({
         status: res.statusCode,
-        error: 'no such email exist',
+        error: 'User does not exit',
       });
     }
+
     if (group.createdby === id) {
       const output = await pool.query(
-        queries.addmember, [groupid, user.id, req.body.email.trim()],
+        queries.addmember, [groupid, user.id, req.body.email.trim(), req.body.role.trim()],
       );
       const data = output.rows[0];
       return res.status(201).json({
@@ -173,6 +174,39 @@ class GroupController {
     });
   }
 
+  static async sendMessageToGroup(req, res) {
+    const msgd = {
+      subject: req.body.subject.trim(),
+      message: req.body.message.trim(),
+    };
+    const { id } = req.user;
+    const groupid = parseInt(req.params.groupid, 10);
+    const { rows } = await pool.query(queries.getgroup, [groupid]);
+    const group = rows[0];
+    const members = await pool.query(queries.getAllGroupMembers, [group.id]);
+    const gm = members.rows;
+    const groupmem = gm.map(m => m.userid);
+    if (groupmem.includes(id)) {
+      const othermem = gm.filter(g => g.userid !== id);
+      if (othermem.length === 0) {
+        return res.status(400).json({
+          status: res.statusCode,
+          message: 'Can\'t send email to group with one member',
+        });
+      }
+      await othermem.forEach((m) => {
+        HelperUtils.sendToGroup(id, msgd.subject, msgd.message, m.memberemail, m.userid);
+      });
+      return res.status(201).json({
+        status: res.statusCode,
+        message: 'message sent',
+      });
+    }
+
+    return res.status(403).json({
+      status: res.statusCode,
+      error: 'Authorization denied',
+      
   static async getAllgroups(req, res) {
     const { id } = req.user;
     const { rows } = await pool.query(queries.getAllGroups, [id]);

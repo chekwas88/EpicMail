@@ -14,7 +14,7 @@ import {
   recipientsSchema,
 } from './messageValidationSchemas';
 
-import { groupNameSchema } from './groupValidationSchema';
+import { groupNameSchema, groupRoleSchema } from './groupValidationSchema';
 
 class ValidationHelper {
 /**
@@ -74,7 +74,6 @@ class ValidationHelper {
       errors.message = 'message should be provided';
     }
     if (recipientsResult.error !== null) {
-      // console.log(recipientsResult.error.details[0]);
       errors.recipients = 'recipients should be email(s) and should be provided';
     }
     return errors;
@@ -122,8 +121,12 @@ class ValidationHelper {
   static addMemberValidation(req) {
     const errors = {};
     const emailValidation = Joi.validate({ email: req.body.email }, emailSchema);
+    const roleValidation = Joi.validate({ role: req.body.role }, groupRoleSchema);
     if (emailValidation.error !== null) {
-      errors.name = 'Email should be provided and should be a valid email type';
+      errors.email = 'Email should be provided and should be a valid email type';
+    }
+    if (roleValidation.error !== null) {
+      errors.role = 'Member\'s role should be provided';
     }
     return errors;
   }
@@ -133,6 +136,19 @@ class ValidationHelper {
     const groupResult = Joi.validate({ name: req.body.name }, groupNameSchema);
     if (groupResult.error !== null) {
       errors.name = 'Group name should be provided';
+    }
+    return errors;
+  }
+
+  static groupMessageValidation(req) {
+    const errors = {};
+    const subjectResult = Joi.validate({ subject: req.body.subject }, subjectSchema);
+    const messageResult = Joi.validate({ message: req.body.message }, messageSchema);
+    if (subjectResult.error !== null) {
+      errors.subject = 'subject should be provided and must be minimum of 2 to maximum 50 characters';
+    }
+    if (messageResult.error !== null) {
+      errors.message = 'message should be provided';
     }
     return errors;
   }
