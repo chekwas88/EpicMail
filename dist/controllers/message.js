@@ -46,8 +46,8 @@ class MessageController {
     return res.status(201).json({
       status: res.statusCode,
       data: [{
-        data,
-        message: 'Message sent'
+        message: 'Message sent',
+        data
       }]
     });
   }

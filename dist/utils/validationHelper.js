@@ -16,6 +16,8 @@ var _userValidationSchemas = require('./userValidationSchemas');
 
 var _messageValidationSchemas = require('./messageValidationSchemas');
 
+var _groupValidationSchema = require('./groupValidationSchema');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 class ValidationHelper {
@@ -73,7 +75,6 @@ class ValidationHelper {
       errors.message = 'message should be provided';
     }
     if (recipientsResult.error !== null) {
-      // console.log(recipientsResult.error.details[0]);
       errors.recipients = 'recipients should be email(s) and should be provided';
     }
     return errors;
@@ -114,6 +115,41 @@ class ValidationHelper {
     }
     if (passwordValidation.error !== null) {
       errors.password = 'Password should be provided and should have minimum of 6 characters';
+    }
+    return errors;
+  }
+
+  static addMemberValidation(req) {
+    const errors = {};
+    const emailValidation = _joi2.default.validate({ email: req.body.email }, _userValidationSchemas.emailSchema);
+    const roleValidation = _joi2.default.validate({ role: req.body.role }, _groupValidationSchema.groupRoleSchema);
+    if (emailValidation.error !== null) {
+      errors.email = 'Email should be provided and should be a valid email type';
+    }
+    if (roleValidation.error !== null) {
+      errors.role = 'Member\'s role should be provided';
+    }
+    return errors;
+  }
+
+  static createGroupValidation(req) {
+    const errors = {};
+    const groupResult = _joi2.default.validate({ name: req.body.name }, _groupValidationSchema.groupNameSchema);
+    if (groupResult.error !== null) {
+      errors.name = 'Group name should be provided';
+    }
+    return errors;
+  }
+
+  static groupMessageValidation(req) {
+    const errors = {};
+    const subjectResult = _joi2.default.validate({ subject: req.body.subject }, _messageValidationSchemas.subjectSchema);
+    const messageResult = _joi2.default.validate({ message: req.body.message }, _messageValidationSchemas.messageSchema);
+    if (subjectResult.error !== null) {
+      errors.subject = 'subject should be provided and must be minimum of 2 to maximum 50 characters';
+    }
+    if (messageResult.error !== null) {
+      errors.message = 'message should be provided';
     }
     return errors;
   }

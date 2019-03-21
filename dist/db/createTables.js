@@ -8,7 +8,7 @@ dotenv.config();
 
 let connectionString;
 if (process.env.NODE_ENV === 'development') {
-  connectionString = process.env.DEVDB;
+  connectionString = process.env.PRODB;
 } else if (process.env.NODE_ENV === 'test') {
   connectionString = process.env.TESTDB;
 }
@@ -112,7 +112,7 @@ const groupmember = () => {
       id SERIAL PRIMARY KEY NOT NULL,
       groupid INT NOT NULL REFERENCES groups(id) ON DELETE CASCADE,
       userid INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-      role VARCHAR(50) DEFAULT 'user',
+      role VARCHAR(50) NOT NULL,
       memberemail TEXT NOT NULL
     );`;
   pool.query(querytext).then(res => {

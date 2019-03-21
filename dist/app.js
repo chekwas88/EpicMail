@@ -32,16 +32,13 @@ var _messageRoute = require('./route/messageRoute');
 
 var _messageRoute2 = _interopRequireDefault(_messageRoute);
 
+var _groupRoute = require('./route/groupRoute');
+
+var _groupRoute2 = _interopRequireDefault(_groupRoute);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const app = (0, _express2.default)();
-
-// app.use((req, res, next) => {
-//   res.header('Access-Control-Allow-Origin', '*');
-//   res.header('Access-Control-Allow-Methods', 'GET, PUT, PATCH, POST, DELETE, OPTIONS');
-//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-//   next();
-// });
 
 app.use((0, _express.json)());
 app.use(_bodyParser2.default.json());
@@ -51,6 +48,7 @@ app.use((0, _cors2.default)());
 app.use('/api/v1/docs', _swaggerUiExpress2.default.serve, _swaggerUiExpress2.default.setup(_swagger2.default));
 app.use(_userRoute2.default);
 app.use(_messageRoute2.default);
+app.use(_groupRoute2.default);
 
 app.get('/', (req, res) => {
   res.status(200).json({

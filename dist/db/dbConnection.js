@@ -19,9 +19,11 @@ let connectionString = process.env.DEVDB;
 if (process.env.NODE_ENV === 'test') {
   connectionString = process.env.TESTDB;
 }
+if (process.env.NODE_ENV === 'production') {
+  connectionString = process.env.PRODB;
+}
 const pool = new _pg.Pool({
   connectionString
 });
-console.log(process.env.NODE_ENV, '======================================', connectionString, process.env.SECRET_KEY);
 
 exports.default = pool;
