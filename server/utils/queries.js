@@ -27,5 +27,9 @@ export default {
   VALUES ($1, $2) RETURNING *`,
   addmember: 'INSERT INTO groupmembers(groupid, userid, memberemail) VALUES ($1, $2, $3) RETURNING*',
   getgroup: 'SELECT * FROM groups WHERE id=$1',
+  deleteGroup: 'DELETE FROM groups WHERE id=$1',
+  deleteMember: 'DELETE FROM groupmembers WHERE groupid=$1 AND userid=$2',
+  getGroupmember: 'SELECT * FROM groupmembers WHERE groupid=$1 AND userid=$2',
+  updateGroup: 'UPDATE groups SET name=$1 WHERE id=$2 RETURNING*',
 
 };
