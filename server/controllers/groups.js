@@ -9,6 +9,7 @@ class GroupController {
       queries.createGroup, [req.body.name.trim(), id],
     );
     const data = rows[0];
+    console.log(data);
     const user = await pool.query(queries.getAuser, [id]);
     const userInsession = user.rows[0];
     await pool.query(queries.addmember, [data.id, id, userInsession.email, data.role]);

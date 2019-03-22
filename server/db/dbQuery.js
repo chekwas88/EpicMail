@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const connectionString = process.env.TESTDB;
+const connectionString = process.env.PRODB;
 const pool = new Pool({
   connectionString,
 });
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS
       id SERIAL PRIMARY KEY NOT NULL,
       groupid INT NOT NULL REFERENCES groups(id) ON DELETE CASCADE,
       userid INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-      role VARCHAR(50) NOT NULL,
+      role VARCHAR(50),
       memberemail TEXT NOT NULL
   );
 `;
