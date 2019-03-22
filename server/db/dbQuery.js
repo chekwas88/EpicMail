@@ -3,15 +3,17 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const connectionString = process.env.PRODB;
+const connectionString = process.env.TESTDB;
 const pool = new Pool({
   connectionString,
 });
 
 const query = `
+DROP TABLE IF EXISTS groupmembers;
 DROP TABLE IF EXISTS sent;
 DROP TABLE IF EXISTS inbox;
 DROP TABLE IF EXISTS messages;
+DROP TABLE IF EXISTS groups;
 DROP TABLE IF EXISTS users;
 CREATE TABLE IF NOT EXISTS
   users(

@@ -10,7 +10,7 @@ describe('GET api/v1/messages/:id', () => {
   before((done) => {
     request(app)
       .post('/api/v1/auth/login')
-      .send({ email: 'ted@epicmail.com', password: '123456' })
+      .send({ email: 'te123@epicmail.com', password: '123456' })
       .end((err, res) => {
         // eslint-disable-next-line prefer-destructuring
         token = res.body.data[0].token;
@@ -40,7 +40,7 @@ describe('GET api/v1/messages/:id', () => {
 
   it('it deletes a messages', (done) => {
     request(app)
-      .delete('/api/v1/messages/13')
+      .delete('/api/v1/messages/1')
       .set('authorization', `Bearer ${token}`)
       .end((err, res) => {
         assert.equal(res.body.data[0].message, 'message deleted');

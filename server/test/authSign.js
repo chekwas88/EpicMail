@@ -11,7 +11,7 @@ describe('Post api/v1/auth/login', () => {
     request(app)
       .post('/api/v1/auth/login')
       .send({
-        email: 'ted@epicmail.com',
+        email: 'ted123@epicmail.com',
         password: '123456',
       })
       .end((err, res) => {
@@ -94,7 +94,7 @@ describe('Post api/v1/auth/login', () => {
     request(app)
       .post('/api/v1/auth/login')
       .send({
-        email: 'ted@epicmail.com',
+        email: 'ted123@epicmail.com',
         password: 'password',
       })
       .end((err, res) => {

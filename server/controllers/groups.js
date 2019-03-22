@@ -11,7 +11,7 @@ class GroupController {
     const data = rows[0];
     const user = await pool.query(queries.getAuser, [id]);
     const userInsession = user.rows[0];
-    await pool.query(queries.addmember, [data.id, id, userInsession.email, userInsession.role]);
+    await pool.query(queries.addmember, [data.id, id, userInsession.email, data.role]);
     return res.status(201).json({
       status: res.statusCode,
       data: [

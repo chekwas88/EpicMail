@@ -18,7 +18,24 @@ describe('Post api/v1/auth/signup', () => {
         confirmPassword: '123456',
       })
       .end((err, res) => {
-        console.log(res.body);
+        assert.equal(res.body.data[0].message, 'Account created successfully');
+        assert.equal(res.status, 201);
+        assert.isArray(res.body.data);
+        done(err);
+      });
+  });
+
+  it('it register\'s a user', (done) => {
+    request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        firstName: 'Ted',
+        lastName: 'Mosby',
+        email: 'te123@epicmail.com',
+        password: '123456',
+        confirmPassword: '123456',
+      })
+      .end((err, res) => {
         assert.equal(res.body.data[0].message, 'Account created successfully');
         assert.equal(res.status, 201);
         assert.isArray(res.body.data);
@@ -72,7 +89,7 @@ describe('Post api/v1/auth/signup', () => {
         firstName: 'ted',
         lastName: 'mosby',
         email: 'ted@epicmail.com',
-        password: '123456',
+        password: '',
         confirmPassword: '123456',
       })
       .end((err, res) => {
@@ -174,7 +191,7 @@ describe('Post api/v1/auth/signup', () => {
       .send({
         firstName: 'ted',
         lastName: 'mosby',
-        email: 'ted@epicmail.com',
+        email: 'ted123@epicmail.com',
         password: '123456',
         confirmPassword: '123456',
       })
@@ -191,7 +208,7 @@ describe('Post api/v1/auth/signup', () => {
       .send({
         firstName: 'ted',
         lastName: 'mosby',
-        email: 'ted@epicmail.com',
+        email: 'tedkn@epicmail.com',
         password: '123456',
         confirmPassword: '12345678',
       })

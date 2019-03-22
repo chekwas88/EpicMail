@@ -11,7 +11,7 @@ describe('Post api/v1/messages', () => {
   before((done) => {
     request(app)
       .post('/api/v1/auth/login')
-      .send({ email: 'ted@epicmail.com', password: '123456' })
+      .send({ email: 'te123@epicmail.com', password: '123456' })
       .end((err, res) => {
         // eslint-disable-next-line prefer-destructuring
         token = res.body.data[0].token;
@@ -26,7 +26,7 @@ describe('Post api/v1/messages', () => {
       .send({
         subject: 'Meeting',
         message: 'This is to inform you that there will be a staff meeting today at 2pm prompt',
-        recipients: 'ted@epicmail.com',
+        recipients: 'ted123@epicmail.com',
       })
       .end((err, res) => {
         assert.equal(res.status, 401);
@@ -41,7 +41,7 @@ describe('Post api/v1/messages', () => {
       .send({
         subject: 'Meeting',
         message: 'This is to inform you that there will be a staff meeting today at 2pm prompt',
-        recipients: 'ted@epicmail.com',
+        recipients: 'ted123@epicmail.com',
       })
       .end((err, res) => {
         assert.equal(res.status, 403);
@@ -56,7 +56,23 @@ describe('Post api/v1/messages', () => {
       .send({
         subject: 'Meeting',
         message: 'This is to inform you that there will be a staff meeting today at 2pm prompt',
-        recipients: 'ted@epicmail.com',
+        recipients: 'ted123@epicmail.com',
+      })
+      .end((err, res) => {
+        assert.equal(res.body.data[0].message, 'Message sent');
+        assert.equal(res.status, 201);
+        done(err);
+      });
+  });
+
+  it('it sends/create message', (done) => {
+    request(app)
+      .post('/api/v1/messages')
+      .set('authorization', `Bearer ${token}`)
+      .send({
+        subject: 'Meeting',
+        message: 'This is to inform you that there will be a staff meeting today at 2pm prompt',
+        recipients: 'ted123@epicmail.com',
       })
       .end((err, res) => {
         assert.equal(res.body.data[0].message, 'Message sent');
