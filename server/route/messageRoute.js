@@ -35,12 +35,14 @@ router.get(
 router.get(
   '/api/v1/messages/:id',
   Token.verifyToken,
+  ValidateMessage.validateIdparams,
   MessageController.getAMessage,
 );
 
 router.delete(
   '/api/v1/messages/:id',
   Token.verifyToken,
+  ValidateMessage.validateIdparams,
   MessageController.deleteAMessage,
 );
 
