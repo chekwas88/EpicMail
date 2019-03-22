@@ -12,6 +12,10 @@ var _groups = require('../controllers/groups');
 
 var _groups2 = _interopRequireDefault(_groups);
 
+var _validateMessage = require('../middleware/validateMessage');
+
+var _validateMessage2 = _interopRequireDefault(_validateMessage);
+
 var _ValidateGroup = require('../middleware/ValidateGroup');
 
 var _ValidateGroup2 = _interopRequireDefault(_ValidateGroup);
@@ -27,14 +31,14 @@ router.post('/api/v1/groups', _verifytoken2.default.verifyToken, _ValidateGroup2
 
 router.get('/api/v1/groups', _verifytoken2.default.verifyToken, _groups2.default.getAllgroups);
 
-router.post('/api/v1/groups/:id/users', _verifytoken2.default.verifyToken, _ValidateGroup2.default.validateGroupMember, _groups2.default.addMemberToGroup);
+router.post('/api/v1/groups/:id/users', _verifytoken2.default.verifyToken, _validateMessage2.default.validateIdparams, _ValidateGroup2.default.validateGroupMember, _groups2.default.addMemberToGroup);
 
-router.post('/api/v1/groups/:groupid/messages', _verifytoken2.default.verifyToken, _ValidateGroup2.default.validateMessageData, _groups2.default.sendMessageToGroup);
+router.post('/api/v1/groups/:groupid/messages', _verifytoken2.default.verifyToken, _validateMessage2.default.validategroupId, _ValidateGroup2.default.validateMessageData, _groups2.default.sendMessageToGroup);
 
-router.patch('/api/v1/groups/:id/name', _verifytoken2.default.verifyToken, _ValidateGroup2.default.ValidateGroupData, _groups2.default.updateGroup);
+router.patch('/api/v1/groups/:id/name', _verifytoken2.default.verifyToken, _validateMessage2.default.validateIdparams, _ValidateGroup2.default.ValidateGroupData, _groups2.default.updateGroup);
 
-router.delete('/api/v1/groups/:id', _verifytoken2.default.verifyToken, _groups2.default.deleteGroup);
+router.delete('/api/v1/groups/:id', _verifytoken2.default.verifyToken, _validateMessage2.default.validateIdparams, _groups2.default.deleteGroup);
 
-router.delete('/api/v1/groups/:groupid/users/:id', _verifytoken2.default.verifyToken, _groups2.default.deleteGroupMember);
+router.delete('/api/v1/groups/:groupid/users/:id', _verifytoken2.default.verifyToken, _validateMessage2.default.validategroupId, _validateMessage2.default.validateIdparams, _groups2.default.deleteGroupMember);
 
 exports.default = router;

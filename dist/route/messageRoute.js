@@ -32,8 +32,8 @@ router.get('/api/v1/messages/unread', _verifytoken2.default.verifyToken, _messag
 
 router.get('/api/v1/messages/sent', _verifytoken2.default.verifyToken, _message2.default.getSentMessages);
 
-router.get('/api/v1/messages/:id', _verifytoken2.default.verifyToken, _message2.default.getAMessage);
+router.get('/api/v1/messages/:id', _verifytoken2.default.verifyToken, _validateMessage2.default.validateIdparams, _message2.default.getAMessage);
 
-router.delete('/api/v1/messages/:id', _verifytoken2.default.verifyToken, _message2.default.deleteAMessage);
+router.delete('/api/v1/messages/:id', _verifytoken2.default.verifyToken, _validateMessage2.default.validateIdparams, _message2.default.deleteAMessage);
 
 exports.default = router;

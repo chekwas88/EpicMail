@@ -51,6 +51,20 @@ class ValidateMessage {
     }
     return next();
   }
+
+  static validateIdparams(req, res, next) {
+    if (Number.isNaN(Number(req.params.id))) {
+      return res.status(400).json({ status: 400, error: 'The id parameter must be a number' });
+    }
+    return next();
+  }
+
+  static validategroupId(req, res, next) {
+    if (Number.isNaN(Number(req.params.groupid))) {
+      return res.status(400).json({ status: 400, error: 'The id parameter must be a number' });
+    }
+    return next();
+  }
 }
 
 exports.default = ValidateMessage;
