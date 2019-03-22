@@ -16,7 +16,7 @@ describe('Post api/v1/auth/login', () => {
       })
       .end((err, res) => {
         assert.equal(res.body.data[0].message, 'login was successful');
-        assert.equal(res.status, 201);
+        assert.equal(res.status, 200);
         assert.isArray(res.body.data);
         done(err);
       });

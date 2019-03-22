@@ -23,7 +23,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
       password: '123456'
     }).end((err, res) => {
       _chai.assert.equal(res.body.data[0].message, 'login was successful');
-      _chai.assert.equal(res.status, 201);
+      _chai.assert.equal(res.status, 200);
       _chai.assert.isArray(res.body.data);
       done(err);
     });
