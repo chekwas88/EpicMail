@@ -20,7 +20,7 @@ let token;
 
 (0, _mocha.describe)('Post api/v1/messages', () => {
   (0, _mocha.before)(done => {
-    (0, _chai.request)(_app2.default).post('/api/v1/auth/login').send({ email: 'ted@epicmail.com', password: '123456' }).end((err, res) => {
+    (0, _chai.request)(_app2.default).post('/api/v1/auth/login').send({ email: 'te123@epicmail.com', password: '123456' }).end((err, res) => {
       // eslint-disable-next-line prefer-destructuring
       token = res.body.data[0].token;
       done(err);
@@ -31,7 +31,7 @@ let token;
     (0, _chai.request)(_app2.default).post('/api/v1/messages').set('authorization', 'Bearer jxxxxxxxxxxxxnns66s').send({
       subject: 'Meeting',
       message: 'This is to inform you that there will be a staff meeting today at 2pm prompt',
-      recipients: 'ted@epicmail.com'
+      recipients: 'ted123@epicmail.com'
     }).end((err, res) => {
       _chai.assert.equal(res.status, 401);
       _chai.assert.equal(res.body.error, 'token not verified');
@@ -43,7 +43,7 @@ let token;
     (0, _chai.request)(_app2.default).post('/api/v1/messages').send({
       subject: 'Meeting',
       message: 'This is to inform you that there will be a staff meeting today at 2pm prompt',
-      recipients: 'ted@epicmail.com'
+      recipients: 'ted123@epicmail.com'
     }).end((err, res) => {
       _chai.assert.equal(res.status, 403);
       _chai.assert.equal(res.body.error, 'No authorization is provided');
@@ -54,7 +54,19 @@ let token;
     (0, _chai.request)(_app2.default).post('/api/v1/messages').set('authorization', `Bearer ${token}`).send({
       subject: 'Meeting',
       message: 'This is to inform you that there will be a staff meeting today at 2pm prompt',
-      recipients: 'ted@epicmail.com'
+      recipients: 'ted123@epicmail.com'
+    }).end((err, res) => {
+      _chai.assert.equal(res.body.data[0].message, 'Message sent');
+      _chai.assert.equal(res.status, 201);
+      done(err);
+    });
+  });
+
+  (0, _mocha.it)('it sends/create message', done => {
+    (0, _chai.request)(_app2.default).post('/api/v1/messages').set('authorization', `Bearer ${token}`).send({
+      subject: 'Meeting',
+      message: 'This is to inform you that there will be a staff meeting today at 2pm prompt',
+      recipients: 'ted123@epicmail.com'
     }).end((err, res) => {
       _chai.assert.equal(res.body.data[0].message, 'Message sent');
       _chai.assert.equal(res.status, 201);

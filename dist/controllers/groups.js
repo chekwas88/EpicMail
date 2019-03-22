@@ -25,7 +25,7 @@ class GroupController {
     const data = rows[0];
     const user = await _dbConnection2.default.query(_queries2.default.getAuser, [id]);
     const userInsession = user.rows[0];
-    await _dbConnection2.default.query(_queries2.default.addmember, [data.id, id, userInsession.email, userInsession.role]);
+    await _dbConnection2.default.query(_queries2.default.addmember, [data.id, id, userInsession.email, data.role]);
     return res.status(201).json({
       status: res.statusCode,
       data: [{

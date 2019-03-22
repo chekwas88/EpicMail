@@ -25,7 +25,21 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
       password: '123456',
       confirmPassword: '123456'
     }).end((err, res) => {
-      console.log(res.body);
+      _chai.assert.equal(res.body.data[0].message, 'Account created successfully');
+      _chai.assert.equal(res.status, 201);
+      _chai.assert.isArray(res.body.data);
+      done(err);
+    });
+  });
+
+  (0, _mocha.it)('it register\'s a user', done => {
+    (0, _chai.request)(_app2.default).post('/api/v1/auth/signup').send({
+      firstName: 'Ted',
+      lastName: 'Mosby',
+      email: 'te123@epicmail.com',
+      password: '123456',
+      confirmPassword: '123456'
+    }).end((err, res) => {
       _chai.assert.equal(res.body.data[0].message, 'Account created successfully');
       _chai.assert.equal(res.status, 201);
       _chai.assert.isArray(res.body.data);
@@ -65,7 +79,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
       firstName: 'ted',
       lastName: 'mosby',
       email: 'ted@epicmail.com',
-      password: '123456',
+      password: '',
       confirmPassword: '123456'
     }).end((err, res) => {
       _chai.assert.equal(res.body.errors.password, 'Password should be provided and should have minimum of 6 characters');
@@ -143,7 +157,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     (0, _chai.request)(_app2.default).post('/api/v1/auth/signup').send({
       firstName: 'ted',
       lastName: 'mosby',
-      email: 'ted@epicmail.com',
+      email: 'ted123@epicmail.com',
       password: '123456',
       confirmPassword: '123456'
     }).end((err, res) => {
@@ -157,7 +171,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     (0, _chai.request)(_app2.default).post('/api/v1/auth/signup').send({
       firstName: 'ted',
       lastName: 'mosby',
-      email: 'ted@epicmail.com',
+      email: 'tedkn@epicmail.com',
       password: '123456',
       confirmPassword: '12345678'
     }).end((err, res) => {

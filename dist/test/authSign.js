@@ -19,7 +19,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 (0, _mocha.describe)('Post api/v1/auth/login', () => {
   (0, _mocha.it)('it log\'s in a user', done => {
     (0, _chai.request)(_app2.default).post('/api/v1/auth/login').send({
-      email: 'ted@epicmail.com',
+      email: 'ted123@epicmail.com',
       password: '123456'
     }).end((err, res) => {
       _chai.assert.equal(res.body.data[0].message, 'login was successful');
@@ -84,7 +84,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
   (0, _mocha.it)('it should return BadRequestError if user password is invalid', done => {
     (0, _chai.request)(_app2.default).post('/api/v1/auth/login').send({
-      email: 'ted@epicmail.com',
+      email: 'ted123@epicmail.com',
       password: 'password'
     }).end((err, res) => {
       _chai.assert.equal(res.body.error, 'invalid email or password');

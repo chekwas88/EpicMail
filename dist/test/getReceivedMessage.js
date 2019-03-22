@@ -19,7 +19,7 @@ let token;
 
 (0, _mocha.describe)('GET api/v1/messages', () => {
   (0, _mocha.before)(done => {
-    (0, _chai.request)(_app2.default).post('/api/v1/auth/login').send({ email: 'ted@epicmail.com', password: '123456' }).end((err, res) => {
+    (0, _chai.request)(_app2.default).post('/api/v1/auth/login').send({ email: 'ted123@epicmail.com', password: '123456' }).end((err, res) => {
       // eslint-disable-next-line prefer-destructuring
       token = res.body.data[0].token;
       done(err);

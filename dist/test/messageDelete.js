@@ -19,7 +19,7 @@ let token;
 
 (0, _mocha.describe)('GET api/v1/messages/:id', () => {
   (0, _mocha.before)(done => {
-    (0, _chai.request)(_app2.default).post('/api/v1/auth/login').send({ email: 'ted@epicmail.com', password: '123456' }).end((err, res) => {
+    (0, _chai.request)(_app2.default).post('/api/v1/auth/login').send({ email: 'te123@epicmail.com', password: '123456' }).end((err, res) => {
       // eslint-disable-next-line prefer-destructuring
       token = res.body.data[0].token;
       done(err);
@@ -42,7 +42,7 @@ let token;
   });
 
   (0, _mocha.it)('it deletes a messages', done => {
-    (0, _chai.request)(_app2.default).delete('/api/v1/messages/13').set('authorization', `Bearer ${token}`).end((err, res) => {
+    (0, _chai.request)(_app2.default).delete('/api/v1/messages/1').set('authorization', `Bearer ${token}`).end((err, res) => {
       _chai.assert.equal(res.body.data[0].message, 'message deleted');
       _chai.assert.equal(res.status, 200);
       done(err);

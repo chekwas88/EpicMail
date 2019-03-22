@@ -10,15 +10,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _dotenv2.default.config();
 
-const connectionString = process.env.PRODB;
+const connectionString = process.env.TESTDB;
 const pool = new _pg.Pool({
   connectionString
 });
 
 const query = `
+DROP TABLE IF EXISTS groupmembers;
 DROP TABLE IF EXISTS sent;
 DROP TABLE IF EXISTS inbox;
 DROP TABLE IF EXISTS messages;
+DROP TABLE IF EXISTS groups;
 DROP TABLE IF EXISTS users;
 CREATE TABLE IF NOT EXISTS
   users(
