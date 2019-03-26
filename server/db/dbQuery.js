@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const connectionString = process.env.TESTDB;
+const connectionString = process.env.PRODB;
 const pool = new Pool({
   connectionString,
 });
