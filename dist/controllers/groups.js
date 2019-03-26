@@ -23,7 +23,6 @@ class GroupController {
     const { id } = req.user;
     const { rows } = await _dbConnection2.default.query(_queries2.default.createGroup, [req.body.name.trim(), id]);
     const data = rows[0];
-    console.log(data);
     const user = await _dbConnection2.default.query(_queries2.default.getAuser, [id]);
     const userInsession = user.rows[0];
     await _dbConnection2.default.query(_queries2.default.addmember, [data.id, id, userInsession.email, data.role]);

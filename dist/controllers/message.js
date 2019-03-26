@@ -33,14 +33,15 @@ class MessageController {
     const mD = {
       subject: req.body.subject.trim(),
       message: req.body.message,
-      recipients: req.body.recipients
+      recipient: req.body.recipient
     };
-    const receiver = await _messageHelper2.default.getUser(mD.recipients);
-    const receiverid = receiver.id;
-    const { rows } = await _dbConnection2.default.query(_queries2.default.sendMessageQuery, [mD.subject, mD.message, id, mD.recipients, receiverid]);
+    const receiver = await _messageHelper2.default.getUser(mD.recipient);
+    const receiverId = receiver.id;
+    const { rows } = await _dbConnection2.default.query(_queries2.default.sendMessageQuery, [mD.subject, mD.message, id, mD.recipient, receiverId]);
     const data = rows[0];
     const rId = data.receiverid;
     const messageid = data.id;
+    await _messageHelper2.default.createContact(receiverId, receiver.firstname, receiver.lastname, mD.recipient);
     await _messageHelper2.default.createSentBox(messageid, rId, id);
     await _messageHelper2.default.createInBox(messageid, rId, id);
     return res.status(201).json({

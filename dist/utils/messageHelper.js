@@ -220,6 +220,20 @@ class MessageUtils {
   }
 
   /**
+     * @function  createInBox - creates a contact
+     * @param {integer} userid- contact's user id
+     * @param {string} firstname -contact's firstname
+     * @param {string}  lastname - contact's lastname
+     * @param {string}  email - contact's email
+     * @returns {object}
+     *
+  */
+  static async createContact(userId, firstname, lastname, email) {
+    const { rows } = await _dbConnection2.default.query(_queries2.default.addInbox, [userId, firstname, lastname, email]);
+    return rows;
+  }
+
+  /**
      * @function  updateStatus - updates status of message
      * @param {array} stat -message's receiverIds
      * @param {integer}  messageId - the message id

@@ -10,7 +10,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _dotenv2.default.config();
 
-const connectionString = process.env.TESTDB;
+const connectionString = process.env.PRODB;
 const pool = new _pg.Pool({
   connectionString
 });
@@ -19,6 +19,7 @@ const query = `
 DROP TABLE IF EXISTS groupmembers;
 DROP TABLE IF EXISTS sent;
 DROP TABLE IF EXISTS inbox;
+DROP TABLE IF EXISTS contacts;
 DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS groups;
 DROP TABLE IF EXISTS users;
@@ -39,9 +40,18 @@ CREATE TABLE IF NOT EXISTS
       message TEXT NOT NULL,
       senderId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
       parentMessageId INT DEFAULT NULL,
-      recipients TEXT NOT NULL,
+      recipient TEXT NOT NULL,
       receiverId INT REFERENCES users(id) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS
+  contacts(
+    id SERIAL PRIMARY KEY NOT NULL,
+    userId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    firstname VARCHAR(50) NOT NULL,
+    lastname VARCHAR(50) NOT NULL,
+    email VARCHAR(128) NOT NULL
+  );
 
 CREATE TABLE IF NOT EXISTS 
     inbox(
@@ -74,8 +84,8 @@ CREATE TABLE IF NOT EXISTS
   CREATE TABLE IF NOT EXISTS 
     groupmembers(
       id SERIAL PRIMARY KEY NOT NULL,
-      groupid INT NOT NULL REFERENCES groups(id) ON DELETE CASCADE,
-      userid INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      groupId INT NOT NULL REFERENCES groups(id) ON DELETE CASCADE,
+      userId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
       role VARCHAR(50),
       memberemail TEXT NOT NULL
   );
