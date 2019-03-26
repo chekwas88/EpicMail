@@ -76,7 +76,7 @@
 .show {
   display: block;
 }
-
+#mailCompo.hide,
 #inbox-set.hide, 
 #sent-set.hide, 
 #draft-set.hide,
@@ -532,6 +532,9 @@ button.addg:hover {
 }
 
 @media screen and (min-width: 600px) {
+  #mailCompo.hide {
+    display: block;
+  }
   .table-div {
     margin-left: 150px;
     

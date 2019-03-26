@@ -80,8 +80,9 @@ body {
 }
 
 .navbar .logo{
- float: right;
- padding: 3px;
+  position: absolute;
+  right: 10px;
+  top: 6px;
 }
 
 .navbar .logo span a i {
@@ -162,7 +163,7 @@ footer.login{
     display: flex;
   }
   .navbar .logo{
-   float: left;
+    left: 10px;
   }
   
   #bars.hide {

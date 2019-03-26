@@ -58,7 +58,6 @@ class UserController {
     const authUser = rows[0];
     const { id } = authUser;
     const payload = { id };
-    console.log(id);
     const token = HelperUtils.generateToken(payload);
     return res.status(200).json({
       status: res.statusCode,
