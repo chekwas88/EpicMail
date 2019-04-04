@@ -1,13 +1,14 @@
+/* eslint-disable import/prefer-default-export */
 const composeLayout = document.getElementById('compose-new');
 const layoutRF = document.getElementById('replyforward');
 const compose = document.getElementById('compose');
 const compoCancel = document.getElementById('compox');
-const send = document.getElementById('compose-send');
+// const send = document.getElementById('compose-send');
 const deleteBtn = document.getElementById('compose-delete');
 const rfSend = document.getElementById('rf-send');
 const rfdelete = document.querySelector('a span #rf-delete');
-const replybtn = document.querySelector('div button#replybtn');
-const fowardbtn = document.querySelector('div button#forwardbtn');
+// const replybtn = document.querySelector('div button#replybtn');
+// const fowardbtn = document.querySelector('div button#forwardbtn');
 const getLink = document.querySelectorAll('li.gp-list');
 const addToGroupLay = document.getElementById('gp-add-page');
 const membersDisplay = document.getElementById('members-modal');
@@ -21,7 +22,7 @@ const contactViewLists = document.querySelectorAll('.layout-div ul li.collection
 const gpAddCancel = document.getElementById('gp-add-cancel');
 
 
-function removeComposeModal() {
+export function removeComposeModal() {
   composeLayout.classList.add('hide');
   composeLayout.classList.remove('show');
 }
@@ -41,10 +42,10 @@ function getGpCreateForm() {
   createGPForm.classList.add('show');
 }
 
-function getReplyForwardModal() {
-  layoutRF.classList.add('show');
-  layoutRF.classList.remove('hide');
-}
+// function getReplyForwardModal() {
+//   layoutRF.classList.add('show');
+//   layoutRF.classList.remove('hide');
+// }
 function getComposeLayout() {
   composeLayout.classList.add('show');
   composeLayout.classList.remove('hide');
@@ -65,8 +66,8 @@ compose.addEventListener('click', () => {
   composeLayout.classList.remove('hide');
 });
 
-fowardbtn.addEventListener('click', getReplyForwardModal);
-replybtn.addEventListener('click', getReplyForwardModal);
+// fowardbtn.addEventListener('click', getReplyForwardModal);
+// replybtn.addEventListener('click', getReplyForwardModal);
 
 const spans = getGroupLists();
 
@@ -113,7 +114,13 @@ gpAddCancel.addEventListener('click', () => {
   addToGroupLay.classList.add('hide');
 });
 
-send.addEventListener('click', removeComposeModal);
+// export function composeMail(token, comMail, msgD) {
+//   send.addEventListener('click', () => {
+//     comMail(token, msgD);
+//     removeComposeModal();
+//   });
+// }
+
 compoCancel.addEventListener('click', removeComposeModal);
 deleteBtn.addEventListener('click', removeComposeModal);
 rfSend.addEventListener('click', removeRFModal);

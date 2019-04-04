@@ -20,18 +20,40 @@ class MessageController {
       recipient: req.body.recipient,
     };
     const receiver = await HelperUtils.getUser(mD.recipient);
-    const receiverId = receiver.id;
+    const sender = await HelperUtils.getMessageSender(id);
+    const receiverName = `${receiver.firstname} ${receiver.lastname}`;
+    const senderName = `${sender.firstname} ${sender.lastname}`;
     const { rows } = await pool.query(
-      queries.sendMessageQuery, [mD.subject, mD.message, id, mD.recipient, receiverId],
+      queries.sendMessageQuery,
+      [mD.subject, mD.message, id, mD.recipient, receiver.id, senderName, receiverName],
     );
-    const data = rows[0];
-    const rId = data.receiverid;
-    const messageid = data.id;
+    const response = rows[0];
+    const {
+      createdon,
+      subject,
+      message,
+      parentmessageid,
+      recipient,
+      receiverid,
+    } = response;
+
+    const data = {
+      id: response.id,
+      createdOn: createdon,
+      subject,
+      message,
+      parentMessageId: parentmessageid,
+      senderName,
+      receiverName,
+      recipient,
+      receiverId: receiverid,
+    };
+    const messageId = data.id;
     await HelperUtils.createContact(
-      receiverId, receiver.firstname, receiver.lastname, mD.recipient,
+      receiver.id, receiver.firstname, receiver.lastname, mD.recipient,
     );
-    await HelperUtils.createSentBox(messageid, rId, id);
-    await HelperUtils.createInBox(messageid, rId, id);
+    await HelperUtils.createSentBox(messageId, data.receiverId, id);
+    await HelperUtils.createInBox(messageId, data.receiverId, id);
     return res.status(201).json({
       status: res.statusCode,
       data: [
@@ -54,11 +76,11 @@ class MessageController {
   static async getReceivedMessages(req, res) {
     const { id } = req.user;
     const data = await HelperUtils.getAllUserReceivedMessages(id);
-    if (data === 'Your inbox is empty') {
-      return res.status(200).json({
-        message: data,
-      });
-    }
+    // if (data === 'Your inbox is empty') {
+    //   return res.status(200).json({
+    //     message: data,
+    //   });
+    // }
     return res.status(200).json({
       status: res.statusCode,
       data: [
@@ -106,11 +128,11 @@ class MessageController {
   static async getSentMessages(req, res) {
     const { id } = req.user;
     const data = await HelperUtils.getAllUserSentMessages(id);
-    if (data === 'No sent messages') {
-      return res.status(200).json({
-        message: data,
-      });
-    }
+    // if (data === 'No sent messages') {
+    //   return res.status(200).json({
+    //     message: data,
+    //   });
+    // }
     return res.status(200).json({
       status: res.statusCode,
       data: [

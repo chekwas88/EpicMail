@@ -66,7 +66,7 @@ class ValidationHelper {
     const errors = {};
     const subjectResult = Joi.validate({ subject: req.body.subject }, subjectSchema);
     const messageResult = Joi.validate({ message: req.body.message }, messageSchema);
-    const recipientsResult = Joi.validate({ recipients: req.body.recipients }, recipientsSchema);
+    const recipientsResult = Joi.validate({ recipient: req.body.recipient }, recipientsSchema);
     if (subjectResult.error !== null) {
       errors.subject = 'subject should be provided and must be minimum of 2 to maximum 50 characters';
     }
@@ -74,7 +74,7 @@ class ValidationHelper {
       errors.message = 'message should be provided';
     }
     if (recipientsResult.error !== null) {
-      errors.recipients = 'recipients should be email(s) and should be provided';
+      errors.recipient = 'recipients should be email(s) and should be provided';
     }
     return errors;
   }

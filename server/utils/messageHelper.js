@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
@@ -9,14 +10,25 @@ const secret = process.env.SECRET_KEY;
 
 class MessageUtils {
   /**
-     * @function  getUser - validates password
-     * @param {object} req - request object
+     * @function  getUser - gets a user
+     * @param {object} email - user email
      * @returns {object}
      *
   */
 
   static async getUser(email) {
     const { rows } = await pool.query(queries.loginQuery, [email]);
+    return rows[0];
+  }
+
+  /**
+     * @function  getMessageSender - gets message sender
+     * @param {object} id - sender Id
+     * @returns {object}
+     *
+  */
+  static async getMessageSender(id) {
+    const { rows } = await pool.query(queries.messenger, [id]);
     return rows[0];
   }
 
@@ -118,6 +130,12 @@ class MessageUtils {
     return data;
   }
 
+  /**
+     * @function  getAllUserSentMessages - get all sent messages
+     * @param {integer}id - user id
+     * @returns {array} data
+     *
+  */
   static async getAllUserSentMessages(id) {
     const sentbox = await MessageUtils.getAllSentbox(id);
     if (sentbox.length === 0 || sentbox === undefined) {
@@ -133,28 +151,6 @@ class MessageUtils {
       }
     });
     return data;
-  }
-
-  /**
-   * @function  getAllInbox - get all inbox of a user
-   * @param {integer}id - user id
-   * @returns {array} data
-   *
-*/
-  static async getAllUnread(status, id) {
-    const unreadMsg = await pool.query(queries.getAllUnread, ['unread', id]);
-    return unreadMsg.rows;
-  }
-
-  /**
-     * @function  getAllSentMessages - get all sent messages
-     * @param {integer}id - user id
-     * @returns {array} data
-     *
-  */
-  static async getAllSentMessages(id) {
-    const sentbox = await pool.query(queries.getUserSentMessagesQ, [id]);
-    return sentbox.rows;
   }
 
   /**
@@ -180,8 +176,9 @@ class MessageUtils {
 
   /**
      * @function  createSentBox - creates a sent data
-     * @param {integer} senderId -message's senderId
      * @param {integer}  messageId - the message id
+     * @param {integer} receiverId - message's receiverId
+     * @param {integer}  senderId - message's senderId
      * @returns {object}
      *
   */
@@ -192,8 +189,9 @@ class MessageUtils {
 
   /**
      * @function  createInBox - creates a sent data
-     * @param {array} receiverId -message's receiverIds
      * @param {integer}  messageId - the message id
+     * @param {array} receiverId - message's receiverId
+     * @param {integer}  senderId - the message's SenderId
      * @returns {object}
      *
   */
@@ -204,7 +202,7 @@ class MessageUtils {
 
 
   /**
-     * @function  createInBox - creates a contact
+     * @function  createContact - creates a contact
      * @param {integer} userid- contact's user id
      * @param {string} firstname -contact's firstname
      * @param {string}  lastname - contact's lastname
@@ -213,14 +211,15 @@ class MessageUtils {
      *
   */
   static async createContact(userId, firstname, lastname, email) {
-    const { rows } = await pool.query(queries.addInbox, [userId, firstname, lastname, email]);
+    const { rows } = await pool.query(queries.addContact, [userId, firstname, lastname, email]);
     return rows;
   }
 
   /**
      * @function  updateStatus - updates status of message
-     * @param {array} stat -message's receiverIds
+     * @param {string} status - inboox status
      * @param {integer}  messageId - the message id
+     * @param {integer} id -message's receiverIds
      * @returns {object}
      *
   */

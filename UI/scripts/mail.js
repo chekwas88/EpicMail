@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 const inboxLayout = document.getElementById('inbox-set');
 const sentLayout = document.getElementById('sent-set');
 const draftLayout = document.getElementById('draft-set');
@@ -10,7 +11,6 @@ const inboxlist = document.getElementById('inbox-list');
 const sentlist = document.getElementById('sent-list');
 const draftlist = document.getElementById('draft-list');
 const contactlist = document.getElementById('contact-list');
-const linkedDiv = document.querySelectorAll('div.table-div .layout-div > div');
 const mailView = document.getElementById('mailView');
 
 function getProfileSet() {
@@ -153,28 +153,45 @@ grouplist.addEventListener('click', () => {
   grouplist.classList.add('visited');
 });
 
-
-linkedDiv.forEach((div) => {
-  div.addEventListener('click', () => {
-    mailView.classList.add('show');
-    mailView.classList.remove('hide');
-    inboxLayout.classList.remove('show');
-    inboxLayout.classList.add('hide');
-    inboxlist.classList.remove('visited');
-    sentLayout.classList.remove('show');
-    sentLayout.classList.add('hide');
-    sentlist.classList.remove('visited');
-    draftLayout.classList.add('hide');
-    draftLayout.classList.remove('show');
-    draftlist.classList.remove('visited');
-    contactLayout.classList.add('hide');
-    contactLayout.classList.remove('show');
-    contactlist.classList.remove('visited');
-    profileLayout.classList.add('hide');
-    profileLayout.classList.remove('show');
-    profilelist.classList.remove('visited');
-    groupLayout.classList.remove('show');
-    groupLayout.classList.add('hide');
-    grouplist.classList.remove('visited');
+export function linkedDivMsg(linkedDiv, mView, msg, token) {
+  linkedDiv.forEach((div) => {
+    div.addEventListener('click', () => {
+      const id = div.getAttribute('id');
+      console.log(id);
+      msg(token, id);
+      mView.classList.add('show');
+      mView.classList.remove('hide');
+      inboxLayout.classList.remove('show');
+      inboxLayout.classList.add('hide');
+      inboxlist.classList.remove('visited');
+      sentLayout.classList.remove('show');
+      sentLayout.classList.add('hide');
+      sentlist.classList.remove('visited');
+      draftLayout.classList.add('hide');
+      draftLayout.classList.remove('show');
+      draftlist.classList.remove('visited');
+      contactLayout.classList.add('hide');
+      contactLayout.classList.remove('show');
+      contactlist.classList.remove('visited');
+      profileLayout.classList.add('hide');
+      profileLayout.classList.remove('show');
+      profilelist.classList.remove('visited');
+      groupLayout.classList.remove('show');
+      groupLayout.classList.add('hide');
+      grouplist.classList.remove('visited');
+    });
   });
-});
+}
+export function divDel(linkedDiv, delMsg, token) {
+  linkedDiv.forEach((div) => {
+    const id = div.getAttribute('id');
+    div.nextElementSibling.querySelector('i').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById(`${id}`).remove();
+      setTimeout(() => {
+        window.location.href = './mail.html';
+      }, 500);
+      delMsg(token, id);
+    });
+  });
+}

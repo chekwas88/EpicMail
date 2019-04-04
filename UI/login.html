@@ -40,7 +40,7 @@
           <div class="signup">SignUp</div>
         </nav>
         <div id="login">
-          <form class="userform">
+          <form id="loginForm" class="userform">
             <div>
               <label for="useremail">Email</label>
               <input id="useremail" type="email" name="email" placeholder="username@epicmail.com" required />
@@ -51,13 +51,13 @@
             </div>
             <a class="fp" href="./forgotpassword.html">forgot password?</a>
             <div>
-              <a href="./mail.html"><button>Login</button></a>
+              <button>Login</button>
             </div>
             
           </form>
         </div>
         <div id="signup">
-          <form class="userform">
+          <form id="signupForm" class="userform">
             <div>
               <label for="fname">Firstname</label>
               <input id="fname" type="text" name="firstName" placeholder="John" required/>
@@ -67,19 +67,19 @@
               <input id="lname" type="text" name="lastName" placeholder="Doe" required/>
             </div>
             <div>
-              <label for="useremail">Email</label>
-              <input id="useremail" type="email" name="email" placeholder="username@epicmail.com" required/>
+              <label for="signUpEmail">Email</label>
+              <input id="signUpEmail" type="email" name="email" placeholder="username@epicmail.com" required/>
             </div>
             <div>
-              <label for="secret">Password</label>
-              <input id="secret" type="password" name="password" required/>
+              <label for="signUpSecret">Password</label>
+              <input id="signUpSecret" type="password" name="password" required/>
             </div>
             <div>
               <label for="secret">Confirm Password</label>
-              <input id="secret" type="password" name="confirmPassword" required/>
+              <input id="psecret" type="password" name="confirmPassword" required/>
             </div>
             <div>
-              <a href="./mail.html"><button id="submit">SignUp</button></a>
+              <button>SignUp</button>
             </div>
           </form>
         </div>
@@ -89,5 +89,7 @@
   </div>
   <script src="./scripts/nav.js"></script>
   <script src="./scripts/userAuth.js"></script>
+  <script src="./fetch/authSignUp.js"></script>
+  <script src="./fetch/authLogin.js"></script>
 </body>
 </html>

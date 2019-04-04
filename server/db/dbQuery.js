@@ -3,7 +3,14 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const connectionString = process.env.PRODB;
+let connectionString = process.env.DEVDB;
+
+if (process.env.NODE_ENV === 'test') {
+  connectionString = process.env.TESTDB;
+}
+if (process.env.NODE_ENV === 'production') {
+  connectionString = process.env.PRODB;
+}
 const pool = new Pool({
   connectionString,
 });
@@ -23,7 +30,7 @@ CREATE TABLE IF NOT EXISTS
     lastname VARCHAR(50) NOT NULL,
     email VARCHAR(128) NOT NULL,
     password VARCHAR(100) NOT NULL,
-    confirmpassword VARCHAR(100) NOT NULL
+    confirmPassword VARCHAR(100) NOT NULL
   );
   CREATE TABLE IF NOT EXISTS 
     messages(
@@ -32,6 +39,8 @@ CREATE TABLE IF NOT EXISTS
       subject VARCHAR(100) NOT NULL,
       message TEXT NOT NULL,
       senderId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      senderName VARCHAR(100) NOT NULL,
+      receiverName VARCHAR(100) NOT NULL,
       parentMessageId INT DEFAULT NULL,
       recipient TEXT NOT NULL,
       receiverId INT REFERENCES users(id) ON DELETE CASCADE
@@ -70,7 +79,7 @@ CREATE TABLE IF NOT EXISTS
   groups(
     id SERIAL PRIMARY KEY NOT NULL,
     name VARCHAR(100) NOT NULL,
-    createdby INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    createdBy INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     role VARCHAR(50) DEFAULT 'Admin'
   );
 
@@ -80,7 +89,7 @@ CREATE TABLE IF NOT EXISTS
       groupId INT NOT NULL REFERENCES groups(id) ON DELETE CASCADE,
       userId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
       role VARCHAR(50),
-      memberemail TEXT NOT NULL
+      memberEmail TEXT NOT NULL
   );
 `;
 

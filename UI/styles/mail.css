@@ -222,19 +222,16 @@ section.messageView div:hover {
   margin-bottom: 10px;
 }
 
-.compose-div div div a {
-  text-decoration: none;
-  padding: 10px;
-}
 
-.compose-div div div a span i{
+.compose-div div div span i{
   padding: 10px;
   font-size: 20px;
   margin-top: 2px;
   color: #d80a0a;
 }
 
-.compose-div div div a button {
+.compose-div div div button {
+  margin-left: 5px;
   padding: 7px;
   font-size: 20px;
   color: #fff;
@@ -280,10 +277,10 @@ div.rfbttn {
   padding: 10px;
 }
 
-.compose-div div div a:nth-child(1) {
+.compose-div div div button {
   float: left;
 }
-.compose-div div div a:nth-child(2) {
+.compose-div div div span {
   float: right;
 }
 
@@ -300,7 +297,7 @@ div.rfbttn {
   line-height: 1.2rem;
 }
 
-.layout-div div span:nth-child(4), .draft-div div span:nth-child(4) {
+.layout-div span.delSpan, .draft-div div span:nth-child(4) {
   position: absolute;
   right: 10px;
   left: 92%;
@@ -333,12 +330,14 @@ div.rfbttn {
   color: #063c5c;
 }
 
-#rf-delete {
-  color: #f10d0d
+.delete {
+  color: #f10d0d;
+  float: right;
 }
 
-#rf-delete:hover {
+.delete:hover {
   font-size: 20px;
+  z-index: 5;
 }
 .gp-li-ch i:hover {
   box-shadow: 0 0 4px rgba(54, 52, 52, 0.7);
@@ -579,8 +578,8 @@ button.addg:hover {
   .layout-div div span:nth-child(3), .draft-div div span:nth-child(3) {
     flex: 1 3 80px;
   }
-  .layout-div div span:nth-child(4), .draft-div div span:nth-child(4) {
-    flex: 1 4 40px;
+  .layout-div span.delSpan .delete, .draft-div div span:nth-child(4) {
+   
     margin-top: 5px;
     position: unset;
     padding: 0 10px;

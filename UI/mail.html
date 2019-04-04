@@ -94,7 +94,7 @@
       </div>
       <!-- inbox -->
       <div id="inbox-set" class="table-div show">
-        <div class="layout-div">
+        <!-- <div class="layout-div">
           <div class="unread">
             <span>Ted Mosby</span>
             <span>Dear Barney, GNB is taking over...</span>
@@ -113,7 +113,7 @@
             <span>02/02/2019</span>
             <span><i id="rf-delete" class="fas fa-trash"></i></span>
           </div>
-        </div>         
+        </div>          -->
       </div>
 
       <!-- replyforward -->
@@ -146,16 +146,12 @@
               <h3>New Message</h3>
               <button id="compox">X</button>
             </header>
-            <input id="recips" type="text" name="recipients" placeholder="Recipients" required />
-            <input type="text" name="subject" placeholder="Subject" required />
-            <textarea name="message" cols="65" rows="15" required></textarea>
+            <input id="recips" type="text" name="recipient" placeholder="Recipient" required />
+            <input id="subject" type="text" name="subject" placeholder="Subject" required />
+            <textarea id="message" name="message" cols="65" rows="15" required></textarea>
             <div>
-              <a href="#">
-                  <button id="compose-send" type="submit">Send</button>
-              </a>
-              <a href="#">
-                <span><i id="compose-delete" class="fas fa-trash"></i></span>
-              </a>
+              <button id="compose-send" type="submit">Send</button>
+              <span><i id="compose-delete" class="fas fa-trash"></i></span>
             </div>
             
           </div>
@@ -165,7 +161,7 @@
       <!-- sent -->
 
       <div id="sent-set" class="table-div hide">
-        <div class="layout-div">
+        <!-- <div class="layout-div">
           <div>
             <span>Barney Stinson</span>
             <span>Dear Ted, Suit up cause we are going...</span>
@@ -184,7 +180,7 @@
             <span>03/03/2019</span>
             <span><i id="rf-delete" class="fas fa-trash"></i></span>
           </div>
-        </div>         
+        </div>          -->
       </div>
 
 
@@ -400,7 +396,7 @@
 
       <!-- modal for a mail view (sent, draft, inbox)-->
       <div id="mailView" class="table-div hide">
-        <div class="rfbttn">
+        <!-- <div class="rfbttn">
           <section class="messageView">
             <h3>Reminder: Pre-Bootcamp Workshops</h3>
             <div>
@@ -426,17 +422,19 @@
               </div>
             </div>
           </section>
-        </div>
+        </div> -->
       </div>
 
     </div>
 
     <footer>© EpicMail 2019. All rights Reserved.</footer>
     <script src="./scripts/nav.js"></script>
-    <script src="./scripts/mailModal.js"></script>
-    <script src="./scripts/mail.js"></script>
     <script src="./scripts/searchContacts.js"></script>
     <script src="./scripts/searchGroup.js"></script>
     <script src="./scripts/inputRecipients.js"></script>
+    <script src="./fetch/getMessages.js" type="module"></script>
+    <script src="./fetch/compose.js" type="module"></script>
+    <script src="./scripts/mailModal.js" type="module"></script>
+    <script src="./scripts/mail.js" type="module"></script>
   </body>
 </html>
