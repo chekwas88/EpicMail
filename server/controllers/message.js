@@ -20,18 +20,40 @@ class MessageController {
       recipient: req.body.recipient,
     };
     const receiver = await HelperUtils.getUser(mD.recipient);
-    const receiverId = receiver.id;
+    const sender = await HelperUtils.getMessageSender(id);
+    const receiverName = `${receiver.firstname} ${receiver.lastname}`;
+    const senderName = `${sender.firstname} ${sender.lastname}`;
     const { rows } = await pool.query(
-      queries.sendMessageQuery, [mD.subject, mD.message, id, mD.recipient, receiverId],
+      queries.sendMessageQuery,
+      [mD.subject, mD.message, id, mD.recipient, receiver.id, senderName, receiverName],
     );
-    const data = rows[0];
-    const rId = data.receiverid;
-    const messageid = data.id;
+    const response = rows[0];
+    const {
+      createdon,
+      subject,
+      message,
+      parentmessageid,
+      recipient,
+      receiverid,
+    } = response;
+
+    const data = {
+      id: response.id,
+      createdOn: createdon,
+      subject,
+      message,
+      parentMessageId: parentmessageid,
+      senderName,
+      receiverName,
+      recipient,
+      receiverId: receiverid,
+    };
+    const messageId = data.id;
     await HelperUtils.createContact(
-      receiverId, receiver.firstname, receiver.lastname, mD.recipient,
+      receiver.id, receiver.firstname, receiver.lastname, mD.recipient,
     );
-    await HelperUtils.createSentBox(messageid, rId, id);
-    await HelperUtils.createInBox(messageid, rId, id);
+    await HelperUtils.createSentBox(messageId, data.receiverId, id);
+    await HelperUtils.createInBox(messageId, data.receiverId, id);
     return res.status(201).json({
       status: res.statusCode,
       data: [
@@ -54,11 +76,6 @@ class MessageController {
   static async getReceivedMessages(req, res) {
     const { id } = req.user;
     const data = await HelperUtils.getAllUserReceivedMessages(id);
-    if (data === 'Your inbox is empty') {
-      return res.status(200).json({
-        message: data,
-      });
-    }
     return res.status(200).json({
       status: res.statusCode,
       data: [
@@ -106,11 +123,11 @@ class MessageController {
   static async getSentMessages(req, res) {
     const { id } = req.user;
     const data = await HelperUtils.getAllUserSentMessages(id);
-    if (data === 'No sent messages') {
-      return res.status(200).json({
-        message: data,
-      });
-    }
+    // if (data === 'No sent messages') {
+    //   return res.status(200).json({
+    //     message: data,
+    //   });
+    // }
     return res.status(200).json({
       status: res.statusCode,
       data: [
@@ -156,20 +173,22 @@ class MessageController {
       }
     }
     if (sentMsg !== undefined) {
-      const { rows } = await pool.query(
-        queries.getASentboxMessageQuery, [sentMsg.messageid, id],
-      );
-      const data = rows[0];
-      if (data !== undefined) {
-        return res.status(200).json({
-          status: res.statusCode,
-          data: [
-            {
-              message: 'message retrieved',
-              data,
-            },
-          ],
-        });
+      if (sentMsg.status !== status[3]) {
+        const { rows } = await pool.query(
+          queries.getASentboxMessageQuery, [sentMsg.messageid, id],
+        );
+        const data = rows[0];
+        if (data !== undefined) {
+          return res.status(200).json({
+            status: res.statusCode,
+            data: [
+              {
+                message: 'message retrieved',
+                data,
+              },
+            ],
+          });
+        }
       }
     }
     return res.status(404).json({
@@ -190,6 +209,14 @@ class MessageController {
     const messageId = parseInt(req.params.id, 10);
     const inboxMsg = await HelperUtils.getAninbox(messageId, id);
     const sentMsg = await HelperUtils.getASentbox(messageId, id, status[2]);
+    if (inboxMsg !== undefined && sentMsg !== undefined) {
+      await pool.query(queries.DeleteSentbox, [status[3], messageId, id]);
+      await pool.query(queries.DeleteInbox, [status[3], messageId, id]);
+      return res.status(200).json({
+        status: res.statusCode,
+        data: [{ message: 'message deleted' }],
+      });
+    }
     if (inboxMsg !== undefined) {
       if (inboxMsg.status !== status[3]) {
         await pool.query(queries.DeleteInbox, [status[3], messageId, id]);
@@ -200,11 +227,13 @@ class MessageController {
       }
     }
     if (sentMsg !== undefined) {
-      await pool.query(queries.DeleteSentbox, [status[3], messageId, id]);
-      return res.status(200).json({
-        status: res.statusCode,
-        data: [{ message: 'message deleted' }],
-      });
+      if (sentMsg.status !== status[3]) {
+        await pool.query(queries.DeleteSentbox, [status[3], messageId, id]);
+        return res.status(200).json({
+          status: res.statusCode,
+          data: [{ message: 'message deleted' }],
+        });
+      }
     }
     return res.status(404).json({
       status: res.statusCode,

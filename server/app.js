@@ -10,11 +10,26 @@ import groupRoute from './route/groupRoute';
 
 const app = express();
 
+const corsOptions = {
+  origin: '*',
+  methods: 'GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS',
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+};
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  next();
+});
+
+
 app.use(json());
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
-app.use(cors());
 
+
+app.use(cors(corsOptions));
 app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(userRoute);
 app.use(messageRoute);

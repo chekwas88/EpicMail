@@ -29,8 +29,10 @@ class UserController {
       queries.registerUserQuery,
       [rD.firstName, rD.lastName, rD.email, encryptedPassword, encryptedcPassword],
     );
-    const user = rows[0];
-    const token = HelperUtils.generateToken({ id: user.id });
+    const authUser = rows[0];
+    const { firstname, lastname, id } = authUser;
+    const user = { firstname, lastname };
+    const token = HelperUtils.generateToken({ id });
     return res.status(201).json({
       status: res.statusCode,
       data: [
@@ -56,15 +58,20 @@ class UserController {
       [req.body.email.trim()],
     );
     const authUser = rows[0];
-    const { id } = authUser;
+    const { id, firstname, lastname } = authUser;
     const payload = { id };
+    const user = {
+      firstname,
+      lastname,
+    };
     const token = HelperUtils.generateToken(payload);
     return res.status(200).json({
       status: res.statusCode,
       data: [
         {
-          token,
           message: 'login was successful',
+          token,
+          user,
         },
       ],
     });

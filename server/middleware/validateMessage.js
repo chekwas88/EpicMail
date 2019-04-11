@@ -29,8 +29,8 @@ class ValidateMessage {
 
 
   static async validateRecipient(req, res, next) {
-    const mailRecipients = req.body.recipients;
-    const user = await MessageHelper.getUser(mailRecipients);
+    const mailRecipient = req.body.recipient;
+    const user = await MessageHelper.getUser(mailRecipient);
     if (!user) {
       return res.status(404).json({
         status: res.statusCode,

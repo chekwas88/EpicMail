@@ -29,7 +29,7 @@
         </div>
         <ul id="bars" class="hide">
           <li>
-            <a href="./mail.html">
+            <a href="./mail.html#inbox-set">
               <span><i class="far fa-envelope"></i></span>
               <span>Mail</span>
             </a>
@@ -45,77 +45,54 @@
       <div id="mailCompo" class="side-nav hide">
         <nav>
           <ul>
-            <li id="compose">
-                <a id="compose-btn">
-                  <span><i class="fas fa-plus"></i></span>
-                  <span>Compose</span>
-                </a>
-            </li>
-            <li id="inbox-list" class="visited">
-              <a id="inbox" href="#">
+            <a id="compose-btn">
+              <li id="compose">
+                <span><i class="fas fa-plus"></i></span>
+                <span>Compose</span> 
+              </li>
+            </a>
+            <a id="inbox" href="#inbox-set">
+              <li id="inbox-list">
                 <span><i class="fas fa-envelope"></i></span>
                 <span>Inbox</span>
                 <span class="numunread">1</span>
-              </a>
-            </li>
-            <li id="sent-list" >
-              <a id="sent" href="#">
+              </li>
+            </a>
+            <a id="sent" href="#sent-set">
+              <li id="sent-list" >
                 <span><i class="fas fa-check-double"></i></span>
                 <span>Sent</span>
-              </a>
-            </li>
-            <li id="draft-list">
-              <a id="draft" href="#">
-                <span><i class="far fa-file"></i></span>
-                <span>Draft</span>
-                <span class="numdraft">3</span>
-              </a>
-            </li>
-            <li id="contact-list">
-              <a id="contact" href="#">
-                <span><i class="fas fa-address-book"></i></span>
-                <span>Contacts</span>
-              </a>
-            </li>
-            <li id="group-list">
-              <a id="group" href="#">
-                <span><i class="fas fa-users"></i></span>
-                <span>Groups</span>
-              </a>
-            </li>
-            <li id="profile-list">
-                <a id="profile" href="#">
+              </li>
+            </a>
+            <a id="draft" href="#draft-set">
+              <li id="draft-list">
+                  <span><i class="far fa-file"></i></span>
+                  <span>Draft</span>
+                  <span class="numdraft">3</span>
+              </li>
+            </a>
+            <a id="contact" href="#contact-set">
+              <li id="contact-list">
+                  <span><i class="fas fa-address-book"></i></span>
+                  <span>Contacts</span>
+              </li>
+            </a>
+            <a id="group" href="#group-set">
+              <li id="group-list">
+                  <span><i class="fas fa-users"></i></span>
+                  <span>Groups</span>
+              </li>
+           </a>
+           <a id="profile" href="#profile-set">
+              <li id="profile-list">
                   <span><i class="fas fa-user"></i></span>
                   <span>profile</span>
-                </a>
-              </li>
+                </li>
+            </a>
           </ul>
         </nav>
       </div>
-      <!-- inbox -->
-      <div id="inbox-set" class="table-div show">
-        <div class="layout-div">
-          <div class="unread">
-            <span>Ted Mosby</span>
-            <span>Dear Barney, GNB is taking over...</span>
-            <span>18/03/2019</span>
-            <span><i id="rf-delete" class="fas fa-trash"></i></span>
-          </div>
-          <div class="read">
-            <span>Marshal Erickson</span>
-            <span>Dear Barney, I'm in the bar...</span>
-            <span>02/03/2019</span>
-            <span><i id="rf-delete" class="fas fa-trash"></i></span>
-          </div>
-          <div class="read">
-            <span>Lily Aldrin</span>
-            <span>Dude where the heck are...</span>
-            <span>02/02/2019</span>
-            <span><i id="rf-delete" class="fas fa-trash"></i></span>
-          </div>
-        </div>         
-      </div>
-
+      
       <!-- replyforward -->
 
       <div id="replyforward" class="rf-layout hide">
@@ -124,12 +101,8 @@
               <input id="rfc" type="text" name="recipients" placeholder="Recipients" required />
               <textarea name="message" cols="65" rows="10" required></textarea>
               <div>
-                <a href="#">
-                    <button id="rf-send" type="submit">Send</button>
-                </a>
-                <a href="#">
-                  <span><i id="rf-delete" class="fas fa-trash"></i></span>
-                </a>
+                <button id="rf-send" type="submit">Send</button>
+                <span><i id="rf-delete" class="fas fa-trash"></i></span>
               </div>
               
             </div>
@@ -146,16 +119,30 @@
               <h3>New Message</h3>
               <button id="compox">X</button>
             </header>
-            <input id="recips" type="text" name="recipients" placeholder="Recipients" required />
-            <input type="text" name="subject" placeholder="Subject" required />
-            <textarea name="message" cols="65" rows="15" required></textarea>
+            <input id="recips" type="text" name="recipient" placeholder="Recipient" required />
+            <input id="subject" type="text" name="subject" placeholder="Subject" required />
+            <textarea id="message" name="message" cols="65" rows="15" required></textarea>
             <div>
-              <a href="#">
-                  <button id="compose-send" type="submit">Send</button>
-              </a>
-              <a href="#">
-                <span><i id="compose-delete" class="fas fa-trash"></i></span>
-              </a>
+              <button id="compose-send" type="submit">Send</button>
+              <span><i id="compose-delete" class="fas fa-trash"></i></span>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <div id="group-compose" class="compose-layout hide">
+        <div class="compose-div">
+          <div>
+            <header>
+              <h3>New Message</h3>
+              <button id="grp-compox">X</button>
+            </header>
+            <input id="grp-subject" type="text" name="subject" placeholder="Subject" required />
+            <textarea id="grp-message" name="message" cols="65" rows="15" required></textarea>
+            <div>
+              <button id="grp-compose-send" type="submit">Send</button>
+              <span><i id="grp-compose-delete" class="fas fa-trash"></i></span>
             </div>
             
           </div>
@@ -164,8 +151,8 @@
 
       <!-- sent -->
 
-      <div id="sent-set" class="table-div hide">
-        <div class="layout-div">
+      <div id="sent-set" class="table-div view">
+        <!-- <div class="layout-div">
           <div>
             <span>Barney Stinson</span>
             <span>Dear Ted, Suit up cause we are going...</span>
@@ -184,13 +171,13 @@
             <span>03/03/2019</span>
             <span><i id="rf-delete" class="fas fa-trash"></i></span>
           </div>
-        </div>         
+        </div>          -->
       </div>
 
 
       <!-- draft -->
 
-      <div id="draft-set" class="table-div hide">
+      <div id="draft-set" class="table-div view">
         <div class="draft-div">
           <div>
             <span>Gredenco Sebratov</span>
@@ -215,10 +202,10 @@
 
       <!-- contact -->
 
-      <div id="contact-set" class="table-div hide">
+      <div id="contact-set" class="table-div view">
         <div class="layout-div">
+            <input class="inputSearch" type="text" id="filterable" placeholder="search contact..." />
           <ul>
-            <input type="text" id="filterable" placeholder="search contact..." />
             <li class="collection-item">
               <span>Lily Aldrin</span>  
             </li>
@@ -239,12 +226,13 @@
       </div>
       
       <!-- groups -->
-      <div id="group-set" class="table-div hide">
+      <div id="group-set" class="table-div view">
         <div class="layout-div">
-          <ul>
-            <input type="text" id="filter" placeholder="search group..." />
-            <button id="creategroup" class="ubttn">create group</button>  
-            <li class="gp-list">
+          <input class="inputSearch" type="text" id="filter" placeholder="search group..." />
+          <button id="creategroup" class="ubttn">create group</button>  
+          <ul id="groupUl">
+            
+            <!-- <li class="gp-list">
               <span class="gp-li-ch">Cycle 39</span>
               <span class="gp-li-ch"><i title="add to group" class="fas fa-plus-circle"></i></span>
               <span class="gp-li-ch"><i title="members" class="fas fa-users"></i></span>
@@ -283,12 +271,12 @@
               <span class="gp-li-ch"><i title="send message" class="fas fa-comment-alt"></i></span>
               <span class="gp-li-ch"><i class="fas fa-edit"></i></span>
               <span class="gp-li-ch"><i id="rf-delete" class="fas fa-trash"></i></span>   
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
       <!-- profile detail -->
-      <div id="profile-set" class="table-div hide" >
+      <div id="profile-set" class="table-div view" >
         <div class="details">
           <div>
             <div class="img-container">
@@ -313,6 +301,35 @@
             </div> 
           </div>
         </div>
+      </div>
+
+       <!-- modal for a mail view (sent, draft, inbox)-->
+       <div id="mailView" class="table-div hide">
+        
+      </div>
+
+      <!-- inbox -->
+      <div id="inbox-set" class="table-div dtview view">
+        <!-- <div class="layout-div">
+          <div class="unread">
+            <span>Ted Mosby</span>
+            <span>Dear Barney, GNB is taking over...</span>
+            <span>18/03/2019</span>
+            <span><i id="rf-delete" class="fas fa-trash"></i></span>
+          </div>
+          <div class="read">
+            <span>Marshal Erickson</span>
+            <span>Dear Barney, I'm in the bar...</span>
+            <span>02/03/2019</span>
+            <span><i id="rf-delete" class="fas fa-trash"></i></span>
+          </div>
+          <div class="read">
+            <span>Lily Aldrin</span>
+            <span>Dude where the heck are...</span>
+            <span>02/02/2019</span>
+            <span><i id="rf-delete" class="fas fa-trash"></i></span>
+          </div>
+        </div>          -->
       </div>
 
       <!-- group-form page -->
@@ -361,20 +378,35 @@
       <div id="ct-gp-form-page" class="gp-layout hide">
         <form class="gp-form">
           <div>
-            <label for="gpr-name"></label>
-            <input id="gpr-name"  type="text" name="name" placeholder="name" required/>
+            <label for="ct-gpr-name"></label>
+            <input id="ct-gpr-name"  type="text" name="name" placeholder="name" required/>
           </div>
           <div>
             <button id="ct-gp-form-sub" type="submit">Add</button>
-            <button id="ct-gp-form-cancel">Cancel</button>
+            <button id="ct-gp-form-cancel" type="button">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- edit group -->
+
+      <div id="ed-gp-form-page" class="gp-layout hide">
+        <form class="gp-form">
+          <div>
+            <label for="ed-gpr-name"></label>
+            <input id="ed-gpr-name"  type="text" name="name" placeholder="name" required/>
+          </div>
+          <div>
+            <button id="ed-gp-form-sub" type="submit">Add</button>
+            <button id="ed-gp-form-cancel" type="button">Cancel</button>
           </div>
         </form>
       </div>
 
       <!-- group-members-modal -->
 
-      <div id="members-modal" class="hide">
-          <div class="gp-members">
+      <div id="members-modal">
+          <!-- <div class="gp-members">
             <ul>
               <li class="member-item">
                 <span>Lily Aldrin</span>  
@@ -395,48 +427,21 @@
             <div>
               <button id="gp-member-close">Close</button>
             </div>
-          </div>
-        </div>
-
-      <!-- modal for a mail view (sent, draft, inbox)-->
-      <div id="mailView" class="table-div hide">
-        <div class="rfbttn">
-          <section class="messageView">
-            <h3>Reminder: Pre-Bootcamp Workshops</h3>
-            <div>
-              <p>Philip Newman<i>:philip.newman@andela.com</i></p>
-              <span>Feb 25, 2019, 11:14 AM</span>
-            </div>
-            <div>
-              <p>Hello there,</p>
-
-              <p>
-                Trust this meets you well.
-                Yes, the Pre-Bootcamp Workshops are starting today. As a reminder, the schedule is as follows:
-                Duration: 2 weeks (Monday 25th February - Saturday 9th March 2019)<br>
-                Week 1:   4:00 - 7:00pm Monday - Friday; 10:30am - 4:30pm Saturday<br>
-                Week 2:   5:00 - 7:00pm Monday - Friday; 10:30am - 4:30pm Saturday<br>
-                Venue:     Andela office (EPIC Tower), 235 Ikorodu Road, Ilupeju, Lagos. <br>
-                Please be sure to arrive early and proceed to the reception on the 4th floor to obtain a guest ID card. We look forward to having you in attendance.<br>
-                See you then!
-              </p>
-              <div>
-                <button id="replybtn">Reply</button>
-                <button id="forwardbtn">forward</button>
-              </div>
-            </div>
-          </section>
-        </div>
+          </div> -->
       </div>
+
+      <!-- compose Alarm -->
+      <div id="alarm"></div>
 
     </div>
 
     <footer>© EpicMail 2019. All rights Reserved.</footer>
     <script src="./scripts/nav.js"></script>
-    <script src="./scripts/mailModal.js"></script>
-    <script src="./scripts/mail.js"></script>
     <script src="./scripts/searchContacts.js"></script>
     <script src="./scripts/searchGroup.js"></script>
     <script src="./scripts/inputRecipients.js"></script>
+    <script src="./fetch/loadWindow.js" type="module"></script>
+    <script src="./fetch/compose.js" type="module"></script>
+    <script src="./scripts/mail.js" type="module"></script>
   </body>
 </html>

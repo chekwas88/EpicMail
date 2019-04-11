@@ -14,5 +14,5 @@ export const messageSchema = {
 };
 
 export const recipientsSchema = {
-  recipients: Joi.string().email().required().trim(),
+  recipient: Joi.string().email().required().trim(),
 };
