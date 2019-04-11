@@ -141,7 +141,11 @@ class MessageUtils {
     if (sentbox.length === 0 || sentbox === undefined) {
       return 'No sent messages';
     }
-    const msgIds = sentbox.map(i => i.messageid);
+    const msg = sentbox.filter(s => s.status !== 'delete');
+    if (msg.length === 0 || msg === undefined) {
+      return 'No sent Messages';
+    }
+    const msgIds = msg.map(i => i.messageid);
     const { rows } = await pool.query(queries.allMessages);
     const messages = rows;
     const data = [];
@@ -228,9 +232,10 @@ class MessageUtils {
     return rows[0];
   }
 
-  static async sendToGroup(id, subject, message, recipient, receiverid) {
+  static async sendToGroup(id, subject, message, recipient, receiverid, senderName, receiverName) {
     const { rows } = await pool.query(
-      queries.sendMessageQuery, [subject, message, id, recipient, receiverid],
+      queries.sendMessageQuery,
+      [subject, message, id, recipient, receiverid, senderName, receiverName],
     );
     const data = rows[0];
     const rId = data.receiverid;

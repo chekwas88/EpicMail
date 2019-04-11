@@ -26,6 +26,13 @@ router.post(
   GroupController.addMemberToGroup,
 );
 
+router.get(
+  '/api/v1/groups/:id/users',
+  Token.verifyToken,
+  validate.validateIdparams,
+  GroupController.getAllgroupUsers,
+);
+
 router.post(
   '/api/v1/groups/:groupid/messages',
   Token.verifyToken,

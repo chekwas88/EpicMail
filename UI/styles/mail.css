@@ -23,11 +23,11 @@
   list-style: none;
 }
 
-.layout-div ul input:focus{
+.layout-div .inputSearch:focus{
   border-color: #f8851a;
 }
 
-.layout-div ul input[type="text"] {
+.layout-div .inputSearch[type="text"] {
   padding: 10px;
   width: 50%;
   margin-bottom: 10px;
@@ -36,11 +36,11 @@
   outline: none;
 }
 
-.side-nav nav ul li {
+.side-nav nav ul a li {
   margin-bottom: 10px;
 }
 
-.side-nav nav ul li:hover {
+.side-nav nav ul a li:hover {
   background: #5a6164;
   cursor: pointer;
 }
@@ -50,23 +50,26 @@
   color: #0672b1;
 }
 
-.side-nav nav ul li a {
+.side-nav nav ul a {
   text-decoration: none;
+}
+
+.side-nav nav ul a li {
   color: #e68f0e;
   font-size: 20px;
   padding-left: 15px;;
 }
 
-.side-nav nav ul li a span i{
+.side-nav nav ul a li span i{
   width: 20px;
 }
 
-.side-nav nav ul li a span:nth-child(2) {
+.side-nav nav ul a li span:nth-child(2) {
   color: #fff;
   font-size: 16px;
   padding-left: 10px;
 }
-.side-nav nav ul li{
+.side-nav nav ul a li{
   padding: 10px 5px;
   box-sizing: border-box;
   width: 100%;
@@ -77,16 +80,12 @@
   display: block;
 }
 #mailCompo.hide,
-#inbox-set.hide, 
-#sent-set.hide, 
-#draft-set.hide,
-#contact-set.hide,
-#compose-new.hide,
-#group-set.hide,
 #mailView.hide,
+#compose-new.hide,
+#group-compose.hide,
 #replyforward.hide, 
-#profile-set.hide,
 #gp-add-page.hide,
+#ed-gp-form-page.hide,
 #members-modal.hide,
 #ct-form-page.hide,
 #ct-gp-form-page.hide,
@@ -94,7 +93,24 @@
   display: none;
 }
 
+.view {
+  display: none;
+}
+.dtview {
+  display: block;
+}
 
+:target {
+  display: block;
+}
+
+:target ~ .dtview {
+  display: none;
+}
+
+.hideView:target {
+  display: none;
+}
 
 .visited {
   background: #553402;
@@ -118,6 +134,41 @@
   border: none;
   margin: 20px 10px;
   
+}
+
+.spinner{
+  width: 200px;
+  margin: 40px auto; 
+  display: block;
+}
+
+.spinner span i{
+  font-size: 40px;
+  color: #0dc544;
+}
+
+.spinner p{
+  text-align: center;
+}
+
+section.messageView h3{
+  text-align: center;
+}
+section.messageView {
+  width: 80%;
+  margin: 0 auto;
+  border: 1px solid rgb(245, 241, 241);
+}
+
+section.messageView .sr p{
+  font-weight: 600;
+}
+/* section.messageView .sr span{
+ color: #df8919;
+} */
+
+section.messageView .sr p i{
+  color: #0dc544;
 }
 
 section.messageView div span {
@@ -326,6 +377,11 @@ div.rfbttn {
 .gp-list span:nth-child(1) {
  flex: 1 1 160px;
 }
+
+
+.gp-li-ch i.fa-trash {
+  color: #f10d0d;
+}
 .gp-li-ch i {
   color: #063c5c;
 }
@@ -379,7 +435,7 @@ button.ubttn:hover {
   left: 3%;
   border: 1px solid #c2bfbf;
   width: 200px;
-  height: 150px;
+  height: 80px;
   overflow-y: auto;
   background: #fff;
   box-shadow: 0 0 4px rgba(54, 52, 52, 0.7);
@@ -530,6 +586,20 @@ button.addg:hover {
   color: #5a6164;
 }
 
+#alarm {
+  width: 200px;
+  color: #fff;
+  background: #011222;
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  z-index: 100;
+}
+
+#alarm p{
+  padding: 10px;
+}
+
 @media screen and (min-width: 600px) {
   #mailCompo.hide {
     display: block;
@@ -550,6 +620,10 @@ button.addg:hover {
     width: 100%;
     max-width: 400px;
   } 
+  #alarm  {
+    top: 50%;
+    left: 35%;
+  }
   .side-nav {
     position: fixed;
     left: 0;
@@ -617,6 +691,10 @@ button.addg:hover {
     left: 75%;
     width: 100%;
     max-width: 600px;
+  }
+  #alarm  {
+    top: 50%;
+    left: 35%;
   }
    
 }

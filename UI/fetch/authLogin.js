@@ -1,7 +1,7 @@
 const loginForm = document.getElementById('loginForm');
 
 function login(userDetails) {
-  fetch('http://127.0.0.1:3001/api/v1/auth/login', {
+  fetch('https://agentcorvinus-epic-mail.herokuapp.com/api/v1/auth/login', {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
@@ -14,7 +14,7 @@ function login(userDetails) {
         const { token, user } = payload.data[0];
         localStorage.setItem('token', token);
         localStorage.setItem('fullname', `${user.firstname} ${user.lastname}`);
-        window.location.href = './mail.html';
+        window.location.href = './mail.html#inbox-set';
         console.log(payload);
       }
     });

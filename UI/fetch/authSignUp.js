@@ -2,7 +2,7 @@
 const signUpF = document.getElementById('signupForm');
 
 function register(userDetails) {
-  fetch('http://127.0.0.1:3001/api/v1/auth/signup', {
+  fetch('https://agentcorvinus-epic-mail.herokuapp.com/api/v1/auth/signup', {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
@@ -15,7 +15,7 @@ function register(userDetails) {
         const { token, user } = payload.data[0];
         localStorage.setItem('token', token);
         localStorage.setItem('fullname', `${user.firstname} ${user.lastname}`);
-        window.location.href = './mail.html';
+        window.location.href = './mail.html#inbox-set';
       }
     });
 }

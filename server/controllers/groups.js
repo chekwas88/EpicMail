@@ -186,9 +186,14 @@ class GroupController {
     const members = await pool.query(queries.getAllGroupMembers, [group.id]);
     const gm = members.rows;
     const groupmem = gm.map(m => m.userid);
+    const sender = await HelperUtils.getMessageSender(id);
+    const senderName = `${sender.firstname} ${sender.lastname}`;
     if (groupmem.includes(id)) {
       await gm.forEach((m) => {
-        HelperUtils.sendToGroup(id, msgd.subject, msgd.message, m.memberemail, m.userid);
+        const receiverName = 'group Message';
+        HelperUtils.sendToGroup(
+          id, msgd.subject, msgd.message, m.memberemail, m.userid, senderName, receiverName,
+        );
       });
       return res.status(201).json({
         status: res.statusCode,
@@ -204,14 +209,53 @@ class GroupController {
 
   static async getAllgroups(req, res) {
     const { id } = req.user;
-    const { rows } = await pool.query(queries.getAllGroups, [id]);
-    const data = rows;
+    const { rows } = await pool.query(queries.getAllUserGroups, [id]);
+    const userMemGroups = rows;
+    const userMemGroupsIds = userMemGroups.map(u => u.groupid);
+    const result = await pool.query(queries.getAllGroups);
+    const allGroups = result.rows;
+    const groups = [];
+    allGroups.forEach((g) => {
+      if (userMemGroupsIds.includes(g.id)) {
+        groups.push(g);
+      }
+    });
     return res.status(200).json({
       status: res.statusCode,
       data: [
         {
           message: 'All groups retrieved',
-          data,
+          groups,
+        },
+      ],
+    });
+  }
+
+  static async getAllgroupUsers(req, res) {
+    const groupid = parseInt(req.params.id, 10);
+    const { rows } = await pool.query(queries.getAllGroupMembers, [groupid]);
+    const groupMembers = rows;
+    if (!groupMembers) {
+      return res.status(404).json({
+        status: res.statusCode,
+        error: 'no such group exist',
+      });
+    }
+    const usersResult = await pool.query(queries.allUserQ);
+    const users = usersResult.rows;
+    const memberIds = groupMembers.map(g => g.userid);
+    const members = [];
+    users.forEach((u) => {
+      if (memberIds.includes(u.id)) {
+        members.push(u);
+      }
+    });
+    return res.status(200).json({
+      status: res.statusCode,
+      data: [
+        {
+          message: 'members retrieved',
+          members,
         },
       ],
     });

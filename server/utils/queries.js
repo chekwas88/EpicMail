@@ -35,5 +35,7 @@ export default {
   sendToGroup: `INSERT INTO messages(subject, message, senderId, recipients, receiverId) 
   VALUES ($1, $2, $3, $4, $5) RETURNING *`,
   getAllGroupMembers: 'SELECT * FROM groupmembers WHERE groupId=$1',
-  getAllGroups: 'SELECT * FROM groupmembers WHERE userId=$1',
+  getAllGroups: 'SELECT * FROM groups',
+  getAllUserGroups: 'SELECT * FROM groupmembers WHERE userId=$1',
+  getAllUsersGroups: 'SELECT * FROM groupmembers',
 };

@@ -1,11 +1,7 @@
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/extensions */
-import { removeComposeModal } from '../scripts/mailModal.js';
-
 const composeSend = document.getElementById('compose-send');
 
 function composeMsg(messageDetails, token) {
-  fetch('http://127.0.0.1:3001/api/v1/messages', {
+  fetch('https://agentcorvinus-epic-mail.herokuapp.com/api/v1/messages', {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
@@ -15,9 +11,13 @@ function composeMsg(messageDetails, token) {
   })
     .then(res => res.json())
     .then((payload) => {
-      if (payload.status === 200) {
-        console.log(payload);
+      if (payload.status === 201) {
+        return payload;
       }
+      document.getElementById('alarm').innerHTML = '<p>Message not Sent</p>';
+      return setTimeout(() => {
+        document.getElementById('alarm').innerHTML = '';
+      }, 3000);
     });
 }
 
@@ -35,5 +35,4 @@ composeSend.addEventListener('click', () => {
   setTimeout(() => {
     window.location.reload(true);
   }, 500);
-  removeComposeModal();
 });
