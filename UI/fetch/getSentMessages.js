@@ -26,7 +26,7 @@ export function getSentMsgs(token, sentboxLayout) {
       }
       if (payload.status === 200 && sent === 'No sent messages') {
         output += `<main id="empty"><span>${sent}</span></main>`;
-       sentBox.innerHTML = output;
+        sentBox.innerHTML = output;
         return sentBox;
       }
       if (payload.status === 200 && sent.length > 0) {

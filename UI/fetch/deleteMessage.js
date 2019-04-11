@@ -9,6 +9,7 @@ export function deleteMsg(token, id) {
   })
     .then(res => res.json())
     .then((payload) => {
+      console.log(payload);
       if (payload.status === 200) {
         const result = payload.data[0].message;
         console.log(result);
