@@ -1,0 +1,35 @@
+.content {
+  width: 100%;
+  margin: -250px auto 40px auto;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 30px 10px;
+  box-sizing: border-box;
+}
+.content div {
+  flex: 0 0 200px;
+  margin: 10px;
+  font-size: 20px;
+  text-align: center;
+  color: #021e38;
+  padding: 10px;
+  border: 1px solid #f0e9e9;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
+}
+
+@media screen and (min-width: 600px) {
+  .content {
+     margin-top: -50%;
+  }
+  .content div {
+    flex: 0 0 250px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .content {
+    margin-top: -15%;
+  }
+}

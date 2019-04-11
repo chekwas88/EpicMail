@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Mail</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro|Ubuntu" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="./styles/general.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./styles/profile.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="./styles/mail.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" 
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" 
+    crossorigin="anonymous">
+    
+  </head>
+  <body>
+    <nav class="navbar">
+        <div id="burger" class="toggle-burger  hide">
+          <div>
+            <Span></Span>
+            <Span></Span>
+            <Span></Span>
+          </div>
+          
+        </div>
+        <div class="logo">
+          <span><a href="./index.html"><i class="fab fa-bandcamp"></i></a></span>
+        </div>
+        <ul id="bars" class="hide">
+          <li>
+            <a href="./mail.html#inbox-set">
+              <span><i class="far fa-envelope"></i></span>
+              <span>Mail</span>
+            </a>
+          </li>
+          <li>
+            <a class="logout" href="./login.html">
+             Logout
+            </a>
+          </li>
+        </ul>
+    </nav>
+    <div class="dcontainer" >
+      <div id="mailCompo" class="side-nav hide">
+        <nav>
+          <ul>
+            <a id="compose-btn">
+              <li id="compose">
+                <span><i class="fas fa-plus"></i></span>
+                <span>Compose</span> 
+              </li>
+            </a>
+            <a id="inbox" href="#inbox-set">
+              <li id="inbox-list">
+                <span><i class="fas fa-envelope"></i></span>
+                <span>Inbox</span>
+                <span class="numunread">1</span>
+              </li>
+            </a>
+            <a id="sent" href="#sent-set">
+              <li id="sent-list" >
+                <span><i class="fas fa-check-double"></i></span>
+                <span>Sent</span>
+              </li>
+            </a>
+            <a id="draft" href="#draft-set">
+              <li id="draft-list">
+                  <span><i class="far fa-file"></i></span>
+                  <span>Draft</span>
+                  <span class="numdraft">3</span>
+              </li>
+            </a>
+            <a id="contact" href="#contact-set">
+              <li id="contact-list">
+                  <span><i class="fas fa-address-book"></i></span>
+                  <span>Contacts</span>
+              </li>
+            </a>
+            <a id="group" href="#group-set">
+              <li id="group-list">
+                  <span><i class="fas fa-users"></i></span>
+                  <span>Groups</span>
+              </li>
+           </a>
+           <a id="profile" href="#profile-set">
+              <li id="profile-list">
+                  <span><i class="fas fa-user"></i></span>
+                  <span>profile</span>
+                </li>
+            </a>
+          </ul>
+        </nav>
+      </div>
+      
+      <!-- replyforward -->
+
+      <div id="replyforward" class="rf-layout hide">
+          <div class="compose-div">
+            <div>
+              <input id="rfc" type="text" name="recipients" placeholder="Recipients" required />
+              <textarea name="message" cols="65" rows="10" required></textarea>
+              <div>
+                <button id="rf-send" type="submit">Send</button>
+                <span><i id="rf-delete" class="fas fa-trash"></i></span>
+              </div>
+              
+            </div>
+          </div>
+      </div>
+
+      
+
+      <!-- compose -->
+      <div id="compose-new" class="compose-layout hide">
+        <div class="compose-div">
+          <div>
+            <header>
+              <h3>New Message</h3>
+              <button id="compox">X</button>
+            </header>
+            <input id="recips" type="text" name="recipient" placeholder="Recipient" required />
+            <input id="subject" type="text" name="subject" placeholder="Subject" required />
+            <textarea id="message" name="message" cols="65" rows="15" required></textarea>
+            <div>
+              <button id="compose-send" type="submit">Send</button>
+              <span><i id="compose-delete" class="fas fa-trash"></i></span>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <div id="group-compose" class="compose-layout hide">
+        <div class="compose-div">
+          <div>
+            <header>
+              <h3>New Message</h3>
+              <button id="grp-compox">X</button>
+            </header>
+            <input id="grp-subject" type="text" name="subject" placeholder="Subject" required />
+            <textarea id="grp-message" name="message" cols="65" rows="15" required></textarea>
+            <div>
+              <button id="grp-compose-send" type="submit">Send</button>
+              <span><i id="grp-compose-delete" class="fas fa-trash"></i></span>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- sent -->
+
+      <div id="sent-set" class="table-div view">
+        <!-- <div class="layout-div">
+          <div>
+            <span>Barney Stinson</span>
+            <span>Dear Ted, Suit up cause we are going...</span>
+            <span>05/03/2019</span>
+            <span><i id="rf-delete" class="fas fa-trash"></i></span>
+          </div>
+          <div>
+            <span>Barney Stinson</span>
+            <span>Dear Marshall, Swear on the brocode you won't slap...</span>
+            <span>04/03/2019</span>
+            <span><i id="rf-delete" class="fas fa-trash"></i></span>
+          </div>
+          <div>
+            <span>Barney Stinson</span>
+            <span>Dear Lilly, please don't tell robin I have feelings...</span>
+            <span>03/03/2019</span>
+            <span><i id="rf-delete" class="fas fa-trash"></i></span>
+          </div>
+        </div>          -->
+      </div>
+
+
+      <!-- draft -->
+
+      <div id="draft-set" class="table-div view">
+        <div class="draft-div">
+          <div>
+            <span>Gredenco Sebratov</span>
+            <span>Dear Barney, It is true that you are from canada...</span>
+            <span>11/03/2019</span>
+            <span><i id="rf-delete" class="fas fa-trash"></i></span>
+          </div>
+          <div>
+            <span>Gredenco Seb</span>
+            <span>Dear Barney, It is going to be legndary tonight...</span>
+            <span>10/03/2019</span>
+            <span><i id="rf-delete" class="fas fa-trash"></i></span>
+          </div>
+          <div>
+            <span>Gredenco Sebratov</span>
+            <span>Dear Barney, What's your job description in...</span>
+            <span>09/03/2019</span>
+            <span><i id="rf-delete" class="fas fa-trash"></i></span>
+          </div>
+        </div>         
+      </div>
+
+      <!-- contact -->
+
+      <div id="contact-set" class="table-div view">
+        <div class="layout-div">
+            <input class="inputSearch" type="text" id="filterable" placeholder="search contact..." />
+          <ul>
+            <li class="collection-item">
+              <span>Lily Aldrin</span>  
+            </li>
+            <li class="collection-item">
+              <span>Marshall Erickson</span>
+            </li>
+            <li class="collection-item">
+              <span>Ted Mosby</span>
+            </li>
+            <li class="collection-item">
+              <span>Barney Stinson</span>
+            </li>
+            <li class="collection-item">
+              <span>Robin Scherbatsky</span> 
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- groups -->
+      <div id="group-set" class="table-div view">
+        <div class="layout-div">
+          <input class="inputSearch" type="text" id="filter" placeholder="search group..." />
+          <button id="creategroup" class="ubttn">create group</button>  
+          <ul id="groupUl">
+            
+            <!-- <li class="gp-list">
+              <span class="gp-li-ch">Cycle 39</span>
+              <span class="gp-li-ch"><i title="add to group" class="fas fa-plus-circle"></i></span>
+              <span class="gp-li-ch"><i title="members" class="fas fa-users"></i></span>
+              <span class="gp-li-ch"><i title="send message" class="fas fa-comment-alt"></i></span>
+              <span class="gp-li-ch"><i class="fas fa-edit"></i></span>
+              <span class="gp-li-ch"><i id="rf-delete" class="fas fa-trash"></i></span>  
+            </li>
+            <li class="gp-list">
+              <span class="gp-li-ch">Cycle 40</span>
+              <span class="gp-li-ch"><i title="add to group" class="fas fa-plus-circle"></i></span>
+              <span class="gp-li-ch"><i title="members" class="fas fa-users"></i></span>
+              <span class="gp-li-ch"><i title="send message" class="fas fa-comment-alt"></i></span>
+              <span class="gp-li-ch"><i class="fas fa-edit"></i></span>
+              <span class="gp-li-ch"><i id="rf-delete" class="fas fa-trash"></i></span>  
+            </li>
+            <li class="gp-list">
+              <span class="gp-li-ch">Cycle 41</span>
+              <span class="gp-li-ch"><i title="add to group" class="fas fa-plus-circle"></i></span>
+              <span class="gp-li-ch"><i title="members" class="fas fa-users"></i></span>
+              <span class="gp-li-ch"><i title="send message" class="fas fa-comment-alt"></i></span>
+              <span class="gp-li-ch"><i class="fas fa-edit"></i></span>
+              <span class="gp-li-ch"><i id="rf-delete" class="fas fa-trash"></i></span>  
+            </li>
+            <li class="gp-list">
+              <span class="gp-li-ch">Cycle 42</span>
+              <span class="gp-li-ch"><i title="add to group" class="fas fa-plus-circle"></i></span>
+              <span class="gp-li-ch"><i title="members" class="fas fa-users"></i></span>
+              <span class="gp-li-ch"><i title="send message" class="fas fa-comment-alt"></i></span>
+              <span class="gp-li-ch"><i class="fas fa-edit"></i></span>
+              <span class="gp-li-ch"><i id="rf-delete" class="fas fa-trash"></i></span>  
+            </li>
+            <li class= "gp-list">
+              <span class="gp-li-ch">Cycle 43</span>
+              <span class="gp-li-ch"><i title="add to group" class="fas fa-plus-circle"></i></span>
+              <span class="gp-li-ch"><i title="members" class="fas fa-users"></i></span>
+              <span class="gp-li-ch"><i title="send message" class="fas fa-comment-alt"></i></span>
+              <span class="gp-li-ch"><i class="fas fa-edit"></i></span>
+              <span class="gp-li-ch"><i id="rf-delete" class="fas fa-trash"></i></span>   
+            </li> -->
+          </ul>
+        </div>
+      </div>
+      <!-- profile detail -->
+      <div id="profile-set" class="table-div view" >
+        <div class="details">
+          <div>
+            <div class="img-container">
+              <div class="banner">
+                  <img src="./images/wentworthmiller.jpg" alt="profile-pic" class="profile-img">
+              </div> 
+              <div class="share">
+                <ul>
+                  <li><i class="fab fa-twitter" ></i></li>
+                  <li><i class="fab fa-git" ></i></li>
+                  <li><i class="fab fa-linkedin"></i></li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="content">
+              <div class="personal">
+                <p><i class="fas fa-burn"></i>Onwuchekwa Chisom</p>
+                <p id="profile-mail"><i class="fa fa-envelope" ></i>princechekwas@gmail.com</p>
+                <p><i class="fas fa-phone"></i>0123456789</p>
+              </div>
+            </div> 
+          </div>
+        </div>
+      </div>
+
+       <!-- modal for a mail view (sent, draft, inbox)-->
+       <div id="mailView" class="table-div hide">
+        
+      </div>
+
+      <!-- inbox -->
+      <div id="inbox-set" class="table-div dtview view">
+        <!-- <div class="layout-div">
+          <div class="unread">
+            <span>Ted Mosby</span>
+            <span>Dear Barney, GNB is taking over...</span>
+            <span>18/03/2019</span>
+            <span><i id="rf-delete" class="fas fa-trash"></i></span>
+          </div>
+          <div class="read">
+            <span>Marshal Erickson</span>
+            <span>Dear Barney, I'm in the bar...</span>
+            <span>02/03/2019</span>
+            <span><i id="rf-delete" class="fas fa-trash"></i></span>
+          </div>
+          <div class="read">
+            <span>Lily Aldrin</span>
+            <span>Dude where the heck are...</span>
+            <span>02/02/2019</span>
+            <span><i id="rf-delete" class="fas fa-trash"></i></span>
+          </div>
+        </div>          -->
+      </div>
+
+      <!-- group-form page -->
+
+      <div id="gp-add-page" class="gp-layout hide">
+        <div class="memselect">
+          <div><button id="gp-add-cancel" class="cancel">X</button></div>
+          <div>
+            <input id="mail1" type="checkbox" name="members" value="lily" />
+            <div class="memlabel">
+              <label for="mail1">Lily Aldrin</label>
+            </div>
+          </div>
+          
+          <div>
+            <input id="mail2" type="checkbox" name="members" value="marshall" />
+            <div class="memlabel">
+              <label for="mail2">Marshall Erickson</label>
+            </div>
+          </div>
+          <div>
+            <input id="mail3" type="checkbox" name="members" value="ted" />
+            <div class="memlabel">
+              <label for="mail3">Ted Mosby</label>
+            </div>
+          </div>
+          <div>
+            <input id="mail4" type="checkbox" name="members" value="barney" />
+            <div class="memlabel">
+              <label for="mail4">Barney Stinson</label>
+            </div>
+          </div>
+          <div>
+              <input id="mail5" type="checkbox" name="members" value="robin" />
+              <div class="memlabel">
+                <label for="mail5">Robin Scherbatsky</label>
+              </div>
+            </div>
+          <button id="addgp" class="addg" type="submit">Add</button>
+        </div>
+        
+      </div>
+
+      <!-- create group form -->
+
+      <div id="ct-gp-form-page" class="gp-layout hide">
+        <form class="gp-form">
+          <div>
+            <label for="ct-gpr-name"></label>
+            <input id="ct-gpr-name"  type="text" name="name" placeholder="name" required/>
+          </div>
+          <div>
+            <button id="ct-gp-form-sub" type="submit">Add</button>
+            <button id="ct-gp-form-cancel" type="button">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- edit group -->
+
+      <div id="ed-gp-form-page" class="gp-layout hide">
+        <form class="gp-form">
+          <div>
+            <label for="ed-gpr-name"></label>
+            <input id="ed-gpr-name"  type="text" name="name" placeholder="name" required/>
+          </div>
+          <div>
+            <button id="ed-gp-form-sub" type="submit">Add</button>
+            <button id="ed-gp-form-cancel" type="button">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- group-members-modal -->
+
+      <div id="members-modal">
+          <!-- <div class="gp-members">
+            <ul>
+              <li class="member-item">
+                <span>Lily Aldrin</span>  
+              </li>
+              <li class="member-item">
+                <span>Marshall Erickson</span>
+              </li>
+              <li class="member-item">
+                <span>Ted Mosby</span>
+              </li>
+              <li class="member-item">
+                <span>Barney Stinson</span>
+              </li>
+              <li class="member-item">
+                <span>Robin Scherbatsky</span> 
+              </li>
+            </ul>
+            <div>
+              <button id="gp-member-close">Close</button>
+            </div>
+          </div> -->
+      </div>
+
+      <!-- compose Alarm -->
+      <div id="alarm"></div>
+
+    </div>
+
+    <footer>© EpicMail 2019. All rights Reserved.</footer>
+    <script src="./scripts/nav.js"></script>
+    <script src="./scripts/searchContacts.js"></script>
+    <script src="./scripts/searchGroup.js"></script>
+    <script src="./scripts/inputRecipients.js"></script>
+    <script src="./fetch/loadWindow.js" type="module"></script>
+    <script src="./fetch/compose.js" type="module"></script>
+    <script src="./scripts/mail.js" type="module"></script>
+  </body>
+</html>

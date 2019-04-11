@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="./styles/general.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="./styles/userAuth.css" />
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro|Ubuntu" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" 
+  integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" 
+  crossorigin="anonymous">
+</head>
+<body>
+  <nav class="navbar">
+    <div id="burger" class="toggle-burger hide">
+      <div>
+        <Span></Span>
+        <Span></Span>
+        <Span></Span>
+      </div>
+    </div>
+    <div class="logo">
+      <span><a href="./index.html"><i class="fab fa-bandcamp"></i></a></span>
+    </div>
+    <ul id="bars" class="hide">
+      <li>
+        <a href="./login.html#inbox-set">
+          Login
+        </a> 
+      </li>
+    </ul>
+  </nav>
+  <div class="pagecontent">
+    <div class="container">
+      <div>
+        <nav>
+          <div class="active login">Login</div>
+          <div class="signup">SignUp</div>
+        </nav>
+        <div id="login">
+          <form id="loginForm" class="userform">
+            <div>
+              <label for="useremail">Email</label>
+              <input id="useremail" type="email" name="email" placeholder="username@epicmail.com" required />
+            </div>
+            <div>
+              <label for="secret">Password</label>
+              <input id="secret" type="password" name="password" required/>
+            </div>
+            <a class="fp" href="./forgotpassword.html">forgot password?</a>
+            <div>
+              <button>Login</button>
+            </div>
+            
+          </form>
+        </div>
+        <div id="signup">
+          <form id="signupForm" class="userform">
+            <div>
+              <label for="fname">Firstname</label>
+              <input id="fname" type="text" name="firstName" placeholder="John" required/>
+            </div>
+            <div>
+              <label for="lname">Lastname</label>
+              <input id="lname" type="text" name="lastName" placeholder="Doe" required/>
+            </div>
+            <div>
+              <label for="signUpEmail">Email</label>
+              <input id="signUpEmail" type="email" name="email" placeholder="username@epicmail.com" required/>
+            </div>
+            <div>
+              <label for="signUpSecret">Password</label>
+              <input id="signUpSecret" type="password" name="password" required/>
+            </div>
+            <div>
+              <label for="secret">Confirm Password</label>
+              <input id="psecret" type="password" name="confirmPassword" required/>
+            </div>
+            <div>
+              <button>SignUp</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <footer class="login">© EpicMail 2019. All rights Reserved.</footer>
+  </div>
+  <script src="./scripts/nav.js"></script>
+  <script src="./scripts/userAuth.js"></script>
+  <script src="./fetch/authSignUp.js"></script>
+  <script src="./fetch/authLogin.js"></script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+body {
+  box-sizing: border-box;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.landingContainer {
+  width: 100%;
+  margin: 0;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+  font-family: 'Source Sans Pro', sans-serif;
+
+}
+.bgl {
+  background-image: url('../images/anime9.jpg');
+  height: 100%;
+  width: 100%;
+  background-size: 100% 60%;
+  background-repeat: no-repeat;
+}
+
+.landingContainer > a {
+  text-decoration: none;
+}
+.getstarted {
+  background: #021e38;
+  position: absolute;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 5px;
+  top: 25%;
+  left: 37%;
+  padding: 15px;
+  z-index: 2;
+  
+}
+
+.getstarted:hover {
+  background: #0c4958;
+}
+.message {
+  color: #fff;
+  padding: 10px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.navbar {
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  background: #021e38;
+  height: auto;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.toggle-burger > div{
+  cursor: pointer;
+  padding: 2px 10px;
+  width: 40px;
+}
+.toggle-burger span {
+  display: block;
+  background: #fff;
+  margin: 3px 0;
+  width: 30px;
+  height: 5px;
+  
+}
+
+.navbar .logo{
+  position: absolute;
+  right: 10px;
+  top: 6px;
+}
+
+.navbar .logo span a i {
+  font-size: 40px;
+  font-weight: bold;
+  color: #e68f0e
+}
+.navbar .toggle-burger {
+ padding: 10px 2px;
+}
+
+.navbar ul {
+  list-style: none;
+  margin-top: 10px;
+  padding: 12px;
+}
+
+.navbar ul li {
+  padding: 10px;
+  border-bottom: 1px solid rgba(233,233,233,0.2);
+  cursor: pointer;
+}
+
+.navbar ul li:hover {
+  border-bottom: 2px solid #e68f0e;
+}
+
+.navbar ul li:nth-child(3):hover {
+  border-bottom: none;
+}
+
+.navbar ul li a {
+  text-decoration: none;
+  color: #fff;
+}
+#bars.show {
+  display: block;
+}
+
+#bars.hide{
+  display: none;
+}
+
+#bars li a span:nth-child(1) {
+  color: #df8919;
+}
+
+footer {
+  color: #fff;
+  padding: 10px;
+  font-weight: 550;
+  background: #021e38;
+  text-align: center;
+}
+.logout {
+  padding: 5px 10px;
+  margin-top: -5px;
+  background: #e9890d;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+}
+
+.logout:hover{
+  box-shadow: 0 0 4px rgba(139, 137, 137, 0.7);
+}
+
+footer.login{
+  margin: 20px 0 0 0;
+  box-sizing: border-box;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+
+@media screen and (min-width: 600px) {
+  #bars.show {
+    display: flex;
+  }
+  .navbar .logo{
+    left: 10px;
+  }
+  
+  #bars.hide {
+    display: flex;
+  }
+  #burger.hide{
+    display: none;
+  }
+  .navbar {
+    position: relative;
+    height: 50px;
+    z-index: 101;
+  }
+  .navbar ul{
+    position: absolute;
+    top: -15px;
+    right: 10px;
+  }
+  .navbar ul li {
+    padding: 5px 20px;
+    border-bottom: none;
+  }
+  .getstarted {
+    left: 43%;
+  }
+ 
+}
+@media screen and (min-width: 1000px) {
+  .bgl {
+    background-size: 100% 70%
+  }
+  .getstarted {
+    left: 45%;
+  }
+  
+}
+
+
+
+
