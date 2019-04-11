@@ -364,6 +364,11 @@ div.rfbttn {
   
 }
 
+#empty{
+  text-align: center;
+  margin: 10px auto;
+}
+
 .gp-list{
   display: flex;
   text-align: left;

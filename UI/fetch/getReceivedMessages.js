@@ -15,15 +15,19 @@ export function getReceivedMsgs(token, inboxLayout) {
     .then(res => res.json())
     .then((payload) => {
       const inbox = payload.data[0].data;
-      console.log(inbox);
       if (inbox.length === 0 || inbox === undefined) {
-        output += `<div class="spinner">
+        output += `<main class="spinner">
                     <span><i class="fas fa-circle-notch"></i></span>
                     <p>LOADING</p>
-                  <div>`;
+                  <main>
+                  </div>`;
+        inboxSet.innerHTML = output;
+        return inboxSet;
       }
       if (payload.status === 200 && inbox === 'Your inbox is empty') {
-        output += `<span>${inbox}</span>`;
+        output += `<main id="empty"><span>${inbox}</span><main>`;
+        inboxSet.innerHTML = output;
+        return inboxSet;
       }
       if (payload.status === 200 && inbox.length > 0) {
         inbox.forEach((i) => {

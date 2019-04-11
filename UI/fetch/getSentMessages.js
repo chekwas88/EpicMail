@@ -19,10 +19,15 @@ export function getSentMsgs(token, sentboxLayout) {
         output += `<div class="spinner">
                     <span><i class="fas fa-circle-notch"></i></span>
                     <p>LOADING</p>
-                  <div>`;
+                  <div>
+                  </div>`;
+        sentBox.innerHTML = output;
+        return sentBox;
       }
       if (payload.status === 200 && sent === 'No sent messages') {
-        output += `<span>${sent}</span>`;
+        output += `<main id="empty"><span>${sent}</span></main>`;
+       sentBox.innerHTML = output;
+        return sentBox;
       }
       if (payload.status === 200 && sent.length > 0) {
         sent.forEach((s) => {
