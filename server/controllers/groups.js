@@ -23,7 +23,7 @@ class GroupController {
     });
   }
 
-  static async addMemberToGroup(req, res) {
+  static async addMemberToGroupByEmail(req, res) {
     const { id } = req.user;
     const groupid = parseInt(req.params.id, 10);
     const { rows } = await pool.query(queries.getgroup, [groupid]);
@@ -60,6 +60,50 @@ class GroupController {
     return res.status(403).json({
       status: res.statusCode,
       error: 'authorization denied',
+    });
+  }
+
+  static async addMemberToGroupById(req, res) {
+    const { id } = req.user;
+    const groupid = parseInt(req.params.groupid, 10);
+    const memberid = parseInt(req.params.id, 10);
+    const grp = await pool.query(queries.getgroup, [groupid]);
+    const user = await HelperUtils.getUserById(memberid);
+    const { rows } = await pool.query(queries.getGroupmember, [groupid, memberid]);
+    const groupmem = rows[0];
+    const group = grp.rows[0];
+    if (groupmem) {
+      return res.status(404).json({
+        status: res.statusCode,
+        error: 'member already exits',
+      });
+    }
+
+    if (!group) {
+      return res.status(404).json({
+        status: res.statusCode,
+        error: 'group does not exit',
+      });
+    }
+    if (group.createdby === id) {
+      await pool.query(queries.addmember, [groupid, memberid, user.email, 'member']);
+      return res.status(200).json({
+        status: res.statusCode,
+        data: [
+          {
+            message: 'Member added',
+          },
+        ],
+      });
+    }
+    return res.status(403).json({
+      status: res.statusCode,
+      data: [
+        {
+          status: res.statusCode,
+          error: 'authorization denied',
+        },
+      ],
     });
   }
 

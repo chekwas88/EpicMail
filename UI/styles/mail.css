@@ -84,6 +84,7 @@
 #compose-new.hide,
 #group-compose.hide,
 #replyforward.hide, 
+#add-member-email.hide,
 #gp-add-page.hide,
 #ed-gp-form-page.hide,
 #members-modal.hide,
@@ -494,20 +495,36 @@ button.ubttn:hover {
   overflow-y: auto;
 }
 .memselect div:nth-child(1) {
-  background: #012438;
+  background: #000;
   padding: 5px;
-  height: 25px;
+  height: 30px;
 }
 .memselect .cancel {
   float: right;
   border: none;
+  color: #fff;
+  margin-top: 2px;
+  font-size: 14px;
+  background: #f8851a;
+  border-radius: 50%;
   padding: 2px 5px;
 }
 
 .memselect button.cancel:hover{
- font-size: 16px;
   cursor: pointer;
 }
+
+button.email-add {
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+  color: #fff;
+  background: #f8851a;
+  box-shadow: 0 0 4px rgba(54, 52, 52, 0.7);
+}
+
 .gp-form > div button{
   background: #021e38;
   width: 25%;
