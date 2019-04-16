@@ -3,6 +3,7 @@ import { getReceivedMsgs } from './getReceivedMessages.js';
 import { getMsg } from './getMessage.js';
 import { getSentMsgs } from './getSentMessages.js';
 import { deleteMsg } from './deleteMessage.js';
+import { addMemByEmail } from './addMemberByEmail.js';
 import {
   linkedDivMsg, divDelMsg, divDelGrp, onLoadVisited, loadGroupMembers, storeGroupId,
 } from '../scripts/mail.js';
@@ -49,6 +50,10 @@ window.addEventListener('load', async () => {
   const draftDiv = document.querySelectorAll('.draft-div div');
   const contactViewLists = document.querySelectorAll('.layout-div ul li.collection-item ');
   const gpAddCancel = document.getElementById('gp-add-cancel');
+  const emailMemAddbtn = document.getElementById('email-gp-add');
+  const gpAddMemCancel = document.getElementById('add-mem-cancel');
+  const addMemToGroup = document.getElementById('add-member-email');
+  const addMemForm = document.querySelector('#add-member-email .gp-form');
 
   const msgDiv = document.querySelectorAll('div.table-div .layout-div > div');
   const groupDiv = document.querySelectorAll('div.table-div .layout-div > ul .gp-list');
@@ -121,14 +126,15 @@ window.addEventListener('load', async () => {
   });
 
   spans.forEach((span) => {
-    span[1].addEventListener('click', () => {
+    span[1].querySelector('i').addEventListener('click', () => {
+      storeGroupId(span[1]);
       addToGroupLay.classList.remove('hide');
       addToGroupLay.classList.add('show');
     });
   });
 
   spans.forEach((span) => {
-    span[3].addEventListener('click', () => {
+    span[3].querySelector('i').addEventListener('click', () => {
       storeGroupId(span[3]);
       groupComposeLayout.classList.add('show');
       groupComposeLayout.classList.remove('hide');
@@ -136,14 +142,14 @@ window.addEventListener('load', async () => {
   });
 
   spans.forEach((span) => {
-    span[4].addEventListener('click', () => {
+    span[4].querySelector('i').addEventListener('click', () => {
       storeGroupId(span[4]);
       getGpUpdateForm();
     });
   });
 
   spans.forEach((span) => {
-    span[2].addEventListener('click', () => {
+    span[2].querySelector('i').addEventListener('click', () => {
       membersDisplay.classList.remove('hide');
       membersDisplay.classList.add('show');
     });
@@ -208,5 +214,30 @@ window.addEventListener('load', async () => {
     setTimeout(() => {
       window.location.reload(true);
     }, 200);
+  });
+
+  emailMemAddbtn.addEventListener('click', () => {
+    addMemToGroup.classList.remove('hide');
+    addMemToGroup.classList.add('show');
+  });
+
+  addMemForm.addEventListener('submit', () => {
+    const email = document.getElementById('add-mem-email').value;
+    const roleSelect = document.getElementById('role-select');
+    const role = roleSelect.options[roleSelect.selectedIndex].value;
+    const groupId = localStorage.getItem('groupId');
+    const memberDetails = {
+      email,
+      role,
+    };
+    addMemByEmail(memberDetails, token, groupId);
+    setTimeout(() => {
+      window.location.reload(true);
+    }, 200);
+  });
+
+  gpAddMemCancel.addEventListener('click', () => {
+    addMemToGroup.classList.remove('show');
+    addMemToGroup.classList.add('hide');
   });
 });

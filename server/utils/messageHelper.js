@@ -21,6 +21,19 @@ class MessageUtils {
     return rows[0];
   }
 
+
+  /**
+     * @function  getUserById - gets a user
+     * @param {object} email - user email
+     * @returns {object}
+     *
+  */
+
+  static async getUserById(id) {
+    const { rows } = await pool.query(queries.getUserById, [id]);
+    return rows[0];
+  }
+
   /**
      * @function  getMessageSender - gets message sender
      * @param {object} id - sender Id

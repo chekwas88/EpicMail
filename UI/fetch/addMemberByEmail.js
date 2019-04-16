@@ -1,19 +1,20 @@
 /* eslint-disable import/prefer-default-export */
-export function editGroup(name, token, id) {
-  fetch(`https://agentcorvinus-epic-mail.herokuapp.com/api/v1/groups/${id}/name`, {
-    method: 'PATCH',
+export function addMemByEmail(details, token, id) {
+  fetch(`http://127.0.0.1:3001/api/v1/groups/${id}/users`, {
+    method: 'POST',
     headers: {
       'content-type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(name),
+    body: JSON.stringify(details),
   })
     .then(res => res.json())
     .then((payload) => {
-      if (payload.status === 200) {
+      console.log(payload);
+      if (payload.status === 201) {
         return payload;
       }
-      document.getElementById('alarm').innerHTML = '<p>Group name was not updated</p>';
+      document.getElementById('alarm').innerHTML = '<p>failed to add member</p>';
       return setTimeout(() => {
         document.getElementById('alarm').innerHTML = '';
       }, 3000);

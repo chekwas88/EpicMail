@@ -336,7 +336,10 @@
 
       <div id="gp-add-page" class="gp-layout hide">
         <div class="memselect">
-          <div><button id="gp-add-cancel" class="cancel">X</button></div>
+          <div>
+            <button id="email-gp-add" class="email-add">Add by email</button>
+            <button id="gp-add-cancel" class="cancel">X</button>
+          </div>
           <div>
             <input id="mail1" type="checkbox" name="members" value="lily" />
             <div class="memlabel">
@@ -384,6 +387,24 @@
           <div>
             <button id="ct-gp-form-sub" type="submit">Add</button>
             <button id="ct-gp-form-cancel" type="button">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Add member by email -->
+      <div id="add-member-email" class="gp-layout hide">
+        <form class="gp-form">
+          <div>
+            <label for="add-mem-email"></label>
+            <input id="add-mem-email"  type="email" name="email" placeholder="email" required/>
+            <select name="role" id="role-select">
+              <option value="member" selected>member</option>
+              <option value="admin">admin</option>
+            </select>
+          </div>
+          <div>
+            <button id="add-mem-sub" type="submit">Add</button>
+            <button id="add-mem-cancel" type="button">Cancel</button>
           </div>
         </form>
       </div>

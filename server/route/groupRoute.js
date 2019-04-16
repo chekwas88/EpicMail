@@ -23,7 +23,15 @@ router.post(
   Token.verifyToken,
   validate.validateIdparams,
   ValidateGroup.validateGroupMember,
-  GroupController.addMemberToGroup,
+  GroupController.addMemberToGroupByEmail,
+);
+
+router.post(
+  '/api/v1/groups/:groupid/users/:id',
+  Token.verifyToken,
+  validate.validateIdparams,
+  validate.validategroupId,
+  GroupController.addMemberToGroupById,
 );
 
 router.get(

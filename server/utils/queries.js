@@ -4,6 +4,7 @@ export default {
     VALUES ($1, $2, $3, $4, $5) RETURNING *`,
 
   loginQuery: 'SELECT * FROM users WHERE email=$1',
+  getUserById: 'SELECT * FROM users WHERE id=$1',
   messenger: 'SELECT * FROM users WHERE id=$1',
   allUserQ: 'SELECT * FROM users',
   getAuser: 'SELECT * FROM users WHERE id=$1',
@@ -19,6 +20,7 @@ export default {
   VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
   addInbox: 'INSERT INTO inbox(messageid, receiverid, senderid) VALUES ($1, $2, $3)',
   addContact: 'INSERT INTO contacts(userId, firstname, lastname, email) VALUES ($1, $2, $3, $4)',
+  getContact: 'SELECT * FROM contacts WHERE email=$1',
   addSent: 'INSERT INTO sent(messageId, receiverId, senderId) VALUES ($1, $2, $3)',
   updateStatusQ: 'UPDATE inbox SET status=$1 WHERE messageId=$2 AND receiverId=$3 RETURNING messageid, receiverid',
   DeleteInbox: 'UPDATE inbox SET status=$1 WHERE messageId=$2 AND receiverId=$3',
