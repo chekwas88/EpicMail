@@ -29,9 +29,27 @@ describe('Post api/v1/auth/signup', () => {
     request(app)
       .post('/api/v1/auth/signup')
       .send({
-        firstName: 'Ted',
-        lastName: 'Mosby',
+        firstName: 'Marshall',
+        lastName: 'Ericson',
         email: 'te123@epicmail.com',
+        password: '123456',
+        confirmPassword: '123456',
+      })
+      .end((err, res) => {
+        assert.equal(res.body.data[0].message, 'Account created successfully');
+        assert.equal(res.status, 201);
+        assert.isArray(res.body.data);
+        done(err);
+      });
+  });
+
+  it('it register\'s a user', (done) => {
+    request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        firstName: 'Lily',
+        lastName: 'Aldrin',
+        email: 'lily@epicmail.com',
         password: '123456',
         confirmPassword: '123456',
       })

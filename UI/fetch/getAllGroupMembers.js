@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 export async function getAllGroupMembers(token, id) {
-  let output = '<div class="gp-members">';
+  let output = `<div class="gp-members">
+                  <ul id="mLists">`;
   const membersList = document.getElementById('members-modal');
   await fetch(`http://127.0.0.1:3001/api/v1/groups/${id}/users`, {
     method: 'GET',
@@ -20,15 +21,14 @@ export async function getAllGroupMembers(token, id) {
         const { members } = payload.data[0];
         members.forEach((m) => {
           output += `
-                      <ul id="mLists">
                         <li class="member-item">
                           <span>${m.firstname} ${m.lastname}</span>  
                         </li>
-                      </ul>
                       `;
         });
       }
-      output += ` <div>
+      output += ` </ul>
+                  <div>
                     <button id="gp-member-close">Close</button>
                   </div>
                 </div>`;

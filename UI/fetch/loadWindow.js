@@ -13,6 +13,7 @@ import { createGroup } from './createGroup.js';
 import { editGroup } from './editGroup.js';
 import { sendGroupMsg } from './groupCompose.js';
 import { deleteGroup } from './deleteGroup.js';
+import { getAllContacts } from './getAllContacts.js';
 
 window.addEventListener('load', async () => {
   const inboxSet = document.getElementById('inbox-set');
@@ -49,8 +50,6 @@ window.addEventListener('load', async () => {
   const createGPBtn = document.getElementById('creategroup');
   const draftDiv = document.querySelectorAll('.draft-div div');
   const contactViewLists = document.querySelectorAll('.layout-div ul li.collection-item ');
-  const gpAddCancel = document.getElementById('gp-add-cancel');
-  const emailMemAddbtn = document.getElementById('email-gp-add');
   const gpAddMemCancel = document.getElementById('add-mem-cancel');
   const addMemToGroup = document.getElementById('add-member-email');
   const addMemForm = document.querySelector('#add-member-email .gp-form');
@@ -61,6 +60,7 @@ window.addEventListener('load', async () => {
   divDelMsg(msgDiv, deleteMsg, token);
   divDelGrp(groupDiv, deleteGroup, token);
   loadGroupMembers(getLink, getAllGroupMembers, token);
+  getAllContacts(token);
 
   function getGroupLists() {
     const spanModal = [];
@@ -163,11 +163,6 @@ window.addEventListener('load', async () => {
     list.addEventListener('click', getComposeLayout);
   });
 
-  gpAddCancel.addEventListener('click', () => {
-    addToGroupLay.classList.remove('show');
-    addToGroupLay.classList.add('hide');
-  });
-
   compoCancel.addEventListener('click', removeComposeModal);
   composeDeleteBtn.addEventListener('click', removeComposeModal);
   grpCompoCancel.addEventListener('click', removeGroupComposeModal);
@@ -216,11 +211,6 @@ window.addEventListener('load', async () => {
     }, 200);
   });
 
-  emailMemAddbtn.addEventListener('click', () => {
-    addMemToGroup.classList.remove('hide');
-    addMemToGroup.classList.add('show');
-  });
-
   addMemForm.addEventListener('submit', () => {
     const email = document.getElementById('add-mem-email').value;
     const roleSelect = document.getElementById('role-select');
@@ -235,7 +225,6 @@ window.addEventListener('load', async () => {
       window.location.reload(true);
     }, 200);
   });
-
   gpAddMemCancel.addEventListener('click', () => {
     addMemToGroup.classList.remove('show');
     addMemToGroup.classList.add('hide');

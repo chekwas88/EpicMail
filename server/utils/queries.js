@@ -19,8 +19,8 @@ export default {
   sendMessageQuery: `INSERT INTO messages(subject, message, senderId, recipient, receiverId, senderName, receiverName) 
   VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
   addInbox: 'INSERT INTO inbox(messageid, receiverid, senderid) VALUES ($1, $2, $3)',
-  addContact: 'INSERT INTO contacts(userId, firstname, lastname, email) VALUES ($1, $2, $3, $4)',
-  getContact: 'SELECT * FROM contacts WHERE email=$1',
+  addContact: 'INSERT INTO contacts(ownerId, userId, firstname, lastname, email) VALUES ($1, $2, $3, $4, $5)',
+  getContact: 'SELECT * FROM contacts WHERE ownerId=$1',
   addSent: 'INSERT INTO sent(messageId, receiverId, senderId) VALUES ($1, $2, $3)',
   updateStatusQ: 'UPDATE inbox SET status=$1 WHERE messageId=$2 AND receiverId=$3 RETURNING messageid, receiverid',
   DeleteInbox: 'UPDATE inbox SET status=$1 WHERE messageId=$2 AND receiverId=$3',

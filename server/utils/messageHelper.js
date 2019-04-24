@@ -220,6 +220,7 @@ class MessageUtils {
 
   /**
      * @function  createContact - creates a contact
+     * @param {integer} ownerId - contact's owner's id
      * @param {integer} userid- contact's user id
      * @param {string} firstname -contact's firstname
      * @param {string}  lastname - contact's lastname
@@ -227,8 +228,10 @@ class MessageUtils {
      * @returns {object}
      *
   */
-  static async createContact(userId, firstname, lastname, email) {
-    const { rows } = await pool.query(queries.addContact, [userId, firstname, lastname, email]);
+  static async createContact(ownerId, userId, firstname, lastname, email) {
+    const { rows } = await pool.query(
+      queries.addContact, [ownerId, userId, firstname, lastname, email],
+    );
     return rows;
   }
 
