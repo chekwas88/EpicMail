@@ -6,6 +6,7 @@ import swaggerDocument from '../swagger.json';
 import userRoute from './route/userRoute';
 import messageRoute from './route/messageRoute';
 import groupRoute from './route/groupRoute';
+import contactRoute from './route/contactRoute';
 
 
 const app = express();
@@ -34,6 +35,7 @@ app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(userRoute);
 app.use(messageRoute);
 app.use(groupRoute);
+app.use(contactRoute);
 
 app.get('/', (req, res) => {
   res.status(200).json({

@@ -49,9 +49,20 @@ class MessageController {
       receiverId: receiverid,
     };
     const messageId = data.id;
-    await HelperUtils.createContact(
-      receiver.id, receiver.firstname, receiver.lastname, mD.recipient,
-    );
+    const contactQuery = await pool.query(queries.getContact, [id]);
+    if (contactQuery.rowCount > 0) {
+      const myContacts = contactQuery.rows;
+      const contactsIds = myContacts.map(mc => mc.userid);
+      if (!contactsIds.includes(receiver.id)) {
+        await HelperUtils.createContact(
+          id, receiver.id, receiver.firstname, receiver.lastname, mD.recipient,
+        );
+      }
+    } else {
+      await HelperUtils.createContact(
+        id, receiver.id, receiver.firstname, receiver.lastname, mD.recipient,
+      );
+    }
     await HelperUtils.createSentBox(messageId, data.receiverId, id);
     await HelperUtils.createInBox(messageId, data.receiverId, id);
     return res.status(201).json({

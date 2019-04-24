@@ -87,7 +87,7 @@ class GroupController {
     }
     if (group.createdby === id) {
       await pool.query(queries.addmember, [groupid, memberid, user.email, 'member']);
-      return res.status(200).json({
+      return res.status(201).json({
         status: res.statusCode,
         data: [
           {
@@ -234,14 +234,13 @@ class GroupController {
     const senderName = `${sender.firstname} ${sender.lastname}`;
     if (groupmem.includes(id)) {
       await gm.forEach((m) => {
-        const receiverName = 'group Message';
         HelperUtils.sendToGroup(
-          id, msgd.subject, msgd.message, m.memberemail, m.userid, senderName, receiverName,
+          id, msgd.subject, msgd.message, m.memberemail, m.userid, senderName, group.name,
         );
       });
       return res.status(201).json({
         status: res.statusCode,
-        message: 'message sent',
+        message: 'Message sent',
       });
     }
 
@@ -282,7 +281,7 @@ class GroupController {
     if (!groupMembers) {
       return res.status(404).json({
         status: res.statusCode,
-        error: 'no such group exist',
+        error: 'no group member found',
       });
     }
     const usersResult = await pool.query(queries.allUserQ);
