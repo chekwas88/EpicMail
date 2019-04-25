@@ -137,20 +137,6 @@
   
 }
 
-.spinner{
-  width: 200px;
-  margin: 40px auto; 
-  display: block;
-}
-
-.spinner span i{
-  font-size: 40px;
-  color: #0dc544;
-}
-
-.spinner p{
-  text-align: center;
-}
 
 section.messageView h3{
   text-align: center;
@@ -164,9 +150,6 @@ section.messageView {
 section.messageView .sr p{
   font-weight: 600;
 }
-/* section.messageView .sr span{
- color: #df8919;
-} */
 
 section.messageView .sr p i{
   color: #0dc544;
@@ -617,7 +600,7 @@ button.addg:hover {
   left: 15%;
   z-index: 100;
 }
-
+/* fetch css */
 #alarm p{
   padding: 10px;
 }
