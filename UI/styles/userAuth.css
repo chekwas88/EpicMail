@@ -52,6 +52,10 @@ label {
   border-bottom: 3px solid #e77111;
 }
 
+.userform {
+  position: relative;
+}
+
 .userform > div {
   padding: 10px;
   font-size: 15px;
@@ -171,11 +175,22 @@ a.fp {
 .fp-form > div, .gp-form > div {
   margin: 10px;
 }
+/* fetch */
+
+p.errordisplay {
+  color: #d60909;
+  position: absolute;
+  top: 52%;
+  left: 10%;
+  font-size: 14px;
+  padding: 5px;
+}
 
 @media screen and (min-width: 450px) {
   .fp-form {
     left: 30%;
   }
+ 
 }
 
 @media screen and (min-width: 600px) {
@@ -185,6 +200,10 @@ a.fp {
 
   .fp-form {
     left: 40%;
+  }
+  p.errordisplay {
+    top: 60%;
+    left: 8%;
   }
 
 }

@@ -16,6 +16,12 @@ function login(userDetails) {
         localStorage.setItem('fullname', `${user.firstname} ${user.lastname}`);
         window.location.href = './mail.html#inbox-set';
         console.log(payload);
+      } else {
+        // const loginContainer = document.getElementById('login');
+        loginForm.innerHTML += '<p class="errordisplay">invalid email or password</p>';
+        // const errordisplayP = document.createElement('p');
+        // errordisplayP.classList.add('errordisplay');
+        // errordisplayP.innerText = 'invalid email or password';
       }
     });
 }
