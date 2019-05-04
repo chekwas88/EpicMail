@@ -2,7 +2,7 @@
 export async function getAllContacts(token) {
   let output = '';
   const contactList = document.querySelector('#gp-add-page .memselect');
-  await fetch('http://127.0.0.1:3001/api/v1/contacts', {
+  await fetch('https://agentcorvinus-epic-mail.herokuapp.com/api/v1/contacts', {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,

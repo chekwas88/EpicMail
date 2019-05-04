@@ -2,7 +2,7 @@
 const signUpF = document.getElementById('signupForm');
 
 function register(userDetails) {
-  fetch('http://127.0.0.1:3001/api/v1/auth/signup', {
+  fetch('https://agentcorvinus-epic-mail.herokuapp.com/api/v1/auth/signup', {
     method: 'POST',
     headers: {
       'content-type': 'application/json',

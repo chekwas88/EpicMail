@@ -2,7 +2,7 @@
 export async function getAllgroups(token) {
   let output = '';
   const groupUl = document.getElementById('groupUl');
-  await fetch('http://127.0.0.1:3001/api/v1/groups', {
+  await fetch('https://agentcorvinus-epic-mail.herokuapp.com/api/v1/groups', {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,

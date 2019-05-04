@@ -3,7 +3,7 @@ export async function getAllGroupMembers(token, id) {
   let output = `<div class="gp-members">
                   <ul id="mLists">`;
   const membersList = document.getElementById('members-modal');
-  await fetch(`http://127.0.0.1:3001/api/v1/groups/${id}/users`, {
+  await fetch(`https://agentcorvinus-epic-mail.herokuapp.com/api/v1/groups/${id}/users`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,

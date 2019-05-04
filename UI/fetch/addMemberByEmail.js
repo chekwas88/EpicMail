@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 export function addMemByEmail(details, token, id) {
-  fetch(`http://127.0.0.1:3001/api/v1/groups/${id}/users`, {
+  fetch(`https://agentcorvinus-epic-mail.herokuapp.com/api/v1/groups/${id}/users`, {
     method: 'POST',
     headers: {
       'content-type': 'application/json',

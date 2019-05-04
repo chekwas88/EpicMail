@@ -1,7 +1,7 @@
 const loginForm = document.getElementById('loginForm');
 
 function login(userDetails) {
-  fetch('http://127.0.0.1:3001/api/v1/auth/login', {
+  fetch('https://agentcorvinus-epic-mail.herokuapp.com/api/v1/auth/login', {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
