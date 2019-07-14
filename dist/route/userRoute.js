@@ -1,27 +1,21 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = void 0;
 
-var _express = require('express');
+var _express = _interopRequireDefault(require("express"));
 
-var _express2 = _interopRequireDefault(_express);
+var _users = _interopRequireDefault(require("../controllers/users"));
 
-var _users = require('../controllers/users');
+var _validateUser = _interopRequireDefault(require("../middleware/validateUser"));
 
-var _users2 = _interopRequireDefault(_users);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _validateUser = require('../middleware/validateUser');
+var router = _express["default"].Router();
 
-var _validateUser2 = _interopRequireDefault(_validateUser);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-const router = _express2.default.Router();
-
-router.post('/api/v1/auth/signup', _validateUser2.default.validateUserRegData, _validateUser2.default.checkEmail, _validateUser2.default.validateUserRegPassword, _users2.default.registerUser);
-
-router.post('/api/v1/auth/login', _validateUser2.default.validateUserLoginData, _validateUser2.default.validateLogin, _users2.default.loginUser);
-
-exports.default = router;
+router.post('/api/v1/auth/signup', _validateUser["default"].validateUserRegData, _validateUser["default"].checkEmail, _validateUser["default"].validateUserRegPassword, _users["default"].registerUser);
+router.post('/api/v1/auth/login', _validateUser["default"].validateUserLoginData, _validateUser["default"].validateLogin, _users["default"].loginUser);
+var _default = router;
+exports["default"] = _default;

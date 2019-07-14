@@ -1,102 +1,32 @@
-'use strict';
+"use strict";
 
-var _pg = require('pg');
+var _pg = require("pg");
 
-var _dotenv = require('dotenv');
+var _dotenv = _interopRequireDefault(require("dotenv"));
 
-var _dotenv2 = _interopRequireDefault(_dotenv);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+_dotenv["default"].config();
 
-_dotenv2.default.config();
+var connectionString = process.env.DEVDB;
 
-const connectionString = process.env.PRODB;
-const pool = new _pg.Pool({
-  connectionString
+if (process.env.NODE_ENV === 'test') {
+  connectionString = process.env.TESTDB;
+}
+
+if (process.env.NODE_ENV === 'production') {
+  connectionString = process.env.PRODB;
+}
+
+var pool = new _pg.Pool({
+  connectionString: connectionString
 });
-
-const query = `
-DROP TABLE IF EXISTS groupmembers;
-DROP TABLE IF EXISTS sent;
-DROP TABLE IF EXISTS inbox;
-DROP TABLE IF EXISTS contacts;
-DROP TABLE IF EXISTS messages;
-DROP TABLE IF EXISTS groups;
-DROP TABLE IF EXISTS users;
-CREATE TABLE IF NOT EXISTS
-  users(
-    id SERIAL PRIMARY KEY NOT NULL,
-    firstname VARCHAR(50) NOT NULL,
-    lastname VARCHAR(50) NOT NULL,
-    email VARCHAR(128) NOT NULL,
-    password VARCHAR(100) NOT NULL,
-    confirmpassword VARCHAR(100) NOT NULL
-  );
-  CREATE TABLE IF NOT EXISTS 
-    messages(
-      id SERIAL PRIMARY KEY NOT NULL,
-      createdOn TIMESTAMP WITH TIME ZONE DEFAULT now(),
-      subject VARCHAR(100) NOT NULL,
-      message TEXT NOT NULL,
-      senderId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-      parentMessageId INT DEFAULT NULL,
-      recipient TEXT NOT NULL,
-      receiverId INT REFERENCES users(id) ON DELETE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS
-  contacts(
-    id SERIAL PRIMARY KEY NOT NULL,
-    userId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    firstname VARCHAR(50) NOT NULL,
-    lastname VARCHAR(50) NOT NULL,
-    email VARCHAR(128) NOT NULL
-  );
-
-CREATE TABLE IF NOT EXISTS 
-    inbox(
-      id SERIAL PRIMARY KEY NOT NULL,
-      messageId INT NOT NULL REFERENCES messages(id) ON DELETE CASCADE,
-      receiverId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-      senderId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-      createdOn TIMESTAMP WITH TIME ZONE DEFAULT now(),
-      status TEXT DEFAULT 'unread'
-  );
-
-  CREATE TABLE IF NOT EXISTS 
-  sent(
-    id SERIAL PRIMARY KEY NOT NULL,
-    messageId INT NOT NULL REFERENCES messages(id) ON DELETE CASCADE,
-    receiverId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    senderId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    createdOn TIMESTAMP WITH TIME ZONE DEFAULT now(),
-    status TEXT DEFAULT 'sent'
-  );
-
-  CREATE TABLE IF NOT EXISTS 
-  groups(
-    id SERIAL PRIMARY KEY NOT NULL,
-    name VARCHAR(100) NOT NULL,
-    createdby INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    role VARCHAR(50) DEFAULT 'Admin'
-  );
-
-  CREATE TABLE IF NOT EXISTS 
-    groupmembers(
-      id SERIAL PRIMARY KEY NOT NULL,
-      groupId INT NOT NULL REFERENCES groups(id) ON DELETE CASCADE,
-      userId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-      role VARCHAR(50),
-      memberemail TEXT NOT NULL
-  );
-`;
-
-pool.query(query)
-// eslint-disable-next-line no-unused-vars
-.then(res => {
+var query = "\nDROP TABLE IF EXISTS groupmembers;\nDROP TABLE IF EXISTS sent;\nDROP TABLE IF EXISTS inbox;\nDROP TABLE IF EXISTS contacts;\nDROP TABLE IF EXISTS messages;\nDROP TABLE IF EXISTS groups;\nDROP TABLE IF EXISTS users;\nCREATE TABLE IF NOT EXISTS\n  users(\n    id SERIAL PRIMARY KEY NOT NULL,\n    firstname VARCHAR(50) NOT NULL,\n    lastname VARCHAR(50) NOT NULL,\n    email VARCHAR(128) NOT NULL,\n    password VARCHAR(100) NOT NULL,\n    confirmPassword VARCHAR(100) NOT NULL\n  );\n  CREATE TABLE IF NOT EXISTS \n    messages(\n      id SERIAL PRIMARY KEY NOT NULL,\n      createdOn TIMESTAMP WITH TIME ZONE DEFAULT now(),\n      subject VARCHAR(100) NOT NULL,\n      message TEXT NOT NULL,\n      senderId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,\n      senderName VARCHAR(100) NOT NULL,\n      receiverName VARCHAR(100) NOT NULL,\n      parentMessageId INT DEFAULT NULL,\n      recipient TEXT NOT NULL,\n      receiverId INT REFERENCES users(id) ON DELETE CASCADE\n);\n\nCREATE TABLE IF NOT EXISTS\n  contacts(\n    id SERIAL PRIMARY KEY NOT NULL,\n    ownerId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,\n    userId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,\n    firstname VARCHAR(50) NOT NULL,\n    lastname VARCHAR(50) NOT NULL,\n    email VARCHAR(128) NOT NULL\n  );\n\nCREATE TABLE IF NOT EXISTS \n    inbox(\n      id SERIAL PRIMARY KEY NOT NULL,\n      messageId INT NOT NULL REFERENCES messages(id) ON DELETE CASCADE,\n      receiverId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,\n      senderId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,\n      createdOn TIMESTAMP WITH TIME ZONE DEFAULT now(),\n      status TEXT DEFAULT 'unread'\n  );\n\n  CREATE TABLE IF NOT EXISTS \n  sent(\n    id SERIAL PRIMARY KEY NOT NULL,\n    messageId INT NOT NULL REFERENCES messages(id) ON DELETE CASCADE,\n    receiverId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,\n    senderId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,\n    createdOn TIMESTAMP WITH TIME ZONE DEFAULT now(),\n    status TEXT DEFAULT 'sent'\n  );\n\n  CREATE TABLE IF NOT EXISTS \n  groups(\n    id SERIAL PRIMARY KEY NOT NULL,\n    name VARCHAR(100) NOT NULL,\n    createdBy INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,\n    role VARCHAR(50) DEFAULT 'Admin'\n  );\n\n  CREATE TABLE IF NOT EXISTS \n    groupmembers(\n      id SERIAL PRIMARY KEY NOT NULL,\n      groupId INT NOT NULL REFERENCES groups(id) ON DELETE CASCADE,\n      userId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,\n      role VARCHAR(50),\n      memberEmail TEXT NOT NULL\n  );\n";
+pool.query(query) // eslint-disable-next-line no-unused-vars
+.then(function (res) {
   console.log('table created');
   pool.end();
-}).catch(err => {
+})["catch"](function (err) {
   console.log(err);
   pool.end();
 });

@@ -1,9 +1,10 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-const users = [{
+exports["default"] = void 0;
+var users = [{
   id: 1,
   firstName: 'Chisom',
   lastName: 'Onwuchekwa',
@@ -20,5 +21,5 @@ const users = [{
   confirmPassword: '12345',
   token: 'abc123'
 }];
-
-exports.default = users;
+var _default = users;
+exports["default"] = _default;

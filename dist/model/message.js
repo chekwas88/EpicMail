@@ -1,9 +1,10 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-const message = [{
+exports["default"] = void 0;
+var message = [{
   id: 1,
   createdOn: '03/07/2019',
   subject: 'BootCamp Reminder',
@@ -58,5 +59,5 @@ const message = [{
   recipients: ['princechekwas@epicmail.com'],
   receiverId: [1]
 }];
-
-exports.default = message;
+var _default = message;
+exports["default"] = _default;

@@ -1,124 +1,80 @@
-'use strict';
+"use strict";
 
 /* eslint-disable operator-linebreak */
-const dotenv = require('dotenv');
-const { Pool } = require('pg');
+var dotenv = require('dotenv');
+
+var _require = require('pg'),
+    Pool = _require.Pool;
 
 dotenv.config();
+var connectionString;
 
-let connectionString;
 if (process.env.NODE_ENV === 'development') {
   connectionString = process.env.PRODB;
 } else if (process.env.NODE_ENV === 'test') {
   connectionString = process.env.TESTDB;
 }
 
-const pool = new Pool({
-  connectionString
+var pool = new Pool({
+  connectionString: connectionString
 });
 
-const createusersTable = () => {
-  const querytext = `CREATE TABLE IF NOT EXISTS
-    users(
-      id SERIAL PRIMARY KEY NOT NULL,
-      firstname VARCHAR(50) NOT NULL,
-      lastname VARCHAR(50) NOT NULL,
-      email VARCHAR(128) NOT NULL,
-      password VARCHAR(100) NOT NULL,
-      confirmpassword VARCHAR(100) NOT NULL
-    );`;
-  pool.query(querytext).then(res => {
+var createusersTable = function createusersTable() {
+  var querytext = "CREATE TABLE IF NOT EXISTS\n    users(\n      id SERIAL PRIMARY KEY NOT NULL,\n      firstname VARCHAR(50) NOT NULL,\n      lastname VARCHAR(50) NOT NULL,\n      email VARCHAR(128) NOT NULL,\n      password VARCHAR(100) NOT NULL,\n      confirmpassword VARCHAR(100) NOT NULL\n    );";
+  pool.query(querytext).then(function (res) {
     console.log(res);
-  }).catch(err => {
+  })["catch"](function (err) {
     console.log(err);
     pool.end();
   });
 };
 
-const messageTable = () => {
-  const querytext = `CREATE TABLE IF NOT EXISTS 
-  messages(
-  id SERIAL PRIMARY KEY NOT NULL,
-  createdOn TIMESTAMP WITH TIME ZONE DEFAULT now(),
-  subject VARCHAR(100) NOT NULL,
-  message TEXT NOT NULL,
-  senderId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-  parentMessageId INT DEFAULT NULL,
-  recipients TEXT NOT NULL,
-  receiverId INT REFERENCES users(id) ON DELETE CASCADE
-);`;
-  pool.query(querytext).then(res => {
+var messageTable = function messageTable() {
+  var querytext = "CREATE TABLE IF NOT EXISTS \n  messages(\n  id SERIAL PRIMARY KEY NOT NULL,\n  createdOn TIMESTAMP WITH TIME ZONE DEFAULT now(),\n  subject VARCHAR(100) NOT NULL,\n  message TEXT NOT NULL,\n  senderId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,\n  parentMessageId INT DEFAULT NULL,\n  recipients TEXT NOT NULL,\n  receiverId INT REFERENCES users(id) ON DELETE CASCADE\n);";
+  pool.query(querytext).then(function (res) {
     console.log(res);
-  }).catch(err => {
+  })["catch"](function (err) {
     console.log(err);
     pool.end();
   });
 };
 
-const inboxTable = () => {
-  const querytext = `CREATE TABLE IF NOT EXISTS 
-    inbox(
-      id SERIAL PRIMARY KEY NOT NULL,
-      messageId INT NOT NULL REFERENCES messages(id) ON DELETE CASCADE,
-      receiverId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-      senderId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-      createdOn TIMESTAMP WITH TIME ZONE DEFAULT now(),
-      status TEXT DEFAULT 'unread'
-  );`;
-  pool.query(querytext).then(res => {
+var inboxTable = function inboxTable() {
+  var querytext = "CREATE TABLE IF NOT EXISTS \n    inbox(\n      id SERIAL PRIMARY KEY NOT NULL,\n      messageId INT NOT NULL REFERENCES messages(id) ON DELETE CASCADE,\n      receiverId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,\n      senderId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,\n      createdOn TIMESTAMP WITH TIME ZONE DEFAULT now(),\n      status TEXT DEFAULT 'unread'\n  );";
+  pool.query(querytext).then(function (res) {
     console.log(res);
-  }).catch(err => {
+  })["catch"](function (err) {
     console.log(err);
     pool.end();
   });
 };
 
-const sentTable = () => {
-  const querytext = `CREATE TABLE IF NOT EXISTS 
-  sent(
-    id SERIAL PRIMARY KEY NOT NULL,
-    messageId INT NOT NULL REFERENCES messages(id) ON DELETE CASCADE,
-    receiverId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    senderId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    createdOn TIMESTAMP WITH TIME ZONE DEFAULT now(),
-    status TEXT DEFAULT 'sent'
-  );`;
-  pool.query(querytext).then(res => {
+var sentTable = function sentTable() {
+  var querytext = "CREATE TABLE IF NOT EXISTS \n  sent(\n    id SERIAL PRIMARY KEY NOT NULL,\n    messageId INT NOT NULL REFERENCES messages(id) ON DELETE CASCADE,\n    receiverId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,\n    senderId INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,\n    createdOn TIMESTAMP WITH TIME ZONE DEFAULT now(),\n    status TEXT DEFAULT 'sent'\n  );";
+  pool.query(querytext).then(function (res) {
     console.log(res);
-  }).catch(err => {
+  })["catch"](function (err) {
     console.log(err);
     pool.end();
   });
 };
 
-const grouptable = () => {
-  const querytext = `CREATE TABLE IF NOT EXISTS 
-  groups(
-    id SERIAL PRIMARY KEY NOT NULL,
-    name VARCHAR(100) NOT NULL,
-    createdby INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    role VARCHAR(50) DEFAULT 'Admin'
-  );`;
-  pool.query(querytext).then(res => {
+var grouptable = function grouptable() {
+  var querytext = "CREATE TABLE IF NOT EXISTS \n  groups(\n    id SERIAL PRIMARY KEY NOT NULL,\n    name VARCHAR(100) NOT NULL,\n    createdby INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,\n    role VARCHAR(50) DEFAULT 'Admin'\n  );";
+  pool.query(querytext).then(function (res) {
     console.log(res);
-  }).catch(err => {
+  })["catch"](function (err) {
     console.log(err);
     pool.end();
   });
 };
-const groupmember = () => {
-  const querytext = `CREATE TABLE IF NOT EXISTS 
-    groupmembers(
-      id SERIAL PRIMARY KEY NOT NULL,
-      groupid INT NOT NULL REFERENCES groups(id) ON DELETE CASCADE,
-      userid INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-      role VARCHAR(50) NOT NULL,
-      memberemail TEXT NOT NULL
-    );`;
-  pool.query(querytext).then(res => {
+
+var groupmember = function groupmember() {
+  var querytext = "CREATE TABLE IF NOT EXISTS \n    groupmembers(\n      id SERIAL PRIMARY KEY NOT NULL,\n      groupid INT NOT NULL REFERENCES groups(id) ON DELETE CASCADE,\n      userid INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,\n      role VARCHAR(50) NOT NULL,\n      memberemail TEXT NOT NULL\n    );";
+  pool.query(querytext).then(function (res) {
     console.log(res);
     pool.end();
-  }).catch(err => {
+  })["catch"](function (err) {
     console.log(err);
     pool.end();
   });

@@ -1,12 +1,14 @@
-'use strict';
+"use strict";
 
 /* eslint-disable operator-linebreak */
-const dotenv = require('dotenv');
-const { Pool } = require('pg');
+var dotenv = require('dotenv');
+
+var _require = require('pg'),
+    Pool = _require.Pool;
 
 dotenv.config();
+var connectionString;
 
-let connectionString;
 if (process.env.NODE_ENV === 'development') {
   connectionString = process.env.DEVDB;
 } else if (process.env.NODE_ENV === 'test') {
@@ -15,43 +17,46 @@ if (process.env.NODE_ENV === 'development') {
   connectionString = process.env.PRODB;
 }
 
-const pool = new Pool({
-  connectionString
+var pool = new Pool({
+  connectionString: connectionString
 });
-const dropUsers = () => {
-  const querytext = 'DROP TABLE IF EXISTS users CASCADE;';
-  pool.query(querytext).then(res => {
+
+var dropUsers = function dropUsers() {
+  var querytext = 'DROP TABLE IF EXISTS users CASCADE;';
+  pool.query(querytext).then(function (res) {
     console.log(res);
-  }).catch(err => {
-    console.log(err);
-    pool.end();
-  });
-};
-const dropMessages = () => {
-  const querytext = 'DROP TABLE IF EXISTS messages CASCADE;';
-  pool.query(querytext).then(res => {
-    console.log(res);
-  }).catch(err => {
-    console.log(err);
-    pool.end();
-  });
-};
-const dropInbox = () => {
-  const querytext = 'DROP TABLE IF EXISTS inbox CASCADE;';
-  pool.query(querytext).then(res => {
-    console.log(res);
-  }).catch(err => {
+  })["catch"](function (err) {
     console.log(err);
     pool.end();
   });
 };
 
-const dropSent = () => {
-  const querytext = 'DROP TABLE IF EXISTS sent CASCADE;';
-  pool.query(querytext).then(res => {
+var dropMessages = function dropMessages() {
+  var querytext = 'DROP TABLE IF EXISTS messages CASCADE;';
+  pool.query(querytext).then(function (res) {
+    console.log(res);
+  })["catch"](function (err) {
+    console.log(err);
+    pool.end();
+  });
+};
+
+var dropInbox = function dropInbox() {
+  var querytext = 'DROP TABLE IF EXISTS inbox CASCADE;';
+  pool.query(querytext).then(function (res) {
+    console.log(res);
+  })["catch"](function (err) {
+    console.log(err);
+    pool.end();
+  });
+};
+
+var dropSent = function dropSent() {
+  var querytext = 'DROP TABLE IF EXISTS sent CASCADE;';
+  pool.query(querytext).then(function (res) {
     console.log(res);
     pool.end();
-  }).catch(err => {
+  })["catch"](function (err) {
     console.log(err);
     pool.end();
   });

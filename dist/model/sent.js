@@ -1,9 +1,10 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-const sent = [{
+exports["default"] = void 0;
+var sent = [{
   senderId: 1,
   messageId: 1,
   createdOn: '03/07/2019'
@@ -16,4 +17,5 @@ const sent = [{
   messageId: 6,
   createdOn: '03/09/2019'
 }];
-exports.default = sent;
+var _default = sent;
+exports["default"] = _default;

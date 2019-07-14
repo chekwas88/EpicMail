@@ -1,23 +1,23 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.recipientsSchema = exports.messageSchema = exports.subjectSchema = undefined;
+exports.recipientsSchema = exports.messageSchema = exports.subjectSchema = void 0;
 
-var _joi = require('joi');
+var _joi = _interopRequireDefault(require("joi"));
 
-var _joi2 = _interopRequireDefault(_joi);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-const subjectSchema = exports.subjectSchema = {
-  subject: _joi2.default.string().required().min(2).max(100).trim()
+var subjectSchema = {
+  subject: _joi["default"].string().required().min(2).max(100).trim()
 };
-const messageSchema = exports.messageSchema = {
-  message: _joi2.default.string().required()
+exports.subjectSchema = subjectSchema;
+var messageSchema = {
+  message: _joi["default"].string().required()
 };
-
-const recipientsSchema = exports.recipientsSchema = {
-  recipients: _joi2.default.string().email().required().trim()
+exports.messageSchema = messageSchema;
+var recipientsSchema = {
+  recipient: _joi["default"].string().email().required().trim()
 };
+exports.recipientsSchema = recipientsSchema;
