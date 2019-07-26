@@ -53,7 +53,7 @@ class Validate {
     if (req.body.password !== req.body.confirmPassword) {
       return res.status(400).json({
         status: res.statusCode,
-        error: 'password and confirmpassword should be same',
+        error: 'password and confirm password should be same',
       });
     }
     return next();
